@@ -1,0 +1,18 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.chenzhipeng.mhbzdz.fragment.comic.ComicRecommendFragment">
+
+
+    <com.chenzhipeng.mhbzdz.widget.VpSwipeRefreshLayout
+        android:id="@+id/vsrl_manhua"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_manhua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.chenzhipeng.mhbzdz.widget.VpSwipeRefreshLayout>
+</FrameLayout>

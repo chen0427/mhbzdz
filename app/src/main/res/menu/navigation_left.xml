@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_comic"
+            android:icon="@drawable/ic_book_black"
+            android:title="@string/comic" />
+        <item
+            android:id="@+id/item_wallpaper"
+            android:icon="@drawable/ic_wallpaper_black"
+            android:title="@string/wallpaper" />
+        <item
+            android:id="@+id/item_joke"
+            android:icon="@drawable/ic_mood_black"
+            android:title="@string/joke" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_share"
+            android:icon="@drawable/ic_menu_share"
+            android:title="@string/share"
+            android:visible="false" />
+        <item
+            android:id="@+id/item_setting"
+            android:icon="@drawable/ic_settings_black"
+            android:title="@string/setting" />
+    </group>
+</menu>

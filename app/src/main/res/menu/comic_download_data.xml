@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/item_comicDownloadDetailsPlay"
+        android:icon="@drawable/ic_download_start"
+        android:title="@string/all_pause"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:title="@string/delete"
+        app:showAsAction="ifRoom" />
+    <item
+        android:title="@string/select"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/item_comicDownloadDetailsEdit"
+        android:title="@string/edit"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/item_1"
+        android:title="@string/details"
+        app:showAsAction="never" />
+
+</menu>

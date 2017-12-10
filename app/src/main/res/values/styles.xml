@@ -1,0 +1,150 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary_1</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_1</item>
+        <item name="colorAccent">@color/colorAccent_1</item>
+    </style>
+
+
+    <style name="AppNoActionBar_1" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_1</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_1</item>
+        <item name="colorAccent">@color/colorAccent_1</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+    </style>
+
+    <style name="AppNoActionBar_2" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_2</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_2</item>
+        <item name="colorAccent">@color/colorAccent_2</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+    </style>
+
+
+    <style name="AppNoActionBar_3" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_3</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_3</item>
+        <item name="colorAccent">@color/colorAccent_3</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+    </style>
+
+    <style name="AppNoActionBar_4" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_4</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_4</item>
+        <item name="colorAccent">@color/colorAccent_4</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+    </style>
+
+    <style name="AppNoActionBar_5" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_5</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_5</item>
+        <item name="colorAccent">@color/colorAccent_5</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+    </style>
+
+    <style name="AppNoActionBar_6" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_6</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_6</item>
+        <item name="colorAccent">@color/colorAccent_6</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+    </style>
+
+    <style name="AppNoActionBar_7" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_7</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_7</item>
+        <item name="colorAccent">@color/colorAccent_7</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+    </style>
+
+    <style name="AppNoActionBar_8" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_8</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_8</item>
+        <item name="colorAccent">@color/colorAccent_8</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+    </style>
+
+    <style name="AppNoActionBar_9" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_9</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_9</item>
+        <item name="colorAccent">@color/colorAccent_9</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+    </style>
+
+    <style name="AppNoActionBar_10" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_10</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_10</item>
+        <item name="colorAccent">@color/colorAccent_10</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+    </style>
+
+    <style name="AppTransparent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_1</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_1</item>
+        <item name="colorAccent">@color/colorAccent_1</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+
+    <style name="TM" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="SearchEditText" parent="Base.Widget.AppCompat.EditText">
+        <item name="colorAccent">@color/white</item>
+    </style>
+
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="titleTextColor">@color/white</item>
+        <item name="subtitleTextColor">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
+    </style>
+
+    <style name="whiteCheckBox" parent="Base.Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+    </style>
+
+
+    <style name="AppThemeDialog" parent="AlertDialog.AppCompat.Light">
+        <!--让这个dialog没有顶部空出来的title-->
+        <item name="android:windowNoTitle">true</item>
+        <!--让这个dialog悬浮在activity上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--dialog动画-->
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+
+
+</resources>

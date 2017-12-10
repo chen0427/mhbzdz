@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">MhBzDz</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="emptyData">暂无数据</string>
+    <string name="networFail">网络不可用</string>
+
+
+    <string name="running_download">正在下载</string>
+    <string name="wait_download">等待下载</string>
+    <string name="pause_download">暂停下载</string>
+    <string name="complete_download">下载完成</string>
+    <string name="fail_download">下载出错 点击重试</string>
+
+    <string name="lock_screen">设置锁屏</string>
+
+
+    <!--漫画阅读图片 加载中-->
+    <string name="comic_picture_loading">加载中…</string>
+    <!--壁纸 段子图片下载-->
+    <string name="picture_downloading">下载中…</string>
+    <!--段子 图片 下载成功-->
+    <string name="album_download">已下载到相册</string>
+    <!--图片下载失败-->
+    <string name="picture_download_fail">下载失败</string>
+    <!--图片已下载-->
+    <string name="picture_already_download">已下载</string>
+    <string name="delete">删除</string>
+    <string name="select_cancel">取消全选</string>
+    <string name="edit">整理</string>
+    <string name="bookshelf">书架</string>
+    <string name="search">搜索</string>
+    <string name="collection">收藏</string>
+    <string name="download">下载</string>
+    <string name="comic">漫画</string>
+    <string name="wallpaper">壁纸</string>
+    <string name="joke">段子</string>
+    <string name="share">分享</string>
+    <string name="setting">设置</string>
+    <string name="all_pause">全部暂停</string>
+    <string name="select">全选</string>
+    <string name="details">详情</string>
+    <string name="enter_downloads">进入下载</string>
+    <string name="sort">排序</string>
+    <string name="default_boot_page">默认启动页</string>
+    <string name="theme_color">主题颜色</string>
+    <string name="set_app_restart">设置后将重启App</string>
+    <string name="comic_sort">漫画章节默认排序</string>
+    <string name="volume_page">音量键翻页</string>
+    <string name="volume_page_msg">浏览图片时按音量键进行翻页</string>
+    <string name="clear_cache">清理缓存</string>
+    <string name="clear_picture_cache">清除图片缓存数据</string>
+    <string name="search_hint">&#160;搜索…</string>
+    <string name="hot">热门</string>
+    <string name="positive_sequence">正序</string>
+    <string name="reverse">倒序</string>
+    <string name="click_refresh">上次看到这里 点击刷新</string>
+    <string name="see_large_image">查看长图</string>
+    <string name="god_comment">神评</string>
+    <string name="setting_loading">正在设置中…</string>
+    <string name="setting_success">设置成功</string>
+    <string name="setting_fail">设置失败</string>
+    <string name="sure_delete">确认删除?</string>
+    <string name="no">否</string>
+    <string name="yes">是</string>
+    <string name="recommend">推荐</string>
+    <string name="picture">图片</string>
+    <string name="video">视频</string>
+    <string name="search_result">搜索结果 :</string>
+    <string name="popularity">人气</string>
+    <string name="score">评分</string>
+    <string name="update">更新</string>
+    <string name="try_out">再按一次退出</string>
+    <string name="classification">分类</string>
+    <string name="history">历史</string>
+    <string name="complete">完成</string>
+    <string name="all_start">全部开始</string>
+    <string name="loading_delete">正在删除中…</string>
+    <string name="is_all_start">全部开始下载?</string>
+    <string name="is_all_pause">全部下载暂停?</string>
+    <string name="is_delete_download">删除当前下载任务?</string>
+    <string name="continue_see">续看</string>
+    <string name="continue_read">继续阅读</string>
+    <string name="start_read">开始阅读</string>
+    <string name="hot_comment">热门评论</string>
+    <string name="news_comment">新鲜评论</string>
+    <string name="handle">正在处理中…</string>
+    <string name="news">最新</string>
+    <string name="introduce">简介</string>
+    <string name="chapter">章节</string>
+    <string name="task_list">任务列表</string>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context="com.chenzhipeng.mhbzdz.activity.joke.JokePictureActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_jokePicture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
+
+    <com.chenzhipeng.mhbzdz.widget.rvp.RecyclerViewPager
+        android:id="@+id/RecyclerViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.chenzhipeng.mhbzdz.widget.PictureBottomView
+        android:id="@+id/pbv_jokePicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+</FrameLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.chenzhipeng.mhbzdz.activity.wallpaper.WallpaperPictureActivity">
+
+    <com.chenzhipeng.mhbzdz.widget.rvp.RecyclerViewPager
+        android:id="@+id/RecyclerViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.chenzhipeng.mhbzdz.widget.PictureBottomView
+        android:id="@+id/pbv_wallpaperPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+
+    <ProgressBar
+        android:id="@+id/pb_wallpaperPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+</FrameLayout>

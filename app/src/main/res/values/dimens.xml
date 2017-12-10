@@ -1,0 +1,9 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!--作者头像大小-->
+    <dimen name="author_h_w">28dp</dimen>
+    <!--评论点赞图片大小-->
+    <!--文本大小-->
+    <dimen name="text_s">16sp</dimen>
+    <!--视频高度-->
+</resources>
