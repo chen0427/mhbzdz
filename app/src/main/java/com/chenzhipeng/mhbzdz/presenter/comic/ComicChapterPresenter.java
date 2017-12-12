@@ -27,9 +27,6 @@ import com.chenzhipeng.mhbzdz.view.comic.IComicChapterView;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/9/19.
- */
 
 @SuppressWarnings("unchecked")
 public class ComicChapterPresenter {
@@ -225,8 +222,8 @@ public class ComicChapterPresenter {
 
 
     public void startDownloadListActivity() {
-        if (currentTypeBean != null) {
-            FragmentActivity activity = fragment.getActivity();
+        if (currentTypeBean != null && fragment != null) {
+            ComicDetailsActivity activity = (ComicDetailsActivity) fragment.getActivity();
             if (activity != null) {
                 ComicDownloadChoiceActivity.startActivity(activity, currentTypeBean);
             }

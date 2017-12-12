@@ -15,9 +15,7 @@ import android.view.WindowManager;
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
-/**
- * Created by Administrator on 2017/8/12.
- */
+
 
 public class BaseActivity extends RxAppCompatActivity {
     @Override
@@ -48,21 +46,6 @@ public class BaseActivity extends RxAppCompatActivity {
             }
         }
     }
-
-    /*protected void showToastToNetworkError() {
-        Toast.makeText(BaseApplication.getContext(), R.string.networFail, Toast.LENGTH_SHORT).show();
-    }*/
-
-
-    /*protected void showToast(String msg) {
-        if (!TextUtils.isEmpty(msg)) {
-            Toast.makeText(BaseApplication.getContext(), msg, Toast.LENGTH_SHORT).show();
-        }
-    }*/
-
- /*   protected void showToastToEmptyData() {
-        Toast.makeText(BaseApplication.getContext(), R.string.emptyData, Toast.LENGTH_SHORT).show();
-    }*/
 
 
     protected void transparentStatus() {

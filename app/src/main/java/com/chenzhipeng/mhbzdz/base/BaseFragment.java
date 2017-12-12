@@ -73,19 +73,6 @@ public class BaseFragment extends RxFragment {
     }
 
 
-  /*  protected void showToastToNetworkError() {
-        Toast.makeText(BaseApplication.getContext(), R.string.networFail, Toast.LENGTH_SHORT).show();
-    }
-
-    protected void showToastToEmptyData() {
-        Toast.makeText(BaseApplication.getContext(), R.string.emptyData, Toast.LENGTH_SHORT).show();
-    }*/
-
-   /* protected void showToast(String msg) {
-        if (!TextUtils.isEmpty(msg)) {
-            Toast.makeText(BaseApplication.getContext(), msg, Toast.LENGTH_SHORT).show();
-        }
-    }*/
 
     protected void showSnackbar(String s) {
         if (!TextUtils.isEmpty(s)) {

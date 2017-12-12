@@ -26,9 +26,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by Administrator on 2017/10/4.
- */
+
 
 public class MainPresenter {
     private IMainView iMainView;
@@ -153,6 +151,8 @@ public class MainPresenter {
             if (wallpaperFile != null && wallpaperFile.exists()) {
                 view.setTag(wallpaperFile.getAbsolutePath());
                 ImageHelper.setImage(wallpaperFile, imageView, R.color.white);
+            } else {
+                imageView.setBackgroundResource(R.mipmap.moren);
             }
         }
     }

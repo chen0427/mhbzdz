@@ -25,22 +25,25 @@ public class BaseApplication extends Application {
     public static final int LOAD_MORE_DELAY = 1000;
 
     /**
-     * 壁纸下载路径
+     * 壁纸下载路径  //com.chenzhipeng.mhbzdz/wallpaper
      */
     public static final String WALLPAPER_PATH = Environment
-            .getExternalStorageDirectory().getAbsolutePath() + File.separator + "chenzhipeng_wallpaper";
+            .getExternalStorageDirectory().getAbsolutePath()
+            + File.separator + "com.chenzhipeng.mhbzdz" + File.separator + "wallpaper";
 
     /**
-     * 漫画下载路径
+     * 漫画下载路径 //com.chenzhipeng.mhbzdz/comic
      */
     public static final String COMIC_PATH = Environment
-            .getExternalStorageDirectory().getAbsolutePath() + File.separator + "chenzhipeng_comic";
+            .getExternalStorageDirectory().getAbsolutePath()
+            + File.separator + "com.chenzhipeng.mhbzdz" + File.separator + "comic";
 
     /**
-     * 段子图片缓存路径
+     * 段子图片下载路径 //com.chenzhipeng.mhbzdz/joke
      */
     public static final String JOKE_PATH = Environment
-            .getExternalStorageDirectory().getAbsolutePath() + File.separator + "chenzhipeng_joke";
+            .getExternalStorageDirectory().getAbsolutePath()
+            + File.separator + "com.chenzhipeng.mhbzdz" + File.separator + "joke";
 
     public static final float SCROLL_SPEED = 0.13F;
 

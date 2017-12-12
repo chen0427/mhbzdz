@@ -26,21 +26,19 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by Administrator on 2017/10/19.
- */
-
 public class ComicDownloadChoicePresenter {
     private String comicId;
     private IComicDownloadChoiceView downloadChoiceView;
     private ComicDownloadChoiceActivity activity;
     private ComicDownloadListAdapter adapter;
-    private List<ComicChapterItemBean> comicChapterItemBeanList = new ArrayList<>();
-    private List<ComicChapterItemBean> checkedComicChapterItemBeanList = new ArrayList<>();
+    private List<ComicChapterItemBean> comicChapterItemBeanList;
+    private List<ComicChapterItemBean> checkedComicChapterItemBeanList;
 
     public ComicDownloadChoicePresenter(ComicDownloadChoiceActivity activity) {
         this.downloadChoiceView = activity;
         this.activity = activity;
+        this.comicChapterItemBeanList = new ArrayList<>();
+        this.checkedComicChapterItemBeanList = new ArrayList<>();
     }
 
 
@@ -103,7 +101,7 @@ public class ComicDownloadChoicePresenter {
     public void updateMenu(Menu menu) {
         if (menu != null && menu.size() == 3) {
             MenuItem item = menu.getItem(2);
-            item.setTitle(isAllSelect() ? "取消全选" : "全选");
+            item.setTitle(isAllSelect() ? activity.getString(R.string.select_cancel) : activity.getString(R.string.select));
         }
     }
 

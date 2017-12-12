@@ -137,6 +137,7 @@ public class MainActivity extends BaseActivity implements IMainView, NavigationV
                 break;
             case R.id.item_setting:
                 startActivity(new Intent(this, SettingActivity.class));
+                VideoUtils.destroy();
                 break;
         }
         return false;
@@ -190,12 +191,15 @@ public class MainActivity extends BaseActivity implements IMainView, NavigationV
     @Override
     public void onClick(View v) {
         //left
-        String path = String.valueOf(v.getTag());
-        if (!TextUtils.isEmpty(path)) {
-            WallpaperItemBean wallpaperItemBean = new WallpaperItemBean(path, false, false);
-            List<WallpaperItemBean> wallpaperItemBeanList = new ArrayList<>();
-            wallpaperItemBeanList.add(wallpaperItemBean);
-            WallpaperPictureActivity.startActivity(this, wallpaperItemBeanList, 0);
+        Object tag = v.getTag();
+        if (tag != null) {
+            String path = String.valueOf(tag);
+            if (!TextUtils.isEmpty(path)) {
+                WallpaperItemBean wallpaperItemBean = new WallpaperItemBean(path, false, false);
+                List<WallpaperItemBean> wallpaperItemBeanList = new ArrayList<>();
+                wallpaperItemBeanList.add(wallpaperItemBean);
+                WallpaperPictureActivity.startActivity(this, wallpaperItemBeanList, 0);
+            }
         }
     }
 }
