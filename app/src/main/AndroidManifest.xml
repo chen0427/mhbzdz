@@ -11,7 +11,7 @@
     <application
         android:name="com.chenzhipeng.mhbzdz.base.BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/tubiao"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppNoActionBar_1">
