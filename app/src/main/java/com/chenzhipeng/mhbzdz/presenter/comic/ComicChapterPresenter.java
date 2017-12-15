@@ -235,12 +235,26 @@ public class ComicChapterPresenter {
             ComicChapterFragment.comicChapterItemBeanList = currentTypeBean.getChapterItemBeanList();
             if (!EmptyUtils.isListsEmpty(ComicChapterFragment.comicChapterItemBeanList)) {
                 if (fragment.getActivity() != null) {
-                    if (historyPosition == 0 && currentTypeBean.isReverse()) {
-                        ComicReadPictureActivity.startActivity(fragment.getActivity(), ComicChapterFragment.comicChapterItemBeanList.size() - 1);
-                    } else {
-                        ComicReadPictureActivity.startActivity(fragment.getActivity(), historyPosition);
-                    }
+                    ComicReadPictureActivity.startActivity(fragment.getActivity(), historyPosition, currentTypeBean.isReverse());
                 }
+            }
+        }
+    }
+
+
+    public void startReadActivity(int position) {
+        if (currentTypeBean != null) {
+            ComicReadPictureActivity.startActivity(fragment.getActivity(), position, currentTypeBean.isReverse());
+        }
+    }
+
+    public void startLast() {
+        if (currentTypeBean != null) {
+            int size = currentTypeBean.getChapterItemBeanList().size();
+            if (currentTypeBean.isReverse()) {
+                ComicReadPictureActivity.startActivity(fragment.getActivity(), 0, currentTypeBean.isReverse());
+            } else {
+                ComicReadPictureActivity.startActivity(fragment.getActivity(), size - 1, currentTypeBean.isReverse());
             }
         }
     }

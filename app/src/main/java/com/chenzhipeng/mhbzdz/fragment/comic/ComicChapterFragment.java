@@ -191,7 +191,7 @@ public class ComicChapterFragment extends BaseFragment
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         haveCheckedHistoryRecord = true;
-        ComicReadPictureActivity.startActivity(getActivity(), position);
+        getPresenter().startReadActivity(position);
     }
 
     /**
@@ -208,6 +208,14 @@ public class ComicChapterFragment extends BaseFragment
     public void startDownloadListActivity() {
         haveCheckedHistoryRecord = true;
         getPresenter().startDownloadListActivity();
+    }
+
+    /**
+     * 跳到最后一话
+     */
+    public void startLast(){
+        haveCheckedHistoryRecord = true;
+        getPresenter().startLast();
     }
 
 }

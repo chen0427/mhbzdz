@@ -290,7 +290,7 @@ public class ComicDownloadDataActivity extends BaseActivity implements IComicDow
                 pictures.add(picture);
             }
             haveCheckedHistoryRecord = true;
-            ComicReadPictureActivity.startActivity(this, pictures, strings);
+            ComicReadPictureActivity.startActivity(this, pictures, strings,false);
         } else if (comicDownloadBean.getState().equals(getStringId(R.string.wait_download))) {
             comicDownloadBean.pause();
             invalidateOptionsMenu();

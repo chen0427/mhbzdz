@@ -16,21 +16,33 @@
             android:orientation="vertical"
             android:padding="5dp">
 
-            <TextView
-                android:id="@+id/TextView1"
-                android:layout_width="match_parent"
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/AppCompatTextView1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="7dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:padding="5dp"
                 android:text=""
                 android:textSize="15sp" />
 
-
-            <TextView
-                android:id="@+id/TextView2"
-                android:layout_width="match_parent"
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/AppCompatTextView3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="7dp"
+                android:padding="5dp"
+                android:text=""
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/AppCompatTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:padding="5dp"
                 android:text=""
                 android:textSize="15sp" />
@@ -40,7 +52,7 @@
                 android:id="@+id/LinearLayout1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="7dp"
                 android:orientation="horizontal" />
 
 
@@ -48,12 +60,12 @@
                 android:id="@+id/ExpandableTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="7dp"
                 app:animAlphaStart="1"
                 app:animDuration="200"
                 app:maxCollapsedLines="3">
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@id/expandable_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,7 +77,7 @@
                     android:textColor="#666666"
                     android:textSize="15sp" />
 
-                <ImageButton
+                <android.support.v7.widget.AppCompatImageButton
                     android:id="@id/expand_collapse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -1,5 +1,7 @@
 package com.chenzhipeng.mhbzdz.bean.comic;
 
+import com.chenzhipeng.mhbzdz.R;
+import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 
@@ -13,9 +15,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/9/4.
- */
 
 public class ComicDetailsBean implements Serializable {
     private String comicId;
@@ -96,6 +95,11 @@ public class ComicDetailsBean implements Serializable {
                 String comicAuthor = jsonObject.getString("comic_author");
                 String comicDesc = jsonObject.getString("comic_desc");
                 String updateTime = jsonObject.getString("update_time");
+                int comicStatus = jsonObject.getInt("comic_status");
+                String chapterType = comicStatus == 2 ?
+                        BaseApplication.getContext().getString(R.string.comic_end)
+                        : BaseApplication.getContext().getString(R.string.comic_serial);
+
                 detailsBean = new ComicDetailsBean();
                 detailsBean.setComicName(comicName);
                 detailsBean.setAuthor(comicAuthor);
@@ -116,44 +120,28 @@ public class ComicDetailsBean implements Serializable {
                 detailsBean.setTagIdList(tagIdList);
                 JSONArray comicChapter = jsonObject.getJSONArray("comic_chapter");
                 List<ComicChapterTypeBean> chapterBeanList = new ArrayList<>();
+                List<ComicChapterItemBean> chapterItemBeanList = new ArrayList<>();
                 for (int i = 0; i < comicChapter.length(); i++) {
                     JSONObject object = comicChapter.getJSONObject(i);
-                    String chapterType = object.getString("chapter_type");
-                    JSONArray chapterList = object.getJSONArray("chapter_list");
-                    List<ComicChapterItemBean> chapterItemBeanList = new ArrayList<>();
-                    for (int j = 0; j < chapterList.length(); j++) {
-                        JSONObject chapterListJSONObject = chapterList.getJSONObject(j);
-
-                        String chapterName = chapterListJSONObject.getString("chapter_name");
-
-                        String chapterId = chapterListJSONObject.getString("chapter_id");
-
-                        String rule = chapterListJSONObject.getJSONArray("chapter_source")
-                                .getJSONObject(0).getString("rule");
-
-                        String startNum = chapterListJSONObject.getJSONArray("chapter_source")
-                                .getJSONObject(0).getString("start_num");
-
-                        String endNum = chapterListJSONObject.getJSONArray("chapter_source")
-                                .getJSONObject(0).getString("end_num");
-
-                        String chapterDomain = chapterListJSONObject.getJSONArray("chapter_source")
-                                .getJSONObject(0).getString("chapter_domain");
-
-                        ComicChapterItemBean chapterListBean
-                                = new ComicChapterItemBean(comicId, comicName, chapterName, chapterId,
-                                rule, startNum, endNum, chapterDomain, chapterType, false, false, false);
-                        chapterItemBeanList.add(chapterListBean);
-                    }
-
-                    if (ConfigUtils.getComicChapterSort() == 0) {
-                        //判断设置里面是正确还是倒序
-                        Collections.reverse(chapterItemBeanList);
-                    }
-
-                    ComicChapterTypeBean chapterBean = new ComicChapterTypeBean(comicId, comicName, chapterType, chapterItemBeanList, ConfigUtils.getComicChapterSort() == 1);
-                    chapterBeanList.add(chapterBean);
+                    String chapterName = object.getString("chapter_name");
+                    String chapterId = object.getString("chapter_id");
+                    String rule = object.getString("rule");
+                    String startNum = object.getString("start_num");
+                    String endNum = object.getString("end_num");
+                    String chapterDomain = object.getString("chapter_domain");
+                    ComicChapterItemBean chapterItemBean
+                            = new ComicChapterItemBean(comicId, comicName, chapterName, chapterId,
+                            rule, startNum, endNum, chapterDomain, chapterType, false, false, false);
+                    chapterItemBeanList.add(chapterItemBean);
                 }
+
+                if (ConfigUtils.getComicChapterSort() == 0) {
+                    //判断设置里面是正确还是倒序
+                    Collections.reverse(chapterItemBeanList);
+                }
+
+                ComicChapterTypeBean chapterBean = new ComicChapterTypeBean(comicId, comicName, chapterType, chapterItemBeanList, ConfigUtils.getComicChapterSort() == 1);
+                chapterBeanList.add(chapterBean);
 
                 detailsBean.setComicId(comicId);
                 detailsBean.setChapterTypeBeanList(chapterBeanList);

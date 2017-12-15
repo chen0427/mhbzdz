@@ -14,6 +14,7 @@ import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicPictureView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -105,17 +106,25 @@ public class ComicReadPicturePresenter {
         Intent intent = activity.getIntent();
         if (intent != null) {
             int position = intent.getIntExtra(ComicReadPictureActivity.KEY_INTENT_2, 0);
-            if (!EmptyUtils.isListsEmpty(ComicChapterFragment.comicChapterItemBeanList)) {
-                ComicChapterItemBean chapterItemBean = ComicChapterFragment.comicChapterItemBeanList.get(position);
+            boolean isReverse = intent.getBooleanExtra(ComicReadPictureActivity.KEY_ORDER, false);
+            List<ComicChapterItemBean> comicChapterItemBeanList = new ArrayList<>();
+            comicChapterItemBeanList.addAll(ComicChapterFragment.comicChapterItemBeanList);
+            if (!EmptyUtils.isListsEmpty(comicChapterItemBeanList)) {
+                ComicChapterItemBean chapterItemBean = comicChapterItemBeanList.get(position);
                 comicId = chapterItemBean.getComicId();
                 comicName = chapterItemBean.getComicName();
                 chapterName = chapterItemBean.getChapterName();
-                ComicItemPicture picture = chapterItemBean.getComicItemPictureList().get(0);
+                //获取你选择章节第一张图的url 后面用来计算整个图片集合中你张图的position
+                String url = chapterItemBean.getComicItemPictureList().get(0).getUrl();
+                if (isReverse) {
+                    //左滑动图片是一直升序
+                    Collections.reverse(comicChapterItemBeanList);
+                }
                 int count = 0;
-                for (ComicChapterItemBean c : ComicChapterFragment.comicChapterItemBeanList) {
+                for (ComicChapterItemBean c : comicChapterItemBeanList) {
                     for (ComicItemPicture p : c.getComicItemPictureList()) {
                         comicItemPictureList.add(p);
-                        if (p.getUrl().equals(picture.getUrl())) {
+                        if (p.getUrl().equals(url)) {
                             readPosition = count;
                         }
                         count++;

@@ -35,7 +35,7 @@ public class ComicIntroducePresenter {
             return;
         }
         setTag(bean);
-        introduceView.onBaseIntroduce(bean.getAuthor(), getLastChapter(bean), bean.getDesc());
+        introduceView.onBaseIntroduce(bean.getAuthor(), getLastChapter(bean), bean.getDesc(),bean.getUpdateTime());
     }
 
     private void setTag(ComicDetailsBean bean) {

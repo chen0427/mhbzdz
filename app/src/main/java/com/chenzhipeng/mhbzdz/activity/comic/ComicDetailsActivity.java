@@ -224,4 +224,7 @@ public class ComicDetailsActivity extends BaseActivity implements IComicDetailsV
         return fabTextView;
     }
 
+    public void startLast() {
+       getPresenter().startLast();
+    }
 }

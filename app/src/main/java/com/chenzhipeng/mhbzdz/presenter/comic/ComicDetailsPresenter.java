@@ -193,4 +193,10 @@ public class ComicDetailsPresenter {
             chapterFragment.startDownloadListActivity();
         }
     }
+
+    public void startLast() {
+        if (chapterFragment != null) {
+            chapterFragment.startLast();
+        }
+    }
 }

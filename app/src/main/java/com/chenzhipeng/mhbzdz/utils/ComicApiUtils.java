@@ -22,7 +22,9 @@ public class ComicApiUtils {
     }
 
     public static String getDetails(String comicId) {
-        return "https://api.yyhao.com/mht_api/v2/getcomicinfo/?comic_id=" + comicId + "&client-channel=tencent&client-version=1.1.1&client-type=android";
+        return "https://getcomicinfo-globalapi.yyhao.com/app_api/v5/getcomicinfo/?comic_id=" + comicId + "&platformname=android&productname=mht";
+
+        //  return "https://api.yyhao.com/mht_api/v2/getcomicinfo/?comic_id=" + comicId + "&client-channel=tencent&client-version=1.1.1&client-type=android";
     }
 
 

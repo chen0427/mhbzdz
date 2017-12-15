@@ -9,5 +9,6 @@
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
         android:padding="5dp"
-        android:text="" />
+        android:text=""
+        android:textSize="15sp" />
 </FrameLayout>

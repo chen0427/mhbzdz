@@ -36,6 +36,7 @@ public class ComicReadPictureActivity extends BaseActivity
     public static final String KEY_INTENT_1 = "key_intent_1";
     public static final String KEY_INTENT_2 = "key_intent_2";
     public static final String KEY_INTENT_3 = "type";
+    public static final String KEY_ORDER = "key_order";
     public static final int TYPE_CHAPTER = 0;
     public static final int TYPE_DOWNLOAD = 1;
     @BindView(R.id.AppCompatTextView_1)
@@ -51,21 +52,25 @@ public class ComicReadPictureActivity extends BaseActivity
     private int readPosition = 0;
 
 
-    public static void startActivity(Context context, int selectChapter) {
+    public static void startActivity(Context context, int selectChapter, boolean isReverse) {
         if (context != null) {
             Intent intent = new Intent(context, ComicReadPictureActivity.class);
             intent.putExtra(KEY_INTENT_2, selectChapter);
             intent.putExtra(KEY_INTENT_3, TYPE_CHAPTER);
+            intent.putExtra(KEY_ORDER, isReverse);
             context.startActivity(intent);
         }
     }
 
-    public static void startActivity(Context context, List<ComicItemPicture> pictures, String[] comicIdAndComicName) {
+    public static void startActivity(Context context,
+                                     List<ComicItemPicture> pictures,
+                                     String[] comicIdAndComicName, boolean isReverse) {
         if (context != null && !EmptyUtils.isListsEmpty(pictures) && comicIdAndComicName != null && comicIdAndComicName.length == 3) {
             Intent intent = new Intent(context, ComicReadPictureActivity.class);
             intent.putExtra(KEY_INTENT_1, (Serializable) pictures);
             intent.putExtra(KEY_INTENT_2, comicIdAndComicName);
             intent.putExtra(KEY_INTENT_3, TYPE_DOWNLOAD);
+            intent.putExtra(KEY_ORDER, isReverse);
             context.startActivity(intent);
         }
     }

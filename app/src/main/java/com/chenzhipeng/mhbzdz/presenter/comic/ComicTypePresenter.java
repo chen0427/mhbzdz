@@ -14,9 +14,6 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/9/27.
- */
 
 public class ComicTypePresenter {
     private RxAppCompatActivity activity;
@@ -49,7 +46,7 @@ public class ComicTypePresenter {
         String str;
         if (ComicTypeActivity.isSearch) {
             str = intent.getStringExtra(ComicTypeActivity.KEY_INTENT_1);
-            typeView.onTitle(activity.getString(R.string.search_result) + str);
+            typeView.onTitle(str);
         } else {
             typeView.onTitle(intent.getStringExtra(ComicTypeActivity.KEY_INTENT_1));
             str = intent.getStringExtra(ComicTypeActivity.KEY_INTENT_2);

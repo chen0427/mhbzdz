@@ -64,7 +64,7 @@ public class WallpaperSearchDataActivity extends BaseActivity implements IWallpa
     @Override
     public void onTitle(String s) {
         if (!TextUtils.isEmpty(s)) {
-            setToolbar(toolbar, getString(R.string.search_result)  + s, true);
+            setToolbar(toolbar,s, true);
         }
     }
 

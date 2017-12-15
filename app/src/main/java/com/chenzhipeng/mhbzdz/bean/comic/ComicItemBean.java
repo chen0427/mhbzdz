@@ -13,6 +13,7 @@ public class ComicItemBean implements Serializable {
     private boolean isChecked = false;
     private boolean isShowChecked = false;
 
+
     public ComicItemBean(String comicId, String comicName, String lastChapterName) {
         this.comicId = comicId;
         this.comicName = comicName;
