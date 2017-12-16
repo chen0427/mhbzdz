@@ -15,9 +15,6 @@ import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/9/9.
- */
 
 public class ComicChapterListAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
 
@@ -30,12 +27,17 @@ public class ComicChapterListAdapter<T> extends BaseQuickAdapter<T, BaseViewHold
         ComicChapterItemBean bean = (ComicChapterItemBean) item;
         String chapterName = bean.getChapterName();
         AppCompatTextView textView = helper.getView(R.id.AppCompatTextView1);
-        textView.setTextColor(bean.isRead() ? getColor() : Color.BLACK);
+        textView.setTextColor(bean.isRead() ? getColor() : getColor1());
         helper.addOnClickListener(R.id.LinearLayout);
         helper.setText(R.id.AppCompatTextView1, chapterName);
     }
 
     private int getColor() {
         return ContextCompat.getColor(BaseApplication.getContext(), ConfigUtils.getChoiceToAppColor());
+    }
+
+    private int getColor1() {
+        return Color.BLACK;
+        // return ContextCompat.getColor(BaseApplication.getContext(), R.color.chapter);
     }
 }

@@ -25,6 +25,7 @@
                 android:clickable="true"
                 android:padding="5dp"
                 android:text=""
+                android:textColor="@color/introduce"
                 android:textSize="15sp" />
 
             <android.support.v7.widget.AppCompatTextView
@@ -34,6 +35,7 @@
                 android:layout_marginTop="7dp"
                 android:padding="5dp"
                 android:text=""
+                android:textColor="@color/introduce"
                 android:textSize="15sp" />
 
             <android.support.v7.widget.AppCompatTextView
@@ -45,6 +47,7 @@
                 android:clickable="true"
                 android:padding="5dp"
                 android:text=""
+                android:textColor="@color/introduce"
                 android:textSize="15sp" />
 
 
@@ -74,8 +77,9 @@
                     android:maxLines="3"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:textColor="#666666"
+                    android:textColor="@color/introduce"
                     android:textSize="15sp" />
+
 
                 <android.support.v7.widget.AppCompatImageButton
                     android:id="@id/expand_collapse"
@@ -86,6 +90,5 @@
             </com.ms.square.android.expandabletextview.ExpandableTextView>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
 
 </FrameLayout>

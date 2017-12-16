@@ -2,7 +2,6 @@ package com.chenzhipeng.mhbzdz.presenter.comic;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
@@ -173,45 +172,32 @@ public class ComicChapterPresenter {
 
 
     /**
-     * 点击 连载 番外事件
-     *
-     * @param view
-     */
-    public void clickChapterType(View view) {
-        if (view != null) {
-            Object[] objects = (Object[]) view.getTag();
-            if (objects != null && objects.length == 2) {
-                ComicChapterTypeBean typeBean = (ComicChapterTypeBean) objects[0];
-                if (typeBean != null) {
-                    int select = (int) objects[1];
-                    chapterView.updateBarForLeft(select);
-                    updateList(typeBean);
-                }
-            }
-        }
-    }
-
-    /**
      * 添加 连载 番外等类型
      *
      * @param list
      */
     private void addChapterType(List<ComicChapterTypeBean> list) {
         if (!EmptyUtils.isListsEmpty(list)) {
-            FragmentActivity activity = fragment.getActivity();
-            LayoutInflater inflater = LayoutInflater.from(activity);
-            for (int i = 0; i < list.size(); i++) {
-                ComicChapterTypeBean typeBean = list.get(i);
-                View view = inflater.inflate(R.layout.itemview_chapter_type, new FrameLayout(activity), false);
-                AppCompatTextView textView = view.findViewById(R.id.AppCompatTextView1);
-                View lineView = view.findViewById(R.id.View);
-                lineView.setBackgroundColor(getColor());
-                lineView.setVisibility(i == 0 ? View.VISIBLE : View.GONE);
-                textView.setText(typeBean.getChapterType());
-                textView.setTextColor(i == 0 ? getColor() : Color.BLACK);
-                Object[] objects = new Object[]{typeBean, i};
-                textView.setTag(objects);
-                chapterView.addChapterType(view, textView);
+            ComicDetailsActivity activity = (ComicDetailsActivity) fragment.getActivity();
+            if (activity != null) {
+                LayoutInflater inflater = LayoutInflater.from(activity);
+                for (int i = 0; i < list.size(); i++) {
+                    ComicChapterTypeBean typeBean = list.get(i);
+                    View view = inflater.inflate(R.layout.itemview_chapter_type, new FrameLayout(activity), false);
+                    AppCompatTextView textView = view.findViewById(R.id.AppCompatTextView1);
+                    AppCompatTextView updateTextView = view.findViewById(R.id.AppCompatTextView2);
+                    View lineView = view.findViewById(R.id.View);
+                    lineView.setVisibility(View.GONE);
+                    lineView.setBackgroundColor(Color.BLACK);
+                    textView.setText(typeBean.getChapterType());
+                    if (!TextUtils.isEmpty(activity.getUpdateTime())) {
+                        updateTextView.setText(activity.getUpdateTime());
+                    }
+                    textView.setTextColor(Color.BLACK);
+                    Object[] objects = new Object[]{typeBean, i};
+                    textView.setTag(objects);
+                    chapterView.addChapterType(view, textView);
+                }
             }
         }
     }

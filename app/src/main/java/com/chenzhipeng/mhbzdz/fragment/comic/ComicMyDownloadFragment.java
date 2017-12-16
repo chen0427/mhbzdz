@@ -124,11 +124,16 @@ public class ComicMyDownloadFragment extends BaseFragment implements IComicMyDow
     }
 
     public void setBottomCheckedViewVisibility(boolean b) {
-        bottomCheckedView.setVisibility(b ? View.VISIBLE : View.GONE);
+        if (bottomCheckedView != null) {
+            bottomCheckedView.setVisibility(b ? View.VISIBLE : View.GONE);
+        }
+
     }
 
     public void setBottomCheckedViewChecked(boolean b) {
-        bottomCheckedView.setChecked(b);
+        if (bottomCheckedView != null) {
+            bottomCheckedView.setChecked(b);
+        }
     }
 
     @Override

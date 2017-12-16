@@ -60,5 +60,7 @@
     <color name="black">#000000</color><!--黑色 -->
     <color name="gray_cc">#cccccc</color>
     <color name="comicLeft">#d9d9d9</color>
+    <color name="introduce">#616161</color>
+    <color name="chapter">#212121</color>
 
 </resources>

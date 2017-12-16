@@ -48,6 +48,7 @@ public class ComicIntroduceFragment extends BaseFragment
     ExpandableTextView expandableTextView;
     private ComicIntroducePresenter presenter;
     private LayoutInflater inflater;
+    private String chapterUpdateTime;
 
     private ComicIntroducePresenter getPresenter() {
         if (presenter == null) {
@@ -119,8 +120,9 @@ public class ComicIntroduceFragment extends BaseFragment
             expandableTextView.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(updateTime)) {
-            String time = getString(R.string.update_str) + dateToStrLong(new Date(Long.parseLong(updateTime) * 1000));
-            updateTimeTextView.setText(time);
+            chapterUpdateTime = dateToStrLong(new Date(Long.parseLong(updateTime) * 1000));
+            String s = getString(R.string.update_str) + chapterUpdateTime;
+            updateTimeTextView.setText(s);
             updateTimeTextView.setVisibility(View.VISIBLE);
         } else {
             updateTimeTextView.setVisibility(View.GONE);
@@ -159,5 +161,9 @@ public class ComicIntroduceFragment extends BaseFragment
     public String dateToStrLong(Date date) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd", Locale.CHINA);
         return formatter.format(date);
+    }
+
+    public String getUpdateTime() {
+        return chapterUpdateTime;
     }
 }

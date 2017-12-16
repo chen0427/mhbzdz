@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.activity.comic.ComicDetailsActivity;
-import com.chenzhipeng.mhbzdz.activity.comic.ComicReadPictureActivity;
 import com.chenzhipeng.mhbzdz.adapter.comic.ComicChapterListAdapter;
 import com.chenzhipeng.mhbzdz.base.BaseFragment;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterItemBean;
@@ -94,10 +93,6 @@ public class ComicChapterFragment extends BaseFragment
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.AppCompatTextView1:
-                //连载 番外 等
-                getPresenter().clickChapterType(view);
-                break;
             case R.id.TextView1:
                 //正序
                 getPresenter().positiveSequence();
@@ -116,7 +111,6 @@ public class ComicChapterFragment extends BaseFragment
     @Override
     public void addChapterType(View view, AppCompatTextView textView) {
         if (view != null && textView != null) {
-            textView.setOnClickListener(this);
             typeChapterLinearLayout.addView(view);
         }
     }
@@ -130,7 +124,6 @@ public class ComicChapterFragment extends BaseFragment
             recyclerView.setAdapter(adapter);
             adapter.setOnItemChildClickListener(this);
             comicChapterItemBeanList = adapter.getData();
-
         }
     }
 
@@ -141,25 +134,7 @@ public class ComicChapterFragment extends BaseFragment
      */
     @Override
     public void updateBarForLeft(int position) {
-        int childCount = typeChapterLinearLayout.getChildCount();
-        if (childCount > 0) {
-            for (int i = 0; i < childCount; i++) {
-                View childAt = typeChapterLinearLayout.getChildAt(i);
-                if (childAt != null) {
-                    LinearLayout layout = childAt.findViewById(R.id.LinearLayout);
-                    if (layout != null) {
-                        AppCompatTextView textView = layout.findViewById(R.id.AppCompatTextView1);
-                        if (textView != null) {
-                            textView.setTextColor(i == position ? getPresenter().getColor() : Color.BLACK);
-                        }
-                        View view = layout.findViewById(R.id.View);
-                        if (view != null) {
-                            view.setVisibility(i == position ? View.VISIBLE : View.GONE);
-                        }
-                    }
-                }
-            }
-        }
+
     }
 
     /**
@@ -213,7 +188,7 @@ public class ComicChapterFragment extends BaseFragment
     /**
      * 跳到最后一话
      */
-    public void startLast(){
+    public void startLast() {
         haveCheckedHistoryRecord = true;
         getPresenter().startLast();
     }

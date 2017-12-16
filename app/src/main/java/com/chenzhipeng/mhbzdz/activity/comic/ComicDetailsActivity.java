@@ -227,4 +227,8 @@ public class ComicDetailsActivity extends BaseActivity implements IComicDetailsV
     public void startLast() {
        getPresenter().startLast();
     }
+
+    public String getUpdateTime() {
+        return getPresenter().getUpdateTime();
+    }
 }

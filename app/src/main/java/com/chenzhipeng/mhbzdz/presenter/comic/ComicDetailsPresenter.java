@@ -12,12 +12,12 @@ import com.chenzhipeng.mhbzdz.activity.comic.ComicDetailsActivity;
 import com.chenzhipeng.mhbzdz.adapter.comic.ComicDetailsViewPagerAdapter;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicDetailsBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
-import com.chenzhipeng.mhbzdz.retrofit.comic.ComicDetailsService;
 import com.chenzhipeng.mhbzdz.fragment.comic.ComicChapterFragment;
 import com.chenzhipeng.mhbzdz.fragment.comic.ComicIntroduceFragment;
+import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
+import com.chenzhipeng.mhbzdz.retrofit.comic.ComicDetailsService;
 import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
 import com.chenzhipeng.mhbzdz.utils.ComicApiUtils;
-import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDetailsView;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -35,14 +35,12 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-/**
- * Created by Administrator on 2017/9/4.
- */
 
 public class ComicDetailsPresenter {
     private IComicDetailsView detailsView;
     private Activity activity;
     private ComicChapterFragment chapterFragment;
+    private ComicIntroduceFragment introduceFragment;
     private String comicId;
     private String comicName;
 
@@ -104,7 +102,8 @@ public class ComicDetailsPresenter {
                                 List<Fragment> fragmentList = new ArrayList<>();
                                 titleList.add(activity.getString(R.string.introduce));
                                 titleList.add(activity.getString(R.string.chapter));
-                                ComicIntroduceFragment introduceFragment = new ComicIntroduceFragment();
+
+                                introduceFragment = new ComicIntroduceFragment();
                                 introduceFragment.setArguments(getBundle(detailsBean));
                                 chapterFragment = new ComicChapterFragment();
                                 chapterFragment.setArguments(getBundle(detailsBean));
@@ -198,5 +197,12 @@ public class ComicDetailsPresenter {
         if (chapterFragment != null) {
             chapterFragment.startLast();
         }
+    }
+
+    public String getUpdateTime() {
+        if (introduceFragment != null) {
+            return introduceFragment.getUpdateTime();
+        }
+        return null;
     }
 }
