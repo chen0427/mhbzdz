@@ -1,8 +1,6 @@
 package com.chenzhipeng.mhbzdz.presenter.comic;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -17,10 +15,11 @@ import com.chenzhipeng.mhbzdz.bean.comic.ComicRecommendBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicRecommendSlideBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicRecommendTypeBean;
 import com.chenzhipeng.mhbzdz.image.ImageHelper;
+import com.chenzhipeng.mhbzdz.intent.SuperIntent;
+import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.comic.ComicRecommendService;
 import com.chenzhipeng.mhbzdz.utils.ComicApiUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
-import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.view.comic.IComicRecommendTagView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -41,37 +40,34 @@ import okhttp3.ResponseBody;
 
 
 public class ComicRecommendTagPresenter implements OnBannerListener {
-    private Activity activity;
+    private ComicRecommendTagActivity activity;
     private IComicRecommendTagView recommendTagView;
     private int recommendPosition = 0;
     private List<ComicRecommendSlideBean> slideBeanList;
     private ComicBookListAdapter adapter;
     private boolean isShuffle = false;
 
-    public ComicRecommendTagPresenter(Activity activity) {
+    public ComicRecommendTagPresenter(ComicRecommendTagActivity activity) {
         this.activity = activity;
-        recommendTagView = (IComicRecommendTagView) activity;
+        recommendTagView = activity;
     }
 
     public void initAdapter() {
-        Intent intent = activity.getIntent();
-        if (intent != null) {
-            ComicRecommendTypeBean typeBean = (ComicRecommendTypeBean) intent.getSerializableExtra(ComicRecommendTagActivity.KEY_INTENT_1);
-            recommendPosition = intent.getIntExtra(ComicRecommendTagActivity.KEY_INTENT_2, -1);
-            if (typeBean != null && recommendPosition != -1) {
-                recommendTagView.onTitle(typeBean.getTabTitle());
-                List<ComicItemBean> itemBeanList = typeBean.getItemBeanList();
-                if (!EmptyUtils.isListsEmpty(itemBeanList)) {
-                    if (adapter == null) {
-                        adapter = new ComicBookListAdapter(R.layout.itemview_comic_book, itemBeanList);
-                        adapter.addHeaderView(getHeadView(typeBean));
-                        recommendTagView.onAdapter(adapter);
-                    } else {
-                        adapter.setNewData(itemBeanList);
-                    }
+        ComicRecommendTypeBean typeBean = (ComicRecommendTypeBean) SuperIntent.getInstance().get(SuperIntent.S2);
+        recommendPosition = (int) SuperIntent.getInstance().get(SuperIntent.S3);
+        if (typeBean != null) {
+            recommendTagView.onTitle(typeBean.getTabTitle());
+            List<ComicItemBean> itemBeanList = typeBean.getItemBeanList();
+            if (!EmptyUtils.isListsEmpty(itemBeanList)) {
+                if (adapter == null) {
+                    adapter = new ComicBookListAdapter(R.layout.itemview_comic_book, itemBeanList);
+                    adapter.addHeaderView(getHeadView(typeBean));
+                    recommendTagView.onAdapter(adapter);
                 } else {
-                    recommendTagView.onEmptyData();
+                    adapter.setNewData(itemBeanList);
                 }
+            } else {
+                recommendTagView.onEmptyData();
             }
         }
     }

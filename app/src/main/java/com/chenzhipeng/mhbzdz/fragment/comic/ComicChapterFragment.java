@@ -45,7 +45,8 @@ public class ComicChapterFragment extends BaseFragment
     ImageButton orderImageButton;
     private ComicChapterPresenter presenter;
     private boolean haveCheckedHistoryRecord = false;
-    public static List<ComicChapterItemBean> comicChapterItemBeanList;
+    // public static List<ComicChapterItemBean> comicChapterItemBeanList;
+    public List<ComicChapterItemBean> comicChapterItemBeanList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

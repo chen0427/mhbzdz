@@ -29,6 +29,7 @@ import java.util.List;
 
 @SuppressWarnings("unchecked")
 public class ComicChapterPresenter {
+    private List<ComicChapterItemBean> comicChapterItemBeanList;
     private ComicChapterFragment fragment;
     private IComicChapterView chapterView;
     private ComicChapterTypeBean currentTypeBean;
@@ -63,8 +64,8 @@ public class ComicChapterPresenter {
         if (currentTypeBean != null) {
             if (!currentTypeBean.isReverse()) {
                 currentTypeBean.setReverse(true);
-                ComicChapterFragment.comicChapterItemBeanList = currentTypeBean.getChapterItemBeanList();
-                Collections.reverse(ComicChapterFragment.comicChapterItemBeanList);
+                comicChapterItemBeanList = currentTypeBean.getChapterItemBeanList();
+                Collections.reverse(comicChapterItemBeanList);
                 updateList(currentTypeBean);
             }
         }
@@ -77,8 +78,8 @@ public class ComicChapterPresenter {
         if (currentTypeBean != null) {
             if (currentTypeBean.isReverse()) {
                 currentTypeBean.setReverse(false);
-                ComicChapterFragment.comicChapterItemBeanList = currentTypeBean.getChapterItemBeanList();
-                Collections.reverse(ComicChapterFragment.comicChapterItemBeanList);
+                comicChapterItemBeanList = currentTypeBean.getChapterItemBeanList();
+                Collections.reverse(comicChapterItemBeanList);
                 updateList(currentTypeBean);
             }
         }
@@ -90,8 +91,8 @@ public class ComicChapterPresenter {
     public void order() {
         if (currentTypeBean != null) {
             currentTypeBean.setReverse(!currentTypeBean.isReverse());
-            ComicChapterFragment.comicChapterItemBeanList = currentTypeBean.getChapterItemBeanList();
-            Collections.reverse(ComicChapterFragment.comicChapterItemBeanList);
+            comicChapterItemBeanList = currentTypeBean.getChapterItemBeanList();
+            Collections.reverse(comicChapterItemBeanList);
             updateList(currentTypeBean);
         }
     }
@@ -105,17 +106,17 @@ public class ComicChapterPresenter {
     private void updateList(ComicChapterTypeBean typeBean) {
         if (typeBean != null) {
             currentTypeBean = typeBean;
-            ComicChapterFragment.comicChapterItemBeanList = typeBean.getChapterItemBeanList();
-            if (!EmptyUtils.isListsEmpty(ComicChapterFragment.comicChapterItemBeanList)) {
+            comicChapterItemBeanList = typeBean.getChapterItemBeanList();
+            if (!EmptyUtils.isListsEmpty(comicChapterItemBeanList)) {
                 if (adapter == null) {
-                    adapter = new ComicChapterListAdapter(R.layout.itemview_comic_chapter, ComicChapterFragment.comicChapterItemBeanList);
+                    adapter = new ComicChapterListAdapter(R.layout.itemview_comic_chapter, comicChapterItemBeanList);
                     chapterView.updateBarForRight(typeBean.isReverse());
                     checkedHistoryRecord(false);
                     chapterView.onAdapter(adapter);
                 } else {
                     chapterView.updateBarForRight(typeBean.isReverse());
                     checkedHistoryRecord(false);
-                    adapter.setNewData(ComicChapterFragment.comicChapterItemBeanList);
+                    adapter.setNewData(comicChapterItemBeanList);
                 }
             }
         }
@@ -128,12 +129,12 @@ public class ComicChapterPresenter {
         if (currentTypeBean != null && adapter != null) {
             historyPosition = 0;
             boolean isHaveRead = false;
-            ComicChapterFragment.comicChapterItemBeanList = currentTypeBean.getChapterItemBeanList();
-            if (!EmptyUtils.isListsEmpty(ComicChapterFragment.comicChapterItemBeanList)) {
+            comicChapterItemBeanList = currentTypeBean.getChapterItemBeanList();
+            if (!EmptyUtils.isListsEmpty(comicChapterItemBeanList)) {
                 String chapterName = ComicDatabase.getInstance().getHistoryChapterName(comicId);
                 if (!TextUtils.isEmpty(chapterName)) {
                     int count = 0;
-                    for (ComicChapterItemBean c : ComicChapterFragment.comicChapterItemBeanList) {
+                    for (ComicChapterItemBean c : comicChapterItemBeanList) {
                         if (c.getChapterName().equals(chapterName)) {
                             c.setRead(true);
                             isHaveRead = true;
@@ -155,8 +156,8 @@ public class ComicChapterPresenter {
 
     private void setContinueToSee(boolean b) {
         if (b) {
-            if (!EmptyUtils.isListsEmpty(ComicChapterFragment.comicChapterItemBeanList)) {
-                String chapterName = ComicChapterFragment.comicChapterItemBeanList.get(historyPosition).getChapterName();
+            if (!EmptyUtils.isListsEmpty(comicChapterItemBeanList)) {
+                String chapterName = comicChapterItemBeanList.get(historyPosition).getChapterName();
                 ComicDetailsActivity activity = (ComicDetailsActivity) fragment.getActivity();
                 if (activity != null) {
                     activity.setContinueToSee(fragment.getString(R.string.continue_see) + " " + chapterName);
@@ -218,10 +219,10 @@ public class ComicChapterPresenter {
 
     public void startActivityToHistory() {
         if (currentTypeBean != null) {
-            ComicChapterFragment.comicChapterItemBeanList = currentTypeBean.getChapterItemBeanList();
-            if (!EmptyUtils.isListsEmpty(ComicChapterFragment.comicChapterItemBeanList)) {
+            comicChapterItemBeanList = currentTypeBean.getChapterItemBeanList();
+            if (!EmptyUtils.isListsEmpty(comicChapterItemBeanList)) {
                 if (fragment.getActivity() != null) {
-                    ComicReadPictureActivity.startActivity(fragment.getActivity(), historyPosition, currentTypeBean.isReverse());
+                    ComicReadPictureActivity.startActivity(fragment.getActivity(), currentTypeBean.getChapterItemBeanList(), historyPosition, currentTypeBean.isReverse());
                 }
             }
         }
@@ -230,7 +231,7 @@ public class ComicChapterPresenter {
 
     public void startReadActivity(int position) {
         if (currentTypeBean != null) {
-            ComicReadPictureActivity.startActivity(fragment.getActivity(), position, currentTypeBean.isReverse());
+            ComicReadPictureActivity.startActivity(fragment.getActivity(), currentTypeBean.getChapterItemBeanList(), position, currentTypeBean.isReverse());
         }
     }
 
@@ -238,9 +239,9 @@ public class ComicChapterPresenter {
         if (currentTypeBean != null) {
             int size = currentTypeBean.getChapterItemBeanList().size();
             if (currentTypeBean.isReverse()) {
-                ComicReadPictureActivity.startActivity(fragment.getActivity(), 0, currentTypeBean.isReverse());
+                ComicReadPictureActivity.startActivity(fragment.getActivity(), currentTypeBean.getChapterItemBeanList(), 0, currentTypeBean.isReverse());
             } else {
-                ComicReadPictureActivity.startActivity(fragment.getActivity(), size - 1, currentTypeBean.isReverse());
+                ComicReadPictureActivity.startActivity(fragment.getActivity(), currentTypeBean.getChapterItemBeanList(), size - 1, currentTypeBean.isReverse());
             }
         }
     }

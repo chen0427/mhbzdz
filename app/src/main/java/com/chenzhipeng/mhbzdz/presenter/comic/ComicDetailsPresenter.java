@@ -1,7 +1,5 @@
 package com.chenzhipeng.mhbzdz.presenter.comic;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +12,7 @@ import com.chenzhipeng.mhbzdz.bean.comic.ComicDetailsBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
 import com.chenzhipeng.mhbzdz.fragment.comic.ComicChapterFragment;
 import com.chenzhipeng.mhbzdz.fragment.comic.ComicIntroduceFragment;
+import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.comic.ComicDetailsService;
 import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
@@ -38,14 +37,14 @@ import okhttp3.ResponseBody;
 
 public class ComicDetailsPresenter {
     private IComicDetailsView detailsView;
-    private Activity activity;
+    private ComicDetailsActivity activity;
     private ComicChapterFragment chapterFragment;
     private ComicIntroduceFragment introduceFragment;
     private String comicId;
     private String comicName;
 
-    public ComicDetailsPresenter(Activity activity) {
-        this.detailsView = (IComicDetailsView) activity;
+    public ComicDetailsPresenter(ComicDetailsActivity activity) {
+        this.detailsView = activity;
         this.activity = activity;
         init();
     }
@@ -60,16 +59,13 @@ public class ComicDetailsPresenter {
     }
 
     public void updateViewPager() {
-        Intent intent = activity.getIntent();
-        if (intent != null) {
-            ComicItemBean comicItemBean = (ComicItemBean) intent.getSerializableExtra(ComicDetailsActivity.KEY_INTENT);
-            if (comicItemBean != null) {
-                comicId = comicItemBean.getComicId();
-                detailsView.onTopImgUrl(ComicApiUtils.getComicImg(comicId));
-                //此漫画有收藏or没有收藏
-                detailsView.setCollectionStatus(ComicDatabase.getInstance().isCollection(comicId));
-                retrofit(comicId);
-            }
+        ComicItemBean comicItemBean = (ComicItemBean) SuperIntent.getInstance().get(SuperIntent.S14);
+        if (comicItemBean != null) {
+            comicId = comicItemBean.getComicId();
+            detailsView.onTopImgUrl(ComicApiUtils.getComicImg(comicId));
+            //此漫画有收藏or没有收藏
+            detailsView.setCollectionStatus(ComicDatabase.getInstance().isCollection(comicId));
+            retrofit(comicId);
         }
     }
 
@@ -77,7 +73,7 @@ public class ComicDetailsPresenter {
         if (!TextUtils.isEmpty(comicId)) {
             RetrofitHelper.getInstance().create(ComicDetailsService.class)
                     .get(ComicApiUtils.getDetails(comicId))
-                    .compose(((RxAppCompatActivity) activity).<ResponseBody>bindToLifecycle())
+                    .compose((activity).<ResponseBody>bindToLifecycle())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .flatMap(new Function<ResponseBody, ObservableSource<?>>() {

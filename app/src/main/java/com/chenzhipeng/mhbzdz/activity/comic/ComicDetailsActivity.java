@@ -21,6 +21,7 @@ import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
 import com.chenzhipeng.mhbzdz.image.ImageHelper;
+import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicDetailsPresenter;
 import com.chenzhipeng.mhbzdz.utils.DisplayUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDetailsView;
@@ -30,7 +31,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ComicDetailsActivity extends BaseActivity implements IComicDetailsView, ViewPager.OnPageChangeListener, View.OnClickListener {
-    public static final String KEY_INTENT = "intent_key";
     public static final String KEY_BUNDLE = "key_bundle";
     @BindView(R.id.Toolbar)
     Toolbar toolbar;
@@ -52,7 +52,7 @@ public class ComicDetailsActivity extends BaseActivity implements IComicDetailsV
 
     public static void startActivity(Context context, ComicItemBean data) {
         Intent intent = new Intent(context, ComicDetailsActivity.class);
-        intent.putExtra(KEY_INTENT, data);
+        SuperIntent.getInstance().put(SuperIntent.S14, data);
         context.startActivity(intent);
     }
 
@@ -225,10 +225,16 @@ public class ComicDetailsActivity extends BaseActivity implements IComicDetailsV
     }
 
     public void startLast() {
-       getPresenter().startLast();
+        getPresenter().startLast();
     }
 
     public String getUpdateTime() {
         return getPresenter().getUpdateTime();
+    }
+
+    @Override
+    public void finish() {
+        SuperIntent.getInstance().remove(SuperIntent.S14);
+        super.finish();
     }
 }

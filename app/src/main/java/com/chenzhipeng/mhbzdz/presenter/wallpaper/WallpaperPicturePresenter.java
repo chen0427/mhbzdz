@@ -1,6 +1,5 @@
 package com.chenzhipeng.mhbzdz.presenter.wallpaper;
 
-import android.content.Intent;
 import android.text.TextUtils;
 
 import com.chenzhipeng.mhbzdz.R;
@@ -9,16 +8,14 @@ import com.chenzhipeng.mhbzdz.adapter.wallpaper.WallpaperPictureListAdapter;
 import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.bean.wallpaper.WallpaperItemBean;
 import com.chenzhipeng.mhbzdz.download.PictureDownloader;
-import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
+import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.lockScreen.SetWallpaperHelper;
+import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.wallpaper.IWallpaperPictureView;
 
 import java.io.File;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/15.
- */
 @SuppressWarnings("unchecked")
 public class WallpaperPicturePresenter {
     private IWallpaperPictureView pictureView;
@@ -60,15 +57,12 @@ public class WallpaperPicturePresenter {
 
 
     public void initData() {
-        Intent intent = activity.getIntent();
-        if (intent != null) {
-            position = intent.getIntExtra(WallpaperPictureActivity.INTENT_KEY_2, 0);
-            beanList = (List<WallpaperItemBean>) intent.getSerializableExtra(WallpaperPictureActivity.INTENT_KEY_1);
-            if (!EmptyUtils.isListsEmpty(beanList)) {
-                WallpaperPictureListAdapter adapter = new WallpaperPictureListAdapter(R.layout.itemview_wallpaper_picture, beanList);
-                pictureView.onAdapter(adapter, position);
-                updateBottomBar(position);
-            }
+        position = (int) SuperIntent.getInstance().get(SuperIntent.S13);
+        beanList = (List<WallpaperItemBean>) SuperIntent.getInstance().get(SuperIntent.S12);
+        if (!EmptyUtils.isListsEmpty(beanList)) {
+            WallpaperPictureListAdapter adapter = new WallpaperPictureListAdapter(R.layout.itemview_wallpaper_picture, beanList);
+            pictureView.onAdapter(adapter, position);
+            updateBottomBar(position);
         }
     }
 

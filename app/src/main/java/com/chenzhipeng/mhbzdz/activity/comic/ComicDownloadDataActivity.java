@@ -24,12 +24,12 @@ import com.chenzhipeng.mhbzdz.base.BaseActivity;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterItemBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicDownloadBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemPicture;
+import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicDownloadDataPresenter;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDownloadDataView;
 import com.chenzhipeng.mhbzdz.widget.BottomCheckedView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +37,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ComicDownloadDataActivity extends BaseActivity implements IComicDownloadDataView, BaseQuickAdapter.OnItemChildClickListener, BottomCheckedView.Listener {
-    public static final String KEY_INTENT_1 = "download_data";
-    public static final String KEY_INTENT_2 = "download_comicId";
     @BindView(R.id.rv_comicDownloadDetails)
     RecyclerView recyclerView;
     @BindView(R.id.toolbar)
@@ -55,8 +53,8 @@ public class ComicDownloadDataActivity extends BaseActivity implements IComicDow
     public static void startActivity(Context context, String comicId, List<ComicChapterItemBean> list) {
         if (context != null && !TextUtils.isEmpty(comicId) && !EmptyUtils.isListsEmpty(list)) {
             Intent intent = new Intent(context, ComicDownloadDataActivity.class);
-            intent.putExtra(KEY_INTENT_1, (Serializable) list);
-            intent.putExtra(KEY_INTENT_2, comicId);
+            SuperIntent.getInstance().put(SuperIntent.S10, list);
+            SuperIntent.getInstance().put(SuperIntent.S11, comicId);
             context.startActivity(intent);
         }
     }
@@ -64,7 +62,7 @@ public class ComicDownloadDataActivity extends BaseActivity implements IComicDow
     public static void startActivity(Context context, String comicId) {
         if (context != null && !TextUtils.isEmpty(comicId)) {
             Intent intent = new Intent(context, ComicDownloadDataActivity.class);
-            intent.putExtra(KEY_INTENT_2, comicId);
+            SuperIntent.getInstance().put(SuperIntent.S11, comicId);
             context.startActivity(intent);
         }
     }
@@ -290,7 +288,7 @@ public class ComicDownloadDataActivity extends BaseActivity implements IComicDow
                 pictures.add(picture);
             }
             haveCheckedHistoryRecord = true;
-            ComicReadPictureActivity.startActivity(this, pictures, strings,false);
+            ComicReadPictureActivity.startActivity(this, pictures, strings, false);
         } else if (comicDownloadBean.getState().equals(getStringId(R.string.wait_download))) {
             comicDownloadBean.pause();
             invalidateOptionsMenu();
@@ -325,6 +323,7 @@ public class ComicDownloadDataActivity extends BaseActivity implements IComicDow
         if (getPresenter().closeMenu()) {
             return;
         }
+        SuperIntent.getInstance().remove(SuperIntent.S10, SuperIntent.S11);
         super.finish();
     }
 
@@ -337,4 +336,5 @@ public class ComicDownloadDataActivity extends BaseActivity implements IComicDow
     public void clickChecked() {
         getPresenter().allChecked();
     }
+
 }

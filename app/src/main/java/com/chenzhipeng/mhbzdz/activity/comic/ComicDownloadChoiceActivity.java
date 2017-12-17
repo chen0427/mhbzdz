@@ -18,6 +18,7 @@ import com.chenzhipeng.mhbzdz.adapter.comic.ComicDownloadListAdapter;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterItemBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterTypeBean;
+import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicDownloadChoicePresenter;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDownloadChoiceView;
 
@@ -25,7 +26,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ComicDownloadChoiceActivity extends BaseActivity implements IComicDownloadChoiceView, BaseQuickAdapter.OnItemChildClickListener {
-    public static final String KEY_INTENT = "ComicChapterTypeBean";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.rv_comicDownloadList)
@@ -41,10 +41,10 @@ public class ComicDownloadChoiceActivity extends BaseActivity implements IComicD
         return presenter;
     }
 
-    public static void startActivity(Context context, ComicChapterTypeBean typeBean) {
-        if (context != null && typeBean != null) {
+    public static void startActivity(Context context, ComicChapterTypeBean comicChapterTypeBean) {
+        if (context != null && comicChapterTypeBean != null) {
             Intent intent = new Intent(context, ComicDownloadChoiceActivity.class);
-            intent.putExtra(KEY_INTENT, typeBean);
+            SuperIntent.getInstance().put(SuperIntent.S1, comicChapterTypeBean);
             context.startActivity(intent);
         }
     }
@@ -126,4 +126,9 @@ public class ComicDownloadChoiceActivity extends BaseActivity implements IComicD
         invalidateOptionsMenu();
     }
 
+    @Override
+    public void finish() {
+        SuperIntent.getInstance().remove(SuperIntent.S1);
+        super.finish();
+    }
 }

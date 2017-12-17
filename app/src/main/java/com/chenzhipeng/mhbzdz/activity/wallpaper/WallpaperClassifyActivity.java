@@ -17,6 +17,7 @@ import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
 import com.chenzhipeng.mhbzdz.bean.wallpaper.WallpaperClassifyItemBean;
 import com.chenzhipeng.mhbzdz.fragment.wallpaper.WallpaperClassifyFragment;
+import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,6 @@ public class WallpaperClassifyActivity extends BaseActivity {
     TabLayout tabLayout;
     @BindView(R.id.vp)
     ViewPager viewPager;
-    public static final String KEY_INTENT = "key_intent";
     public static final String KEY_BUNDLE_1 = "key_bundle_1";
     public static final String KEY_BUNDLE_2 = "key_bundle_2";
     public static final int TYPE_NEW = 1;
@@ -42,7 +42,7 @@ public class WallpaperClassifyActivity extends BaseActivity {
 
     public static void startActivity(Activity activity, WallpaperClassifyItemBean bean) {
         Intent intent = new Intent(activity, WallpaperClassifyActivity.class);
-        intent.putExtra(KEY_INTENT, bean);
+        SuperIntent.getInstance().put(SuperIntent.S9, bean);
         activity.startActivity(intent);
     }
 
@@ -51,8 +51,7 @@ public class WallpaperClassifyActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallpaper_classify);
         ButterKnife.bind(this);
-        WallpaperClassifyItemBean itemBean
-                = (WallpaperClassifyItemBean) getIntent().getSerializableExtra(KEY_INTENT);
+        WallpaperClassifyItemBean itemBean = (WallpaperClassifyItemBean) SuperIntent.getInstance().get(SuperIntent.S9);
         if (itemBean == null) {
             return;
         }

@@ -1,6 +1,5 @@
 package com.chenzhipeng.mhbzdz.presenter.comic;
 
-import android.content.Intent;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
@@ -16,6 +15,7 @@ import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
 import com.chenzhipeng.mhbzdz.document.ComicDocumentHelper;
 import com.chenzhipeng.mhbzdz.download.ComicBookDownloader;
 import com.chenzhipeng.mhbzdz.download.ComicDownloaderManager;
+import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDownloadDataView;
@@ -304,56 +304,53 @@ public class ComicDownloadDataPresenter {
 
 
     public void init() {
-        final Intent intent = activity.getIntent();
-        if (intent != null) {
-            downloadDataView.setProgress(true);
-            Observable.create(new ObservableOnSubscribe<Object>() {
-                @Override
-                public void subscribe(@NonNull ObservableEmitter<Object> e) throws Exception {
-                    List<ComicChapterItemBean> comicChapterItemBeanList = (List<ComicChapterItemBean>) intent.getSerializableExtra(ComicDownloadDataActivity.KEY_INTENT_1);
-                    comicId = intent.getStringExtra(ComicDownloadDataActivity.KEY_INTENT_2);
-                    List<ComicDownloadBean> comicDownloadBeanList = new ArrayList<>();
-                    List<ComicDownloadBean> dbList = ComicDatabase.getInstance().getDownloadData(comicId);
-                    if (!EmptyUtils.isListsEmpty(comicChapterItemBeanList)) {
-                        comicName = comicChapterItemBeanList.get(0).getComicName();
-                        ComicDatabase.getInstance().insertDownloadBook(comicId, comicName);
-                        //有新添加的任务
-                        List<ComicDownloadBean> addList = getComicDownloadBeanList(comicChapterItemBeanList);
-                        insertDownloadData(addList);
-                        dbList.addAll(addList);
-                        setDownloadDataToRunning(dbList, comicDownloadBeanList);
-                    } else {
-                        //没有新添加的任务 直接从数据库中取
-                        comicName = dbList.get(0).getComicName();
-                        setDownloadDataToRunning(dbList, comicDownloadBeanList);
-                    }
-                    e.onNext(comicDownloadBeanList);
+        downloadDataView.setProgress(true);
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Object> e) throws Exception {
+                List<ComicChapterItemBean> comicChapterItemBeanList = (List<ComicChapterItemBean>) SuperIntent.getInstance().get(SuperIntent.S10);
+                comicId = (String) SuperIntent.getInstance().get(SuperIntent.S11);
+                List<ComicDownloadBean> comicDownloadBeanList = new ArrayList<>();
+                List<ComicDownloadBean> dbList = ComicDatabase.getInstance().getDownloadData(comicId);
+                if (!EmptyUtils.isListsEmpty(comicChapterItemBeanList)) {
+                    comicName = comicChapterItemBeanList.get(0).getComicName();
+                    ComicDatabase.getInstance().insertDownloadBook(comicId, comicName);
+                    //有新添加的任务
+                    List<ComicDownloadBean> addList = getComicDownloadBeanList(comicChapterItemBeanList);
+                    insertDownloadData(addList);
+                    dbList.addAll(addList);
+                    setDownloadDataToRunning(dbList, comicDownloadBeanList);
+                } else {
+                    //没有新添加的任务 直接从数据库中取
+                    comicName = dbList.get(0).getComicName();
+                    setDownloadDataToRunning(dbList, comicDownloadBeanList);
                 }
-            }).subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<Object>() {
-                        @Override
-                        public void accept(Object o) throws Exception {
-                            downloadDataView.setProgress(false);
-                            List<ComicDownloadBean> comicDownloadBeanList = (List<ComicDownloadBean>) o;
-                            if (!EmptyUtils.isListsEmpty(comicDownloadBeanList)) {
-                                if (adapter == null) {
-                                    adapter = new ComicDownloadDataListAdapter(R.layout.itemview_comic_download_details, comicDownloadBeanList);
-                                    checkedHistoryRecord(false);
-                                    downloadDataView.onAdapter(adapter);
-                                } else {
-                                    checkedHistoryRecord(false);
-                                    adapter.setNewData(comicDownloadBeanList);
-                                }
+                e.onNext(comicDownloadBeanList);
+            }
+        }).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        downloadDataView.setProgress(false);
+                        List<ComicDownloadBean> comicDownloadBeanList = (List<ComicDownloadBean>) o;
+                        if (!EmptyUtils.isListsEmpty(comicDownloadBeanList)) {
+                            if (adapter == null) {
+                                adapter = new ComicDownloadDataListAdapter(R.layout.itemview_comic_download_details, comicDownloadBeanList);
+                                checkedHistoryRecord(false);
+                                downloadDataView.onAdapter(adapter);
+                            } else {
+                                checkedHistoryRecord(false);
+                                adapter.setNewData(comicDownloadBeanList);
                             }
-
-                            comicBookDownloader = new ComicBookDownloader();
-                            comicBookDownloader.setData(comicDownloadBeanList).setListener(new BookDownloadListener()).start();
-                            //更新播放按钮
-                            activity.invalidateOptionsMenu();
                         }
-                    });
-        }
+
+                        comicBookDownloader = new ComicBookDownloader();
+                        comicBookDownloader.setData(comicDownloadBeanList).setListener(new BookDownloadListener()).start();
+                        //更新播放按钮
+                        activity.invalidateOptionsMenu();
+                    }
+                });
     }
 
     /**

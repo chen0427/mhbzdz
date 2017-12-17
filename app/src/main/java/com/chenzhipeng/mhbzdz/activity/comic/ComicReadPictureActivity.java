@@ -16,7 +16,9 @@ import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.adapter.comic.ComicPictureListAdapter;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
 import com.chenzhipeng.mhbzdz.base.BaseApplication;
+import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterItemBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemPicture;
+import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicReadPicturePresenter;
 import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
@@ -24,7 +26,6 @@ import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicPictureView;
 import com.chenzhipeng.mhbzdz.widget.rvp.RecyclerViewPager;
 
-import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,10 +34,6 @@ import butterknife.ButterKnife;
 @SuppressWarnings("unchecked")
 public class ComicReadPictureActivity extends BaseActivity
         implements IComicPictureView {
-    public static final String KEY_INTENT_1 = "key_intent_1";
-    public static final String KEY_INTENT_2 = "key_intent_2";
-    public static final String KEY_INTENT_3 = "type";
-    public static final String KEY_ORDER = "key_order";
     public static final int TYPE_CHAPTER = 0;
     public static final int TYPE_DOWNLOAD = 1;
     @BindView(R.id.AppCompatTextView_1)
@@ -48,16 +45,18 @@ public class ComicReadPictureActivity extends BaseActivity
     @BindView(R.id.root)
     RelativeLayout relativeLayout;
     private ComicReadPicturePresenter presenter;
-
     private int readPosition = 0;
 
 
-    public static void startActivity(Context context, int selectChapter, boolean isReverse) {
-        if (context != null) {
+    public static void startActivity(Context context,
+                                     List<ComicChapterItemBean> comicChapterItemBeanList,
+                                     int selectChapter, boolean isReverse) {
+        if (context != null && !EmptyUtils.isListsEmpty(comicChapterItemBeanList)) {
             Intent intent = new Intent(context, ComicReadPictureActivity.class);
-            intent.putExtra(KEY_INTENT_2, selectChapter);
-            intent.putExtra(KEY_INTENT_3, TYPE_CHAPTER);
-            intent.putExtra(KEY_ORDER, isReverse);
+            SuperIntent.getInstance().put(SuperIntent.S8, selectChapter);
+            SuperIntent.getInstance().put(SuperIntent.S17, comicChapterItemBeanList);
+            SuperIntent.getInstance().put(SuperIntent.S6, TYPE_CHAPTER);
+            SuperIntent.getInstance().put(SuperIntent.S7, isReverse);
             context.startActivity(intent);
         }
     }
@@ -67,10 +66,10 @@ public class ComicReadPictureActivity extends BaseActivity
                                      String[] comicIdAndComicName, boolean isReverse) {
         if (context != null && !EmptyUtils.isListsEmpty(pictures) && comicIdAndComicName != null && comicIdAndComicName.length == 3) {
             Intent intent = new Intent(context, ComicReadPictureActivity.class);
-            intent.putExtra(KEY_INTENT_1, (Serializable) pictures);
-            intent.putExtra(KEY_INTENT_2, comicIdAndComicName);
-            intent.putExtra(KEY_INTENT_3, TYPE_DOWNLOAD);
-            intent.putExtra(KEY_ORDER, isReverse);
+            SuperIntent.getInstance().put(SuperIntent.S4, pictures);
+            SuperIntent.getInstance().put(SuperIntent.S5, comicIdAndComicName);
+            SuperIntent.getInstance().put(SuperIntent.S6, TYPE_DOWNLOAD);
+            SuperIntent.getInstance().put(SuperIntent.S7, isReverse);
             context.startActivity(intent);
         }
     }
@@ -183,5 +182,13 @@ public class ComicReadPictureActivity extends BaseActivity
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void finish() {
+        SuperIntent.getInstance().remove(SuperIntent.S4, SuperIntent.S5,
+                SuperIntent.S6, SuperIntent.S7,
+                SuperIntent.S17);
+        super.finish();
     }
 }

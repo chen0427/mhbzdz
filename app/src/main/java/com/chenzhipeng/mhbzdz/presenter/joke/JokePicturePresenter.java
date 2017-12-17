@@ -9,15 +9,13 @@ import com.chenzhipeng.mhbzdz.activity.joke.JokePictureActivity;
 import com.chenzhipeng.mhbzdz.adapter.joke.JokePictureListAdapter;
 import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.download.PictureDownloader;
+import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.joke.IJokePictureView;
 
 import java.io.File;
 import java.util.ArrayList;
 
-/**
- * Created by Administrator on 2017/8/10.
- */
 
 public class JokePicturePresenter {
     private IJokePictureView iJokePictureView;
@@ -33,15 +31,12 @@ public class JokePicturePresenter {
     }
 
     public void initData() {
-        Intent intent = activity.getIntent();
-        if (intent != null) {
-            list = intent.getStringArrayListExtra(JokePictureActivity.INTENT_KEY1);
-            position = intent.getIntExtra(JokePictureActivity.INTENT_KEY2, 0);
-            if (!EmptyUtils.isListsEmpty(list)) {
-                JokePictureListAdapter adapter = new JokePictureListAdapter(R.layout.itemview_joke_picture, list);
-                iJokePictureView.onAdapter(adapter, position);
-                updateBottomBar(position);
-            }
+        list = (ArrayList<String>) SuperIntent.getInstance().get(SuperIntent.S16);
+        position = (int) SuperIntent.getInstance().get(SuperIntent.S15);
+        if (!EmptyUtils.isListsEmpty(list)) {
+            JokePictureListAdapter adapter = new JokePictureListAdapter(R.layout.itemview_joke_picture, list);
+            iJokePictureView.onAdapter(adapter, position);
+            updateBottomBar(position);
         }
     }
 

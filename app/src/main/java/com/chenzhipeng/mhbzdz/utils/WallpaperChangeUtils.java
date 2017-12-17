@@ -8,9 +8,6 @@ import com.chenzhipeng.mhbzdz.bean.wallpaper.WallpaperItemBean;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/18.
- */
 
 public class WallpaperChangeUtils {
     /**

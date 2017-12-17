@@ -18,13 +18,13 @@ import com.chenzhipeng.mhbzdz.adapter.wallpaper.WallpaperPictureListAdapter;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
 import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.bean.wallpaper.WallpaperItemBean;
+import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.presenter.wallpaper.WallpaperPicturePresenter;
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.chenzhipeng.mhbzdz.view.wallpaper.IWallpaperPictureView;
 import com.chenzhipeng.mhbzdz.widget.PictureBottomView;
 import com.chenzhipeng.mhbzdz.widget.rvp.RecyclerViewPager;
 
-import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,8 +33,6 @@ import butterknife.ButterKnife;
 @SuppressWarnings("unchecked")
 public class WallpaperPictureActivity extends BaseActivity implements
         IWallpaperPictureView, PictureBottomView.Listener {
-    public static final String INTENT_KEY_1 = "data";
-    public static final String INTENT_KEY_2 = "position";
     @BindView(R.id.RecyclerViewPager)
     RecyclerViewPager recyclerViewPager;
     @BindView(R.id.pbv_wallpaperPicture)
@@ -52,8 +50,8 @@ public class WallpaperPictureActivity extends BaseActivity implements
             return;
         }
         Intent intent = new Intent(context, WallpaperPictureActivity.class);
-        intent.putExtra(INTENT_KEY_1, (Serializable) beanList);
-        intent.putExtra(INTENT_KEY_2, position);
+        SuperIntent.getInstance().put(SuperIntent.S12, beanList);
+        SuperIntent.getInstance().put(SuperIntent.S13, position);
         context.startActivity(intent);
         ((Activity) context).overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
     }

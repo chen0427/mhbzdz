@@ -15,6 +15,7 @@ import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.adapter.joke.JokePictureListAdapter;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
 import com.chenzhipeng.mhbzdz.base.BaseApplication;
+import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.presenter.joke.JokePicturePresenter;
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.chenzhipeng.mhbzdz.view.joke.IJokePictureView;
@@ -35,8 +36,6 @@ public class JokePictureActivity extends BaseActivity implements IJokePictureVie
     @BindView(R.id.RecyclerViewPager)
     RecyclerViewPager recyclerViewPager;
     private JokePicturePresenter presenter;
-    public static final String INTENT_KEY1 = "picture_list";
-    public static final String INTENT_KEY2 = "current_position";
     private AlertDialog alertDialog;
 
     private int readPosition = 0;
@@ -46,13 +45,13 @@ public class JokePictureActivity extends BaseActivity implements IJokePictureVie
         if (activity != null && data != null) {
             Intent intent = new Intent(activity, JokePictureActivity.class);
             if (data instanceof ArrayList) {
-                intent.putStringArrayListExtra(INTENT_KEY1, (ArrayList<String>) data);
+                SuperIntent.getInstance().put(SuperIntent.S16, data);
             } else if (data instanceof String) {
                 ArrayList<String> strings = new ArrayList<>();
                 strings.add(String.valueOf(data));
-                intent.putStringArrayListExtra(INTENT_KEY1, strings);
+                SuperIntent.getInstance().put(SuperIntent.S16, strings);
             }
-            intent.putExtra(INTENT_KEY2, currentPosition);
+            SuperIntent.getInstance().put(SuperIntent.S15, currentPosition);
             activity.startActivity(intent);
             activity.overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
         }

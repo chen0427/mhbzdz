@@ -14,9 +14,9 @@ import android.widget.LinearLayout;
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
 import com.chenzhipeng.mhbzdz.base.BaseApplication;
+import com.chenzhipeng.mhbzdz.image.ImageCacheHelper;
 import com.chenzhipeng.mhbzdz.presenter.SettingPresenter;
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
-import com.chenzhipeng.mhbzdz.image.ImageCacheHelper;
 import com.chenzhipeng.mhbzdz.view.ISettingView;
 import com.chenzhipeng.mhbzdz.widget.ColorChoiceView;
 
