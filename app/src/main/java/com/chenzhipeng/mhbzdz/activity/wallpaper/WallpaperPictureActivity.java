@@ -11,7 +11,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
-import android.widget.ProgressBar;
 
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.adapter.wallpaper.WallpaperPictureListAdapter;
@@ -37,8 +36,6 @@ public class WallpaperPictureActivity extends BaseActivity implements
     RecyclerViewPager recyclerViewPager;
     @BindView(R.id.pbv_wallpaperPicture)
     PictureBottomView pictureBottomView;
-    @BindView(R.id.pb_wallpaperPicture)
-    ProgressBar progressBar;
     private WallpaperPicturePresenter presenter;
     private AlertDialog alertDialog;
 
@@ -58,6 +55,7 @@ public class WallpaperPictureActivity extends BaseActivity implements
 
     @Override
     public void finish() {
+        SuperIntent.getInstance().remove(SuperIntent.S12, SuperIntent.S13);
         super.finish();
         overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
     }

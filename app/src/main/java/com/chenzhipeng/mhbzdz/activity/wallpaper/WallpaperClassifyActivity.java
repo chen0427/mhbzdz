@@ -119,4 +119,10 @@ public class WallpaperClassifyActivity extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void finish() {
+        SuperIntent.getInstance().remove(SuperIntent.S9);
+        super.finish();
+    }
 }

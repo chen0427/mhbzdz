@@ -6,12 +6,6 @@
     android:background="@color/black"
     tools:context="com.chenzhipeng.mhbzdz.activity.joke.JokePictureActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_jokePicture"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible" />
-
     <com.chenzhipeng.mhbzdz.widget.rvp.RecyclerViewPager
         android:id="@+id/RecyclerViewPager"
         android:layout_width="match_parent"

@@ -31,8 +31,6 @@ import butterknife.ButterKnife;
 public class JokePictureActivity extends BaseActivity implements IJokePictureView, PictureBottomView.Listener {
     @BindView(R.id.pbv_jokePicture)
     PictureBottomView pictureBottomView;
-    @BindView(R.id.rv_jokePicture)
-    RecyclerView recyclerView;
     @BindView(R.id.RecyclerViewPager)
     RecyclerViewPager recyclerViewPager;
     private JokePicturePresenter presenter;
@@ -59,6 +57,7 @@ public class JokePictureActivity extends BaseActivity implements IJokePictureVie
 
     @Override
     public void finish() {
+        SuperIntent.getInstance().remove(SuperIntent.S15, SuperIntent.S16);
         super.finish();
         overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
     }
@@ -190,5 +189,4 @@ public class JokePictureActivity extends BaseActivity implements IJokePictureVie
         }
         return super.onKeyDown(keyCode, event);
     }
-
 }

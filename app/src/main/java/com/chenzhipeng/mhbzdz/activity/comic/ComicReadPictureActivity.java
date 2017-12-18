@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.widget.RelativeLayout;
 
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.adapter.comic.ComicPictureListAdapter;
@@ -42,8 +41,6 @@ public class ComicReadPictureActivity extends BaseActivity
     AppCompatTextView comicNameTextView;
     @BindView(R.id.RecyclerViewPager)
     RecyclerViewPager recyclerViewPager;
-    @BindView(R.id.root)
-    RelativeLayout relativeLayout;
     private ComicReadPicturePresenter presenter;
     private int readPosition = 0;
 
@@ -187,7 +184,7 @@ public class ComicReadPictureActivity extends BaseActivity
     @Override
     public void finish() {
         SuperIntent.getInstance().remove(SuperIntent.S4, SuperIntent.S5,
-                SuperIntent.S6, SuperIntent.S7,
+                SuperIntent.S6, SuperIntent.S7, SuperIntent.S8,
                 SuperIntent.S17);
         super.finish();
     }
