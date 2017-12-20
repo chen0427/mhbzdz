@@ -7,17 +7,14 @@ import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
-import com.chenzhipeng.mhbzdz.image.ImageHelper;
 import com.chenzhipeng.mhbzdz.document.ComicDocumentHelper;
+import com.chenzhipeng.mhbzdz.image.ImageHelper;
 import com.chenzhipeng.mhbzdz.utils.DisplayUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.File;
 
-/**
- * Created by Administrator on 2017/10/19.
- */
 
 public class ComicReadPictureView extends PhotoView {
     private Paint paint;
@@ -43,7 +40,6 @@ public class ComicReadPictureView extends PhotoView {
     }
 
     private void init() {
-        setAdjustViewBounds(true);
         setBackgroundColor(Color.BLACK);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textColor = Color.WHITE;
@@ -96,5 +92,6 @@ public class ComicReadPictureView extends PhotoView {
 
     public void setTextVisibility(boolean textVisibility) {
         isTextVisibility = textVisibility;
+        invalidate();
     }
 }

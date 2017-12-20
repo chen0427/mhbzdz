@@ -1,6 +1,8 @@
 package com.chenzhipeng.mhbzdz.widget;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -13,13 +15,11 @@ import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.File;
 
-/**
- * Created by Administrator on 2017/11/20.
- */
 
 public class WallpaperPictureView extends FrameLayout {
     private PhotoView photoView;
     private ProgressBar progressBar;
+    private AppCompatTextView textView;
 
     public WallpaperPictureView(Context context) {
         super(context);
@@ -40,18 +40,32 @@ public class WallpaperPictureView extends FrameLayout {
         LayoutInflater.from(context).inflate(R.layout.customview_wallpaper_picture, this);
         photoView = findViewById(R.id.pv_wallpaperPicture);
         progressBar = findViewById(R.id.pb_wallpaperPicture);
+        textView = findViewById(R.id.AppCompatTextView);
+        textView.setTextColor(Color.WHITE);
+    }
+
+    public PhotoView getPhotoView() {
+        return this.photoView;
+    }
+
+    public ProgressBar getProgressBar() {
+        return this.progressBar;
+    }
+
+    public AppCompatTextView getTextView() {
+        return this.textView;
     }
 
 
     public void setImage(String url) {
         if (!TextUtils.isEmpty(url)) {
-            ImageHelper.setWallpaper(url, photoView, progressBar);
+            ImageHelper.setWallpaper(url, this);
         }
     }
 
     public void setImage(File file) {
         if (file != null && file.exists()) {
-            ImageHelper.setWallpaper(file, photoView, progressBar);
+            ImageHelper.setWallpaper(file, this);
         }
     }
 }

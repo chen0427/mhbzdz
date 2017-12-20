@@ -15,7 +15,6 @@ import java.util.List;
  */
 
 public class JokePictureListAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-
     public JokePictureListAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
         super(layoutResId, data);
     }
@@ -23,6 +22,6 @@ public class JokePictureListAdapter extends BaseQuickAdapter<String, BaseViewHol
     @Override
     protected void convert(BaseViewHolder helper, String item) {
         JokePictureView jokePictureView = helper.getView(R.id.jpv_jokePicture);
-        jokePictureView.setImage(item, R.color.black);
+        jokePictureView.setImage(item);
     }
 }

@@ -20,9 +20,6 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by Administrator on 2017/11/15.
- */
 
 public class ColorChoiceView extends FrameLayout implements BaseQuickAdapter.OnItemChildClickListener {
     private Integer[] colorIds = {R.color.colorPrimary_1, R.color.colorPrimary_2,

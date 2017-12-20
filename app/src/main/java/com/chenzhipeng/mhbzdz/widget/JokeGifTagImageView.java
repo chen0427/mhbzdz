@@ -22,9 +22,7 @@ import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/10/16.
- */
+
 
 public class JokeGifTagImageView extends FrameLayout implements View.OnClickListener {
     private AppCompatImageView imageView;

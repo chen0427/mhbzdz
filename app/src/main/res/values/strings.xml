@@ -4,6 +4,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="emptyData">暂无数据</string>
     <string name="networFail">网络不可用</string>
+    <string name="load_failed">加载失败 点击重试</string>
 
 
     <string name="running_download">正在下载</string>
@@ -91,4 +92,5 @@
     <string name="comic_end">完结</string>
     <string name="comic_serial">连载</string>
     <string name="update_str">最近更新&#160;</string>
+    <string name="gif">git_tag</string>
 </resources>

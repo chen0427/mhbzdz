@@ -1,10 +1,12 @@
 package com.chenzhipeng.mhbzdz.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ public class JokePictureView extends FrameLayout {
     private SubsamplingScaleImageView scaleImageView;
     private AppCompatImageView imageView;
     private ProgressBar progressBar;
+    private AppCompatTextView textView;
 
 
     public JokePictureView(@NonNull Context context) {
@@ -42,15 +45,39 @@ public class JokePictureView extends FrameLayout {
         scaleImageView = findViewById(R.id.siv_JokePicture);
         imageView = findViewById(R.id.iv_JokePicture);
         progressBar = findViewById(R.id.pb_JokePicture);
+        textView = findViewById(R.id.AppCompatTextView);
+        textView.setTextColor(Color.WHITE);
+    }
+
+    public void setTextVisibility(boolean b) {
+        textView.setVisibility(b ? VISIBLE : GONE);
+    }
+
+    public void setText(String s) {
+        if (!TextUtils.isEmpty(s)) {
+            textView.setText(s);
+        }
+    }
+
+    public void setProgressBarVisibility(boolean b) {
+        progressBar.setVisibility(b ? VISIBLE : GONE);
+    }
+
+    public SubsamplingScaleImageView getScaleImageView() {
+        return this.scaleImageView;
+    }
+
+    public AppCompatImageView getImageView() {
+        return this.imageView;
     }
 
 
-    public void setImage(String url, int placeholderId) {
+    public void setImage(String url) {
         if (!TextUtils.isEmpty(url)) {
             if (url.contains("webp")) {
-                ImageHelper.setLargeImage(url, scaleImageView, progressBar, placeholderId);
+                ImageHelper.setJokeToLargeImage(url, this);
             } else {
-                ImageHelper.setGIF(url, imageView, progressBar, placeholderId);
+                ImageHelper.setJokeToGIF(url, this);
             }
         }
     }

@@ -32,7 +32,7 @@ public class RecyclerViewPager extends RecyclerView {
     private int mSmoothScrollTargetPosition = -1;
     private int mPositionBeforeScroll = -1;
     private float mTriggerOffset = 0.05f;
-    private Float mScrollSpeed;
+    private Float mScrollSpeed = 0.13f;
     private boolean mNeedAdjust;
     private int mFirstLeftWhenDragging;
     private int mFirstTopWhenDragging;
