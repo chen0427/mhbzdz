@@ -1,4 +1,4 @@
-package com.chenzhipeng.mhbzdz.adapter;
+package com.chenzhipeng.mhbzdz.adapter.joke;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -10,12 +10,8 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by Administrator on 2017/8/12.
- */
 
-
-public class NeiHanCommentsAdapter extends BaseMultiItemQuickAdapter<NeiHanCommentsItemBean, BaseViewHolder> {
+public class JokeCommentsAdapter extends BaseMultiItemQuickAdapter<NeiHanCommentsItemBean, BaseViewHolder> {
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
@@ -23,7 +19,7 @@ public class NeiHanCommentsAdapter extends BaseMultiItemQuickAdapter<NeiHanComme
      *
      * @param data A new list is created out of this one to avoid mutable list
      */
-    public NeiHanCommentsAdapter(List<NeiHanCommentsItemBean> data) {
+    public JokeCommentsAdapter(List<NeiHanCommentsItemBean> data) {
         super(data);
         addItemType(NeiHanCommentsItemBean.TYPE_HOT, R.layout.itemview_comment_flag);
         addItemType(NeiHanCommentsItemBean.TYPE_NEW, R.layout.itemview_comment_flag);

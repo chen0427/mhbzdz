@@ -14,9 +14,6 @@ import com.chenzhipeng.mhbzdz.widget.ComicDownloadDataView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/10/21.
- */
 
 public class ComicDownloadDataListAdapter extends BaseQuickAdapter<ComicDownloadBean, BaseViewHolder> {
     private List<View> viewList = new ArrayList<>();

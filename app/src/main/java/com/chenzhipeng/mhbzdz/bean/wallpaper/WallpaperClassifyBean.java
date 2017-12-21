@@ -5,9 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/15.
- */
 
 public class WallpaperClassifyBean implements Serializable {
     private String msg;

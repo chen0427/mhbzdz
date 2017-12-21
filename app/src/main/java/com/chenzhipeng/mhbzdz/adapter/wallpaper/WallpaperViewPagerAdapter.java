@@ -6,9 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/10/2.
- */
 
 public class WallpaperViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments;

@@ -14,9 +14,6 @@ import com.chenzhipeng.mhbzdz.utils.ComicApiUtils;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/31.
- */
 
 public class ComicClassifyRightListAdapter extends BaseQuickAdapter<ComicClassifyBean.ClassifyType, BaseViewHolder> {
     public ComicClassifyRightListAdapter(@LayoutRes int layoutResId, @Nullable List<ComicClassifyBean.ClassifyType> data) {

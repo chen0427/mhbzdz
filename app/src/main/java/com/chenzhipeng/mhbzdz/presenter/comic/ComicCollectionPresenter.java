@@ -20,9 +20,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by Administrator on 2017/9/30.
- */
 
 public class ComicCollectionPresenter {
     private IComicCollectionView collectionView;

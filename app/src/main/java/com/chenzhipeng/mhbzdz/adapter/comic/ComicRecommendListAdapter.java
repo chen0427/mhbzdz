@@ -19,9 +19,6 @@ import com.chenzhipeng.mhbzdz.utils.ComicApiUtils;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/29.
- */
 
 @SuppressWarnings("unchecked")
 public class ComicRecommendListAdapter extends BaseQuickAdapter<ComicRecommendTypeBean, BaseViewHolder> implements View.OnClickListener {

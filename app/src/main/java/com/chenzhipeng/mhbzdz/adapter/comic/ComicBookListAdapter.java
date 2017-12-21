@@ -17,9 +17,6 @@ import com.chenzhipeng.mhbzdz.utils.ComicApiUtils;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/9/27.
- */
 
 public class ComicBookListAdapter extends BaseQuickAdapter<ComicItemBean, BaseViewHolder> {
 

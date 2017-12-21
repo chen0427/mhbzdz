@@ -1,8 +1,5 @@
 package com.chenzhipeng.mhbzdz.utils;
 
-/**
- * Created by Administrator on 2017/7/16.
- */
 
 public class JokeApiUtils {
     public static final String BASE_URL = "http://lf.snssdk.com/neihan/stream/mix/v1/";

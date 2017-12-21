@@ -31,9 +31,6 @@ import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/10/1.
- */
 
 public class AppSearchView extends FrameLayout implements View.OnClickListener, TextView.OnEditorActionListener, BaseQuickAdapter.OnItemChildClickListener, TextWatcher {
     private Toolbar toolbar;

@@ -9,9 +9,7 @@ import com.chenzhipeng.mhbzdz.R;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/21.
- */
+
 
 public class SearchRecordListAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     public SearchRecordListAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {

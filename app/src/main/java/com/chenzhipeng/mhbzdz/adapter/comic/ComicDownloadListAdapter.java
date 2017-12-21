@@ -14,9 +14,6 @@ import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterItemBean;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/10/19.
- */
 
 public class ComicDownloadListAdapter extends BaseQuickAdapter<ComicChapterItemBean, BaseViewHolder> {
 

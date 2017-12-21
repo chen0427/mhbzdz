@@ -16,9 +16,6 @@ import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/31.
- */
 
 public class ComicClassifyLeftListAdapter extends BaseQuickAdapter<ComicClassifyBean, BaseViewHolder> {
     public ComicClassifyLeftListAdapter(@LayoutRes int layoutResId, @Nullable List<ComicClassifyBean> data) {

@@ -4,10 +4,10 @@ import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.activity.comic.ComicMyBookActivity;
 import com.chenzhipeng.mhbzdz.adapter.comic.ComicBookListAdapter;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
+import com.chenzhipeng.mhbzdz.document.ComicDocumentHelper;
 import com.chenzhipeng.mhbzdz.download.ComicDownloaderManager;
 import com.chenzhipeng.mhbzdz.fragment.comic.ComicMyDownloadFragment;
 import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
-import com.chenzhipeng.mhbzdz.document.ComicDocumentHelper;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicMyDownloadView;
 
@@ -22,9 +22,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by Administrator on 2017/11/12.
- */
 
 public class ComicMyDownloadPresenter {
     private IComicMyDownloadView iComicMyDownloadView;

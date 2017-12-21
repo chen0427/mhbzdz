@@ -41,9 +41,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-/**
- * Created by Administrator on 2017/8/29.
- */
+
 @SuppressWarnings("unchecked")
 public class ComicRecommendPresenter implements OnBannerListener {
     private IComicRecommendView recommendView;

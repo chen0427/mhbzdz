@@ -6,9 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/9/26.
- */
 
 public class ComicIndexViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentList;

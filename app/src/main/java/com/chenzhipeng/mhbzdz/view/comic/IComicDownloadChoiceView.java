@@ -1,8 +1,5 @@
 package com.chenzhipeng.mhbzdz.view.comic;
 
-/**
- * Created by Administrator on 2017/10/19.
- */
 
 public interface IComicDownloadChoiceView {
 

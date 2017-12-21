@@ -3,9 +3,6 @@ package com.chenzhipeng.mhbzdz.utils;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerManager;
 
-/**
- * Created by Administrator on 2017/8/8.
- */
 
 public class VideoUtils {
     /**

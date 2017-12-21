@@ -13,9 +13,6 @@ import com.chenzhipeng.mhbzdz.widget.WallpaperPictureView;
 import java.io.File;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/10/2.
- */
 
 public class WallpaperPictureListAdapter extends BaseQuickAdapter<WallpaperItemBean, BaseViewHolder> {
 

@@ -2,13 +2,13 @@ package com.chenzhipeng.mhbzdz.presenter.joke;
 
 import android.support.v4.app.Fragment;
 
-import com.chenzhipeng.mhbzdz.adapter.NeiHanAdapter;
+import com.chenzhipeng.mhbzdz.adapter.joke.JokeAdapter;
 import com.chenzhipeng.mhbzdz.bean.joke.JokeBean;
-import com.chenzhipeng.mhbzdz.retrofit.joke.JokeBeanService;
 import com.chenzhipeng.mhbzdz.fragment.joke.JokeTypeFragment;
+import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
+import com.chenzhipeng.mhbzdz.retrofit.joke.JokeBeanService;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.utils.JokeApiUtils;
-import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.view.joke.IJokeTypeView;
 
 import java.util.ArrayList;
@@ -24,14 +24,11 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by Administrator on 2017/8/8.
- */
 
 public class JokeTypePresenter {
     private IJokeTypeView iJokeTypeView;
     private Fragment fragment;
-    private NeiHanAdapter neiHanAdapter;
+    private JokeAdapter jokeAdapter;
     private int refreshFlag = 0;
     private int refreshFlagPosition = 0;
 
@@ -129,14 +126,14 @@ public class JokeTypePresenter {
             if (data != null) {
                 List<JokeBean.Data.Dates> dates = data.getDates();
                 if (!EmptyUtils.isListsEmpty(dates)) {
-                    if (neiHanAdapter == null) {
-                        neiHanAdapter = new NeiHanAdapter(fragment.getActivity(), dates);
-                        iJokeTypeView.onAdapter(neiHanAdapter);
+                    if (jokeAdapter == null) {
+                        jokeAdapter = new JokeAdapter(fragment.getActivity(), dates);
+                        iJokeTypeView.onAdapter(jokeAdapter);
                     } else {
                         refreshFlag++;
                         //移除上一次数据 "上次看到这里 点击刷新"
                         if (refreshFlag > 1) {
-                            neiHanAdapter.remove(refreshFlagPosition);
+                            jokeAdapter.remove(refreshFlagPosition);
                             refreshFlag--;
                         }
                         //在新增加的数据后面  添加 "上次看到这里 点击刷新"
@@ -144,7 +141,7 @@ public class JokeTypePresenter {
                         showRefresh.setShowRefresh(true);
                         dates.add(showRefresh);
                         refreshFlagPosition = dates.size() - 1;
-                        neiHanAdapter.addData(0, dates);
+                        jokeAdapter.addData(0, dates);
                         iJokeTypeView.setRecyclerViewTop();
                     }
                 }

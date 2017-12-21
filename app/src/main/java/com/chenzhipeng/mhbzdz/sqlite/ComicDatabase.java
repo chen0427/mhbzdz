@@ -17,9 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/9/28.
- */
 
 public class ComicDatabase extends SQLiteOpenHelper {
     private static final int version = 1;
@@ -313,21 +310,6 @@ public class ComicDatabase extends SQLiteOpenHelper {
         return false;
     }
 
-   /* public boolean updateDownloadDataState(ComicDownloadBean comicDownloadBean) {
-        if (comicDownloadBean != null) {
-            Cursor cursor = getReadableDatabase().query(TABLE_DOWNLOAD_DATA, null, "comicId=? and chapterName=?", new String[]{comicDownloadBean.getComicId(), comicDownloadBean.getChapterName()}, null, null, null);
-            if (cursor != null && cursor.getCount() > 0) {
-                String state = comicDownloadBean.getState();
-                ContentValues values = new ContentValues();
-                values.put("state", state);
-                closeCursor(cursor);
-                int update = getWritableDatabase().update(TABLE_DOWNLOAD_DATA, values, null, null);
-                return update > 0;
-            }
-            closeCursor(cursor);
-        }
-        return false;
-    }*/
 
     public List<ComicDownloadBean> getDownloadData(String comicId) {
         List<ComicDownloadBean> comicDownloadBeanList = new ArrayList<>();

@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/31.
- */
 
 public class ComicClassifyBean {
     private String classifyTitle;

@@ -6,9 +6,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
-/**
- * Created by Administrator on 2017/8/30.
- */
 
 public class VpSwipeRefreshLayout extends SwipeRefreshLayout {
 

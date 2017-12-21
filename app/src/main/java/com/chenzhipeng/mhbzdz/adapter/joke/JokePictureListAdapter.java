@@ -10,9 +10,6 @@ import com.chenzhipeng.mhbzdz.widget.JokePictureView;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/10/2.
- */
 
 public class JokePictureListAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     public JokePictureListAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {

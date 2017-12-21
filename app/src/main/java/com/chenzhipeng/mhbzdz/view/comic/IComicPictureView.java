@@ -1,8 +1,5 @@
 package com.chenzhipeng.mhbzdz.view.comic;
 
-/**
- * Created by Administrator on 2017/9/21.
- */
 
 public interface IComicPictureView {
     <T> void onAdapter(T data, int readPosition);

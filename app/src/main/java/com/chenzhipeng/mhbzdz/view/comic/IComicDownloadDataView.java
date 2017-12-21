@@ -1,8 +1,5 @@
 package com.chenzhipeng.mhbzdz.view.comic;
 
-/**
- * Created by Administrator on 2017/10/21.
- */
 
 public interface IComicDownloadDataView {
     <T> void onAdapter(T data);

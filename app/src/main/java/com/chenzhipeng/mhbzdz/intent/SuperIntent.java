@@ -5,6 +5,12 @@ import android.text.TextUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.schedulers.Schedulers;
+
 /**
  * intent 不能传大数据 用这个传
  */
@@ -57,11 +63,16 @@ public class SuperIntent {
         return null;
     }
 
-    public void remove(String... keys) {
-        if (keys != null && keys.length > 0) {
-            for (String key : keys) {
-                map.remove(key);
+    public void remove(final String... keys) {
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Object> e) throws Exception {
+                if (keys != null && keys.length > 0) {
+                    for (String key : keys) {
+                        map.remove(key);
+                    }
+                }
             }
-        }
+        }).subscribeOn(Schedulers.newThread()).subscribe();
     }
 }

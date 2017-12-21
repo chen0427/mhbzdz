@@ -1,4 +1,4 @@
-package com.chenzhipeng.mhbzdz.lockScreen;
+package com.chenzhipeng.mhbzdz.wallpaper;
 
 
 import android.app.WallpaperManager;

@@ -15,9 +15,6 @@ import com.chenzhipeng.mhbzdz.view.comic.IComicMyBookView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/9/30.
- */
 
 public class ComicMyBookPresenter {
     private IComicMyBookView bookView;

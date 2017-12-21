@@ -12,10 +12,6 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by Administrator on 2017/8/23.
- */
-
 public class FileUtils {
 
     public static void copy(final File oldFile, final File newFile) {

@@ -13,9 +13,6 @@ import com.chenzhipeng.mhbzdz.activity.joke.JokePictureActivity;
 import com.chenzhipeng.mhbzdz.image.ImageHelper;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
-/**
- * Created by Administrator on 2017/10/16.
- */
 
 public class JokeLargeImageView extends FrameLayout implements View.OnClickListener {
     private AppCompatTextView seeTextView;

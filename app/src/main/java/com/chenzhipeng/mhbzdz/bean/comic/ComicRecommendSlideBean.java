@@ -2,9 +2,6 @@ package com.chenzhipeng.mhbzdz.bean.comic;
 
 import java.io.Serializable;
 
-/**
- * Created by Administrator on 2017/9/29.
- */
 
 public class ComicRecommendSlideBean implements Serializable {
     private String comicId;

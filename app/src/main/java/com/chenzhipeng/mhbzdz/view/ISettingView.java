@@ -1,8 +1,5 @@
 package com.chenzhipeng.mhbzdz.view;
 
-/**
- * Created by Administrator on 2017/11/15.
- */
 
 public interface ISettingView {
     void showIndexChoiceDialog();

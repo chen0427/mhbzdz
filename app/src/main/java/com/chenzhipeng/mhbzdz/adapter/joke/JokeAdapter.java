@@ -1,4 +1,4 @@
-package com.chenzhipeng.mhbzdz.adapter;
+package com.chenzhipeng.mhbzdz.adapter.joke;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -24,14 +24,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
-/**
- * Created by Administrator on 2017/7/17.
- */
 
-public class NeiHanAdapter extends BaseMultiItemQuickAdapter<JokeBean.Data.Dates, BaseViewHolder> {
+public class JokeAdapter extends BaseMultiItemQuickAdapter<JokeBean.Data.Dates, BaseViewHolder> {
     private Context context;
 
-    public NeiHanAdapter(Context context, @Nullable List<JokeBean.Data.Dates> dates) {
+    public JokeAdapter(Context context, @Nullable List<JokeBean.Data.Dates> dates) {
         super(dates);
         this.context = context;
         addItemType(JokeBean.TYPE_TEXT, R.layout.itemview_joke_text);
@@ -141,8 +138,8 @@ public class NeiHanAdapter extends BaseMultiItemQuickAdapter<JokeBean.Data.Dates
         recyclerView.setLayoutParams(layoutParams);
         recyclerView.setLayoutManager(new GridLayoutManager(context, 3));
         recyclerView.setHasFixedSize(true);
-        ItemImageListAdapter itemImageListAdapter = new ItemImageListAdapter(R.layout.itemview_joke_item_image, thumbImageLists, largeImageLists);
-        recyclerView.setAdapter(itemImageListAdapter);
+        JokeItemImageListAdapter jokeItemImageListAdapter = new JokeItemImageListAdapter(R.layout.itemview_joke_item_image, thumbImageLists, largeImageLists);
+        recyclerView.setAdapter(jokeItemImageListAdapter);
     }
 
     private void loadImage(BaseViewHolder helper, JokeBean.Data.Dates item) {

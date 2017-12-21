@@ -4,9 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/11.
- */
 
 public class NeiHanCommentsBean {
     private Data data;
@@ -73,7 +70,7 @@ public class NeiHanCommentsBean {
             }
         }
 
-       public class RecentComments {
+        public class RecentComments {
             private String text;
             @SerializedName("avatar_url")
             private String avatarUrl;

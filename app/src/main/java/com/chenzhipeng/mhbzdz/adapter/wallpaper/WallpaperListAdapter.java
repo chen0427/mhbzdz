@@ -16,9 +16,6 @@ import com.chenzhipeng.mhbzdz.image.ImageHelper;
 import java.io.File;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/14.
- */
 
 public class WallpaperListAdapter extends BaseQuickAdapter<WallpaperItemBean, BaseViewHolder> {
 

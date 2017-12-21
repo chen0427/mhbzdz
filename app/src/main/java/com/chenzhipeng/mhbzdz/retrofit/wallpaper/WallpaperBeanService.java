@@ -6,9 +6,6 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Url;
 
-/**
- * Created by Administrator on 2017/8/14.
- */
 
 public interface WallpaperBeanService {
     @GET

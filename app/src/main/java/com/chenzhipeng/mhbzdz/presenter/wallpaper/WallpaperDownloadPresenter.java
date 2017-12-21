@@ -25,9 +25,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by Administrator on 2017/10/4.
- */
 
 public class WallpaperDownloadPresenter {
     private IWallpaperDownloadView downloadView;

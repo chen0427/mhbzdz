@@ -13,9 +13,6 @@ import com.chenzhipeng.mhbzdz.view.joke.IJokeIndexView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/10/2.
- */
 
 public class JokeIndexPresenter {
     private Fragment fragment;

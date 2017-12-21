@@ -2,10 +2,6 @@ package com.chenzhipeng.mhbzdz.bean.joke;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
-/**
- * Created by Administrator on 2017/8/12.
- */
-
 
 public class NeiHanCommentsItemBean implements MultiItemEntity {
     private String text;

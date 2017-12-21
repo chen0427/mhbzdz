@@ -1,8 +1,5 @@
 package com.chenzhipeng.mhbzdz.view.joke;
 
-/**
- * Created by Administrator on 2017/8/8.
- */
 
 public interface IJokeTypeView {
     <T> void onAdapter(T data);

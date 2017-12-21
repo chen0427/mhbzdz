@@ -30,9 +30,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by Administrator on 2017/8/14.
- */
 
 @SuppressWarnings("unchecked")
 public class WallpaperTypePresenter {

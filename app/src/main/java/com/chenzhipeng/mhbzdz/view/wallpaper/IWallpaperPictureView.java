@@ -1,8 +1,5 @@
 package com.chenzhipeng.mhbzdz.view.wallpaper;
 
-/**
- * Created by Administrator on 2017/8/15.
- */
 
 public interface IWallpaperPictureView {
 

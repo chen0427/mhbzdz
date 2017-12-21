@@ -9,7 +9,7 @@ import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.bean.wallpaper.WallpaperItemBean;
 import com.chenzhipeng.mhbzdz.download.PictureDownloader;
 import com.chenzhipeng.mhbzdz.intent.SuperIntent;
-import com.chenzhipeng.mhbzdz.lockScreen.SetWallpaperHelper;
+import com.chenzhipeng.mhbzdz.wallpaper.SetWallpaperHelper;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.wallpaper.IWallpaperPictureView;
 

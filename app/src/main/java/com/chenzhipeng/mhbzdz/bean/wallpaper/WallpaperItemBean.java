@@ -2,9 +2,6 @@ package com.chenzhipeng.mhbzdz.bean.wallpaper;
 
 import java.io.Serializable;
 
-/**
- * Created by Administrator on 2017/8/18.
- */
 
 public class WallpaperItemBean implements Serializable {
     private String thumb;

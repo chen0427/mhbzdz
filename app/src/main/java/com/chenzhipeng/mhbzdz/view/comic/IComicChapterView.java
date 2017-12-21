@@ -3,9 +3,6 @@ package com.chenzhipeng.mhbzdz.view.comic;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
-/**
- * Created by Administrator on 2017/9/19.
- */
 
 public interface IComicChapterView {
     /**

@@ -6,9 +6,6 @@ import android.content.SharedPreferences;
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseApplication;
 
-/**
- * Created by Administrator on 2017/11/15.
- */
 
 public class ConfigUtils {
     private static final String CONFIG_NAME = "config";

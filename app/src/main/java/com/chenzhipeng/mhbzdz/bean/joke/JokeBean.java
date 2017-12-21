@@ -7,9 +7,6 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/8/7.
- */
 
 public class JokeBean implements Serializable {
     public static final int TYPE_TEXT = 1;

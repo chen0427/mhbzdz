@@ -15,9 +15,6 @@ import android.widget.ProgressBar;
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseApplication;
 
-/**
- * Created by Administrator on 2017/10/21.
- */
 
 public class ComicDownloadDataView extends FrameLayout {
     private AppCompatTextView nameTextView;

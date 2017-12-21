@@ -12,14 +12,10 @@ import com.chenzhipeng.mhbzdz.view.wallpaper.IWallpaperIndexView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/10/2.
- */
 
 public class WallpaperIndexPresenter {
     private Fragment fragment;
     private IWallpaperIndexView wallpaperView;
-
 
 
     public WallpaperIndexPresenter(Fragment fragment) {

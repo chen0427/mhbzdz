@@ -12,9 +12,6 @@ import com.chenzhipeng.mhbzdz.view.comic.IComicIntroduceView;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/9/24.
- */
 
 public class ComicIntroducePresenter {
     private Fragment fragment;
@@ -35,7 +32,7 @@ public class ComicIntroducePresenter {
             return;
         }
         setTag(bean);
-        introduceView.onBaseIntroduce(bean.getAuthor(), getLastChapter(bean), bean.getDesc(),bean.getUpdateTime());
+        introduceView.onBaseIntroduce(bean.getAuthor(), getLastChapter(bean), bean.getDesc(), bean.getUpdateTime());
     }
 
     private void setTag(ComicDetailsBean bean) {

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chenzhipeng.mhbzdz.R;
-import com.chenzhipeng.mhbzdz.adapter.NeiHanAdapter;
+import com.chenzhipeng.mhbzdz.adapter.joke.JokeAdapter;
 import com.chenzhipeng.mhbzdz.base.BaseFragment;
 import com.chenzhipeng.mhbzdz.bean.joke.JokeBean;
 import com.chenzhipeng.mhbzdz.presenter.joke.JokeTypePresenter;
@@ -104,7 +104,7 @@ public class JokeTypeFragment extends BaseFragment implements
 
     @Override
     public <T> void onAdapter(T data) {
-        NeiHanAdapter adapter = (NeiHanAdapter) data;
+        JokeAdapter adapter = (JokeAdapter) data;
         if (adapter != null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setHasFixedSize(true);

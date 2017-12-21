@@ -9,9 +9,9 @@ import com.chenzhipeng.mhbzdz.adapter.wallpaper.WallpaperListAdapter;
 import com.chenzhipeng.mhbzdz.bean.wallpaper.WallpaperBean;
 import com.chenzhipeng.mhbzdz.bean.wallpaper.WallpaperItemBean;
 import com.chenzhipeng.mhbzdz.fragment.wallpaper.WallpaperClassifyFragment;
+import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.wallpaper.WallpaperBeanService;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
-import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.utils.WallpaperApiUtils;
 import com.chenzhipeng.mhbzdz.utils.WallpaperChangeUtils;
 import com.chenzhipeng.mhbzdz.view.wallpaper.IWallpaperClassifyView;
@@ -27,9 +27,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by Administrator on 2017/8/17.
- */
 @SuppressWarnings("unchecked")
 public class WallpaperClassifyPresenter {
     private IWallpaperClassifyView classifyView;

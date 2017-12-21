@@ -1,8 +1,5 @@
 package com.chenzhipeng.mhbzdz.view.comic;
 
-/**
- * Created by Administrator on 2017/9/4.
- */
 
 public interface IComicDetailsView {
     void setFabVisibility(boolean b);

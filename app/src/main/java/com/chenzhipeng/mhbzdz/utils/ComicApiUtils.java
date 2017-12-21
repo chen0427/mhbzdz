@@ -1,8 +1,5 @@
 package com.chenzhipeng.mhbzdz.utils;
 
-/**
- * Created by Administrator on 2017/8/29.
- */
 
 public class ComicApiUtils {
     public static String getRecommend() {

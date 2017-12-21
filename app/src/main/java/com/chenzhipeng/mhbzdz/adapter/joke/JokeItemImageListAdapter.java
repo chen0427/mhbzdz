@@ -1,4 +1,4 @@
-package com.chenzhipeng.mhbzdz.adapter;
+package com.chenzhipeng.mhbzdz.adapter.joke;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -13,15 +13,12 @@ import com.chenzhipeng.mhbzdz.widget.JokeNormalImageView;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2017/7/28.
- */
 
-class ItemImageListAdapter extends BaseQuickAdapter<JokeBean.Data.Dates.Group.ThumbImageList, BaseViewHolder> {
+class JokeItemImageListAdapter extends BaseQuickAdapter<JokeBean.Data.Dates.Group.ThumbImageList, BaseViewHolder> {
     private List<JokeBean.Data.Dates.Group.LargeImageList> largeImageList;
 
-    ItemImageListAdapter(@LayoutRes int layoutResId, List<JokeBean.Data.Dates.Group.ThumbImageList> thumbImageList,
-                         @Nullable List<JokeBean.Data.Dates.Group.LargeImageList> largeImageList) {
+    JokeItemImageListAdapter(@LayoutRes int layoutResId, List<JokeBean.Data.Dates.Group.ThumbImageList> thumbImageList,
+                             @Nullable List<JokeBean.Data.Dates.Group.LargeImageList> largeImageList) {
         super(layoutResId, thumbImageList);
         this.largeImageList = largeImageList;
     }

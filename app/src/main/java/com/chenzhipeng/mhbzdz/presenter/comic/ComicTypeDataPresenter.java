@@ -8,11 +8,11 @@ import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.activity.comic.ComicTypeActivity;
 import com.chenzhipeng.mhbzdz.adapter.comic.ComicBookListAdapter;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
-import com.chenzhipeng.mhbzdz.retrofit.comic.ComicTypeService;
 import com.chenzhipeng.mhbzdz.fragment.comic.ComicTypeFragment;
+import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
+import com.chenzhipeng.mhbzdz.retrofit.comic.ComicTypeService;
 import com.chenzhipeng.mhbzdz.utils.ComicApiUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
-import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.view.comic.IComicTypeDataView;
 
 import org.json.JSONArray;
@@ -32,9 +32,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-/**
- * Created by Administrator on 2017/9/27.
- */
+
 @SuppressWarnings("unchecked")
 public class ComicTypeDataPresenter {
     private Fragment fragment;

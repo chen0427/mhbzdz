@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chenzhipeng.mhbzdz.R;
-import com.chenzhipeng.mhbzdz.adapter.NeiHanCommentsAdapter;
+import com.chenzhipeng.mhbzdz.adapter.joke.JokeCommentsAdapter;
 import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.bean.joke.NeiHanCommentsBean;
 import com.chenzhipeng.mhbzdz.bean.joke.NeiHanCommentsItemBean;
@@ -43,7 +43,7 @@ import io.reactivex.schedulers.Schedulers;
 public class CommentsDialogHelper {
     private static volatile CommentsDialogHelper commentsDialogHelper;
     private int offset = 0;
-    private NeiHanCommentsAdapter adapter;
+    private JokeCommentsAdapter adapter;
 
     private CommentsDialogHelper() {
 
@@ -67,7 +67,7 @@ public class CommentsDialogHelper {
                           final View view, final String groupId) {
         final RecyclerView recyclerView = view.findViewById(R.id.rv_wallpaperType);
         if (adapter == null) {
-            adapter = new NeiHanCommentsAdapter(beanList);
+            adapter = new JokeCommentsAdapter(beanList);
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setHasFixedSize(true);
             recyclerView.setAdapter(adapter);
