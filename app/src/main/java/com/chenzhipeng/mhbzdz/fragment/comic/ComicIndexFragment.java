@@ -23,6 +23,7 @@ import com.chenzhipeng.mhbzdz.activity.comic.ComicMyBookActivity;
 import com.chenzhipeng.mhbzdz.activity.comic.ComicSearchViewActivity;
 import com.chenzhipeng.mhbzdz.base.BaseFragment;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicIndexPresenter;
+import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicIndexView;
 
 import butterknife.BindView;
@@ -93,7 +94,7 @@ public class ComicIndexFragment extends BaseFragment implements IComicIndexView 
         viewPager.setAdapter((PagerAdapter) data);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
-        tabLayout.setTabTextColors(ContextCompat.getColor(getActivity(), R.color.gray_cc), Color.WHITE);
+        tabLayout.setTabTextColors(ContextCompat.getColor(getActivity(), R.color.no_select), Color.WHITE);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
     }
 

@@ -17,8 +17,8 @@ import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.comic.ComicDetailsService;
 import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
 import com.chenzhipeng.mhbzdz.utils.ComicApiUtils;
+import com.chenzhipeng.mhbzdz.utils.HttpCacheUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDetailsView;
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -71,6 +71,15 @@ public class ComicDetailsPresenter {
 
     private void retrofit(final String comicId) {
         if (!TextUtils.isEmpty(comicId)) {
+            //缓存
+            Object httpCache = HttpCacheUtils.getHttpCache(ComicApiUtils.getDetails(comicId));
+            if (httpCache != null) {
+                detailsView.setShowProgress(false);
+                setAdapter((ComicDetailsBean) httpCache);
+                return;
+            }
+
+            //----------------------
             RetrofitHelper.getInstance().create(ComicDetailsService.class)
                     .get(ComicApiUtils.getDetails(comicId))
                     .compose((activity).<ResponseBody>bindToLifecycle())
@@ -92,21 +101,9 @@ public class ComicDetailsPresenter {
                         public void onNext(@NonNull Object o) {
                             ComicDetailsBean detailsBean = (ComicDetailsBean) o;
                             if (detailsBean != null) {
-                                comicName = detailsBean.getComicName();
-                                detailsView.onTitleName(comicName);
-                                List<String> titleList = new ArrayList<>();
-                                List<Fragment> fragmentList = new ArrayList<>();
-                                titleList.add(activity.getString(R.string.introduce));
-                                titleList.add(activity.getString(R.string.chapter));
-
-                                introduceFragment = new ComicIntroduceFragment();
-                                introduceFragment.setArguments(getBundle(detailsBean));
-                                chapterFragment = new ComicChapterFragment();
-                                chapterFragment.setArguments(getBundle(detailsBean));
-                                fragmentList.add(introduceFragment);
-                                fragmentList.add(chapterFragment);
-                                FragmentManager manager = ((RxAppCompatActivity) activity).getSupportFragmentManager();
-                                detailsView.onAdapter(new ComicDetailsViewPagerAdapter(manager, titleList, fragmentList));
+                                //缓存
+                                HttpCacheUtils.addHttpCache(ComicApiUtils.getDetails(comicId), detailsBean);
+                                setAdapter(detailsBean);
                             } else {
                                 detailsView.onEmptyData();
                             }
@@ -126,6 +123,25 @@ public class ComicDetailsPresenter {
         }
 
     }
+
+    private void setAdapter(ComicDetailsBean detailsBean) {
+        comicName = detailsBean.getComicName();
+        detailsView.onTitleName(comicName);
+        List<String> titleList = new ArrayList<>();
+        List<Fragment> fragmentList = new ArrayList<>();
+        titleList.add(activity.getString(R.string.introduce));
+        titleList.add(activity.getString(R.string.chapter));
+
+        introduceFragment = new ComicIntroduceFragment();
+        introduceFragment.setArguments(getBundle(detailsBean));
+        chapterFragment = new ComicChapterFragment();
+        chapterFragment.setArguments(getBundle(detailsBean));
+        fragmentList.add(introduceFragment);
+        fragmentList.add(chapterFragment);
+        FragmentManager manager = (activity).getSupportFragmentManager();
+        detailsView.onAdapter(new ComicDetailsViewPagerAdapter(manager, titleList, fragmentList));
+    }
+
 
     private <T extends Serializable> Bundle getBundle(T data) {
         Bundle bundle = new Bundle();

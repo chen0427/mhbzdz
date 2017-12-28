@@ -20,6 +20,7 @@ import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.comic.ComicRecommendService;
 import com.chenzhipeng.mhbzdz.utils.ComicApiUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
+import com.chenzhipeng.mhbzdz.utils.HttpCacheUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicRecommendTagView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -77,9 +78,25 @@ public class ComicRecommendTagPresenter implements OnBannerListener {
     }
 
     private void retrofit() {
+        // 缓存
+        Object httpCache = HttpCacheUtils.getHttpCache(ComicApiUtils.getRecommend());
+        if (httpCache != null) {
+            List<ComicRecommendTypeBean> typeBeanList = (List<ComicRecommendTypeBean>) httpCache;
+            ComicRecommendTypeBean comicRecommendTypeBean = typeBeanList.get(recommendPosition);
+            recommendTagView.setProgress(false);
+            if (adapter == null) {
+                adapter = new ComicBookListAdapter(R.layout.itemview_comic_book, comicRecommendTypeBean.getItemBeanList());
+                adapter.addHeaderView(getHeadView(comicRecommendTypeBean));
+                recommendTagView.onAdapter(adapter);
+            } else {
+                adapter.setNewData(comicRecommendTypeBean.getItemBeanList());
+            }
+            return;
+        }
+        //--------------------------------------------------------
         RetrofitHelper.getInstance().create(ComicRecommendService.class)
                 .get(ComicApiUtils.getRecommend())
-                .compose(((ComicRecommendTagActivity) activity).<ResponseBody>bindToLifecycle())
+                .compose((activity).<ResponseBody>bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap(new Function<ResponseBody, ObservableSource<?>>() {
@@ -100,6 +117,8 @@ public class ComicRecommendTagPresenter implements OnBannerListener {
                 if (bean != null) {
                     List<ComicRecommendTypeBean> typeBeanList = bean.getTypeBeanList();
                     if (!EmptyUtils.isListsEmpty(typeBeanList)) {
+                        //缓存
+                        HttpCacheUtils.addHttpCache(ComicApiUtils.getRecommend(), typeBeanList);
                         ComicRecommendTypeBean typeBean = typeBeanList.get(recommendPosition);
                         if (typeBeanList.size() >= recommendPosition + 1) {
                             if (typeBean != null) {
@@ -133,6 +152,7 @@ public class ComicRecommendTagPresenter implements OnBannerListener {
             }
         });
     }
+
 
     private View getHeadView(ComicRecommendTypeBean typeBean) {
         if (typeBean != null) {

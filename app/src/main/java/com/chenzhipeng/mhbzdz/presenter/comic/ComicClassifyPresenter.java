@@ -10,6 +10,7 @@ import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.comic.ComicClassifyService;
 import com.chenzhipeng.mhbzdz.utils.ComicApiUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
+import com.chenzhipeng.mhbzdz.utils.HttpCacheUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicClassifyView;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
@@ -47,6 +48,19 @@ public class ComicClassifyPresenter {
     }
 
     private void retrofit() {
+        //缓存
+        Object httpCache = HttpCacheUtils.getHttpCache(ComicApiUtils.getClassify());
+        if (httpCache != null) {
+            iComicClassifyView.setProgress(false);
+            if (leftAdapter == null) {
+                leftAdapter = new ComicClassifyLeftListAdapter(R.layout.itemview_classify_left, (List<ComicClassifyBean>) httpCache);
+                iComicClassifyView.onLeftAdapter(leftAdapter);
+            } else {
+                leftAdapter.setNewData((List<ComicClassifyBean>) httpCache);
+            }
+            return;
+        }
+        //----------------------
         RetrofitHelper.getInstance()
                 .create(ComicClassifyService.class)
                 .get(ComicApiUtils.getClassify())
@@ -69,11 +83,15 @@ public class ComicClassifyPresenter {
                     @Override
                     public void onNext(@NonNull Object o) {
                         List<ComicClassifyBean> beanList = (List<ComicClassifyBean>) o;
-                        if (leftAdapter == null) {
-                            leftAdapter = new ComicClassifyLeftListAdapter(R.layout.itemview_classify_left, beanList);
-                            iComicClassifyView.onLeftAdapter(leftAdapter);
-                        } else {
-                            leftAdapter.setNewData(beanList);
+                        if (!EmptyUtils.isListsEmpty(beanList)) {
+                            //缓存
+                            HttpCacheUtils.addHttpCache(ComicApiUtils.getClassify(), beanList);
+                            if (leftAdapter == null) {
+                                leftAdapter = new ComicClassifyLeftListAdapter(R.layout.itemview_classify_left, beanList);
+                                iComicClassifyView.onLeftAdapter(leftAdapter);
+                            } else {
+                                leftAdapter.setNewData(beanList);
+                            }
                         }
                     }
 

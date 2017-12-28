@@ -12,6 +12,7 @@ import com.chenzhipeng.mhbzdz.fragment.wallpaper.WallpaperClassifyFragment;
 import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.wallpaper.WallpaperBeanService;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
+import com.chenzhipeng.mhbzdz.utils.HttpCacheUtils;
 import com.chenzhipeng.mhbzdz.utils.WallpaperApiUtils;
 import com.chenzhipeng.mhbzdz.utils.WallpaperChangeUtils;
 import com.chenzhipeng.mhbzdz.view.wallpaper.IWallpaperClassifyView;
@@ -60,61 +61,78 @@ public class WallpaperClassifyPresenter {
         }
     }
 
-    private void retrofit(String url, final boolean isLoadMore) {
-        RetrofitHelper.getInstance()
-                .create(WallpaperBeanService.class)
-                .get(url)
-                .compose(fragment.<WallpaperBean>bindToLifecycle())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(new Function<WallpaperBean, ObservableSource<?>>() {
-                    @Override
-                    public ObservableSource<?> apply(@NonNull WallpaperBean bean) throws Exception {
-                        return Observable.just(WallpaperChangeUtils.getWallpaperItemBeen(bean));
-                    }
-                }).subscribe(new Observer<Object>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-                if (!isLoadMore) {
-                    classifyView.setProgress(true);
-                }
-            }
-
-            @Override
-            public void onNext(@NonNull Object o) {
-                List<WallpaperItemBean> beanList = (List<WallpaperItemBean>) o;
-                if (isLoadMore) {
-                    setLoadMore(beanList);
+    private void retrofit(final String url, final boolean isLoadMore) {
+        if (!TextUtils.isEmpty(url)) {
+            //缓存
+            Object httpCache = HttpCacheUtils.getHttpCache(url);
+            if (httpCache != null) {
+                classifyView.setProgress(false);
+                if (adapter == null) {
+                    adapter = new WallpaperListAdapter(R.layout.itemview_wallpaper_item, (List<WallpaperItemBean>) httpCache);
+                    classifyView.onAdapter(adapter);
                 } else {
-                    if (!EmptyUtils.isListsEmpty(beanList)) {
-                        if (adapter == null) {
-                            adapter = new WallpaperListAdapter(R.layout.itemview_wallpaper_item, beanList);
-                            classifyView.onAdapter(adapter);
-                        } else {
-                            adapter.setNewData(beanList);
+                    adapter.setNewData((List<WallpaperItemBean>) httpCache);
+                }
+                return;
+            }
+            //----------------------
+            RetrofitHelper.getInstance()
+                    .create(WallpaperBeanService.class)
+                    .get(url)
+                    .compose(fragment.<WallpaperBean>bindToLifecycle())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .flatMap(new Function<WallpaperBean, ObservableSource<?>>() {
+                        @Override
+                        public ObservableSource<?> apply(@NonNull WallpaperBean bean) throws Exception {
+                            return Observable.just(WallpaperChangeUtils.getWallpaperItemBeen(bean));
                         }
-                    } else {
-                        classifyView.onEmptyData();
+                    }).subscribe(new Observer<Object>() {
+                @Override
+                public void onSubscribe(@NonNull Disposable d) {
+                    if (!isLoadMore) {
+                        classifyView.setProgress(true);
                     }
                 }
 
-            }
+                @Override
+                public void onNext(@NonNull Object o) {
+                    List<WallpaperItemBean> beanList = (List<WallpaperItemBean>) o;
+                    if (isLoadMore) {
+                        setLoadMore(beanList);
+                    } else {
+                        if (!EmptyUtils.isListsEmpty(beanList)) {
+                            //缓存
+                            HttpCacheUtils.addHttpCache(url, beanList);
+                            if (adapter == null) {
+                                adapter = new WallpaperListAdapter(R.layout.itemview_wallpaper_item, beanList);
+                                classifyView.onAdapter(adapter);
+                            } else {
+                                adapter.setNewData(beanList);
+                            }
+                        } else {
+                            classifyView.onEmptyData();
+                        }
+                    }
 
-            @Override
-            public void onError(@NonNull Throwable e) {
-                classifyView.setProgress(false);
-                if (isLoadMore && adapter != null) {
-                    adapter.loadMoreFail();
-                } else {
-                    classifyView.onFail(e);
                 }
-            }
 
-            @Override
-            public void onComplete() {
-                classifyView.setProgress(false);
-            }
-        });
+                @Override
+                public void onError(@NonNull Throwable e) {
+                    classifyView.setProgress(false);
+                    if (isLoadMore && adapter != null) {
+                        adapter.loadMoreFail();
+                    } else {
+                        classifyView.onFail(e);
+                    }
+                }
+
+                @Override
+                public void onComplete() {
+                    classifyView.setProgress(false);
+                }
+            });
+        }
     }
 
     private void setLoadMore(List<WallpaperItemBean> beanList) {

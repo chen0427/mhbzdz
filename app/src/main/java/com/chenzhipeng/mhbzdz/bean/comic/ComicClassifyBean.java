@@ -6,12 +6,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class ComicClassifyBean {
+public class ComicClassifyBean implements Serializable {
     private String classifyTitle;
     private List<ClassifyType> classifyTypes;
     private boolean isSelect;
@@ -46,7 +47,7 @@ public class ComicClassifyBean {
         this.classifyTypes = classifyTypes;
     }
 
-    public static class ClassifyType {
+    public static class ClassifyType implements Serializable {
         private String title;
         private String tag;
 

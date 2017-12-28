@@ -13,6 +13,7 @@ import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.comic.ComicTypeService;
 import com.chenzhipeng.mhbzdz.utils.ComicApiUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
+import com.chenzhipeng.mhbzdz.utils.HttpCacheUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicTypeDataView;
 
 import org.json.JSONArray;
@@ -59,12 +60,27 @@ public class ComicTypeDataPresenter {
 
     private void retrofit(String tag, String orderby, int page, final boolean isLoadMore) {
         if (!EmptyUtils.isStringsEmpty(tag, orderby)) {
-            String url;
+            final String url;
             if (ComicTypeActivity.isSearch) {
                 url = ComicApiUtils.getSearch(tag, orderby, page);
             } else {
                 url = ComicApiUtils.getType(tag, orderby, page);
             }
+            //缓存
+            if (ComicTypeActivity.isSearch) {
+                Object httpCache = HttpCacheUtils.getHttpCache(url);
+                if (httpCache != null) {
+                    dataView.setProgress(false);
+                    if (adapter == null) {
+                        adapter = new ComicBookListAdapter(R.layout.itemview_comic_book, (List<ComicItemBean>) httpCache);
+                        dataView.onAdapter(adapter);
+                    } else {
+                        adapter.setNewData((List<ComicItemBean>) httpCache);
+                    }
+                    return;
+                }
+            }
+            //---------------------------
             RetrofitHelper.getInstance()
                     .create(ComicTypeService.class)
                     .get(url)
@@ -98,6 +114,8 @@ public class ComicTypeDataPresenter {
                         }
                     } else {
                         if (!EmptyUtils.isListsEmpty(list)) {
+                            //缓存
+                            HttpCacheUtils.addHttpCache(url, list);
                             if (adapter == null) {
                                 adapter = new ComicBookListAdapter(R.layout.itemview_comic_book, list);
                                 dataView.onAdapter(adapter);

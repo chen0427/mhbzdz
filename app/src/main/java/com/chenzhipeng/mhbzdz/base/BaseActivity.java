@@ -16,7 +16,6 @@ import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 
-
 public class BaseActivity extends RxAppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

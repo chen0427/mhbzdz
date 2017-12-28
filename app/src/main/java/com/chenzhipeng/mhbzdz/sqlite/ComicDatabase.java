@@ -71,7 +71,6 @@ public class ComicDatabase extends SQLiteOpenHelper {
     private static final String SQL_DOWNLOAD_DATA = "create table " + TABLE_DOWNLOAD_DATA + "(_id integer primary key autoincrement,comicId txt,comicName txt,chapterName txt,urls txt)";
     private static final String SQL_DOWNLOAD_BOOK = "create table " + TABLE_DOWNLOAD_BOOK + "(_id integer primary key autoincrement,comicId txt,comicName txt)";
 
-
     private ComicDatabase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }

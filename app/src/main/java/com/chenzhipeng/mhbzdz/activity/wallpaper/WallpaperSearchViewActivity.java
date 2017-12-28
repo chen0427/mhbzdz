@@ -35,11 +35,7 @@ public class WallpaperSearchViewActivity extends BaseActivity implements AppSear
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.TM);
         setContentView(R.layout.activity_wallpaper_search_view);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, ConfigUtils.getChoiceToAppColor()));
-        }
         ButterKnife.bind(this);
         searchView.setToolbar(this);
         searchView.setListener(this);

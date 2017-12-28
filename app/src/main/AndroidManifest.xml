@@ -34,12 +34,8 @@
         <activity android:name="com.chenzhipeng.mhbzdz.activity.comic.ComicTypeActivity" />
         <activity android:name="com.chenzhipeng.mhbzdz.activity.comic.ComicRecommendTagActivity" />
         <activity android:name="com.chenzhipeng.mhbzdz.activity.comic.ComicMyBookActivity" />
-        <activity
-            android:name="com.chenzhipeng.mhbzdz.activity.comic.ComicSearchViewActivity"
-            android:theme="@style/TM" />
-        <activity
-            android:name="com.chenzhipeng.mhbzdz.activity.wallpaper.WallpaperSearchViewActivity"
-            android:theme="@style/TM" />
+        <activity android:name="com.chenzhipeng.mhbzdz.activity.comic.ComicSearchViewActivity" />
+        <activity android:name="com.chenzhipeng.mhbzdz.activity.wallpaper.WallpaperSearchViewActivity" />
         <activity android:name="com.chenzhipeng.mhbzdz.activity.wallpaper.WallpaperDownloadActivity" />
         <activity android:name="com.chenzhipeng.mhbzdz.activity.comic.ComicDownloadChoiceActivity" />
         <activity android:name="com.chenzhipeng.mhbzdz.activity.comic.ComicDownloadDataActivity" />

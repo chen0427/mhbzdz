@@ -29,6 +29,7 @@ import com.chenzhipeng.mhbzdz.adapter.SearchRecordListAdapter;
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,6 +40,7 @@ public class AppSearchView extends FrameLayout implements View.OnClickListener, 
     private RecyclerView recyclerView;
     private Listener listener;
     private SearchRecordListAdapter adapter;
+    private View footerView;
 
     public AppSearchView(@NonNull Context context) {
         super(context);
@@ -88,6 +90,7 @@ public class AppSearchView extends FrameLayout implements View.OnClickListener, 
         if (!EmptyUtils.isListsEmpty(strings)) {
             if (adapter == null) {
                 adapter = new SearchRecordListAdapter(R.layout.itemview_search_record, strings);
+                adapter.addFooterView(getFooterView());
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setHasFixedSize(true);
                 adapter.setOnItemChildClickListener(this);
@@ -98,6 +101,14 @@ public class AppSearchView extends FrameLayout implements View.OnClickListener, 
         }
     }
 
+    private View getFooterView() {
+        if (footerView == null) {
+            footerView = LayoutInflater.from(getContext()).inflate(R.layout.itemview_search_clear, new FrameLayout(getContext()), false);
+            footerView.findViewById(R.id.TextView).setOnClickListener(this);
+        }
+        return footerView;
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -105,6 +116,17 @@ public class AppSearchView extends FrameLayout implements View.OnClickListener, 
             case R.id.AppCompatImageView:
                 //clear
                 editText.setText("");
+                break;
+            default:
+                if (adapter != null) {
+                    for (String s : adapter.getData()) {
+                        if (listener != null) {
+                            listener.onDeleteItem(s);
+                        }
+                    }
+                    adapter.setNewData(new ArrayList<String>());
+                    getFooterView().setVisibility(GONE);
+                }
                 break;
         }
     }

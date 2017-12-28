@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseApplication;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class ConfigUtils {
     private static final String CONFIG_NAME = "config";
@@ -13,15 +15,17 @@ public class ConfigUtils {
     private static final String KEY_COLOR = "color";
     private static final String KEY_VOLUME = "volume";
     private static final String KEY_COMIC_CHAPTER_SORT = "comic_chapter_sort";
+    private static final String KEY_TIME = "key_time";
+    private static final String HTTP_CACHE_CONFIG_NAME = "http_cache_config_name";
 
     public static int getChoiceToIndex() {
-        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, MODE_PRIVATE);
         return sharedPreferences.getInt(KEY_INDEX, 0);
     }
 
 
     public static void setChoiceToIndex(int i) {
-        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putInt(KEY_INDEX, i);
         edit.apply();
@@ -29,40 +33,40 @@ public class ConfigUtils {
 
     public static void setComicChapterSort(int i) {
         //i=0 是正序 i=1是倒序
-        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, MODE_PRIVATE);
         sharedPreferences.edit().putInt(KEY_COMIC_CHAPTER_SORT, i).apply();
     }
 
 
     public static void setChoiceToAppColor(int colorId) {
-        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putInt(KEY_COLOR, colorId);
         edit.apply();
     }
 
     public static void setVolumePage(boolean b) {
-        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, MODE_PRIVATE);
         sharedPreferences.edit().putBoolean(KEY_VOLUME, b).apply();
     }
 
     public static boolean getVolumePage() {
-        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, MODE_PRIVATE);
         return sharedPreferences.getBoolean(KEY_VOLUME, false);
     }
 
     public static int getComicChapterSort() {
-        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, MODE_PRIVATE);
         return sharedPreferences.getInt(KEY_COMIC_CHAPTER_SORT, 0);
     }
 
     public static int getChoiceToAppColorThem() {
-        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, MODE_PRIVATE);
         return getTheme(sharedPreferences.getInt(KEY_COLOR, 0));
     }
 
     public static int getChoiceToAppColor() {
-        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = BaseApplication.getContext().getSharedPreferences(CONFIG_NAME, MODE_PRIVATE);
         return getColor(sharedPreferences.getInt(KEY_COLOR, 0));
     }
 
@@ -121,5 +125,15 @@ public class ConfigUtils {
         }
     }
 
+
+    public static void setHttpCacheTime(long time) {
+        SharedPreferences sp = BaseApplication.getContext().getSharedPreferences(HTTP_CACHE_CONFIG_NAME, MODE_PRIVATE);
+        sp.edit().putLong(KEY_TIME, time).apply();
+    }
+
+    public static Long getHttpCacheTime() {
+        SharedPreferences sp = BaseApplication.getContext().getSharedPreferences(HTTP_CACHE_CONFIG_NAME, MODE_PRIVATE);
+        return sp.getLong(KEY_TIME, 30);
+    }
 
 }

@@ -6,10 +6,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
@@ -57,6 +61,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private AlertDialog appColorAlertDialog;
     private SettingPresenter presenter;
 
+    private int leftClickCount = 0;
+
+    private long firstLeftTime = 0;
+
 
     private SettingPresenter getPresenter() {
         if (presenter == null) {
@@ -82,6 +90,16 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         canNetLinearLayout.setOnClickListener(this);
         switchCompat.setOnCheckedChangeListener(this);
         clearImgCacheLayout.setOnClickListener(this);
+
+        int childCount = toolbar.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View childAt = toolbar.getChildAt(i);
+            if (childAt != null && childAt instanceof TextView) {
+                if (((TextView) childAt).getText().toString().equals(getString(R.string.setting))) {
+                    childAt.setOnClickListener(this);
+                }
+            }
+        }
     }
 
     @Override
@@ -113,6 +131,40 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 String emptyImgData = "0.00KB";
                 ImageCacheHelper.clearImageAllCache();
                 clearImgCacheTextView.setText(emptyImgData);
+                break;
+            default:
+                leftClickCount++;
+                if (leftClickCount == 1) {
+                    firstLeftTime = System.currentTimeMillis();
+                } else {
+                    long current = System.currentTimeMillis();
+                    if (current - firstLeftTime <= 5 * 1000) {
+                        if (leftClickCount == 7) {
+                            leftClickCount = 0;
+                            LinearLayout layout = new LinearLayout(this);
+                            layout.setOrientation(LinearLayout.VERTICAL);
+                            final EditText editText = new EditText(this);
+                            editText.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
+                            editText.setHint("当前 : " + ConfigUtils.getHttpCacheTime() + "分钟");
+                            layout.addView(editText);
+                            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) editText.getLayoutParams();
+                            layoutParams.setMargins(50, 0, 50, 0);
+                            new AlertDialog.Builder(this).setTitle("设置http缓存时间")
+                                    .setView(layout).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String trim = editText.getText().toString().trim();
+                                    if (!TextUtils.isEmpty(trim)) {
+                                        long time = Long.parseLong(trim);
+                                        ConfigUtils.setHttpCacheTime(time);
+                                    }
+                                }
+                            }).setNegativeButton("取消", null).show();
+                        }
+                    } else {
+                        leftClickCount = 0;
+                    }
+                }
                 break;
         }
     }

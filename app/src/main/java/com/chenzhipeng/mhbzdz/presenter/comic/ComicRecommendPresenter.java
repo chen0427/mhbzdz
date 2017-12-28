@@ -20,6 +20,7 @@ import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.comic.ComicRecommendService;
 import com.chenzhipeng.mhbzdz.utils.ComicApiUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
+import com.chenzhipeng.mhbzdz.utils.HttpCacheUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicRecommendView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -66,6 +67,19 @@ public class ComicRecommendPresenter implements OnBannerListener {
 
 
     private void retrofit() {
+        //缓存
+        Object httpCache = HttpCacheUtils.getHttpCache(ComicApiUtils.getRecommend());
+        if (httpCache != null) {
+            recommendView.setProgress(false);
+            List<ComicRecommendTypeBean> typeBeanList = (List<ComicRecommendTypeBean>) httpCache;
+            if (adapter == null) {
+                setAdapter(typeBeanList);
+            } else {
+                adapter.setNewData(typeBeanList);
+            }
+            return;
+        }
+        //----------------------------
         RetrofitHelper.getInstance()
                 .create(ComicRecommendService.class)
                 .get(ComicApiUtils.getRecommend())
@@ -89,6 +103,8 @@ public class ComicRecommendPresenter implements OnBannerListener {
                 ComicRecommendBean bean = (ComicRecommendBean) o;
                 if (bean != null) {
                     List<ComicRecommendTypeBean> typeBeanList = bean.getTypeBeanList();
+                    //保存缓存
+                    HttpCacheUtils.addHttpCache(ComicApiUtils.getRecommend(), typeBeanList);
                     if (!EmptyUtils.isListsEmpty(typeBeanList)) {
                         if (adapter == null) {
                             setAdapter(typeBeanList);

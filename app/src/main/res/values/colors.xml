@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary_1">#3F51B5</color>
-    <color name="colorPrimaryDark_1">#3F51B5</color>
+    <color name="colorPrimaryDark_1">#303f9f</color>
     <color name="colorAccent_1">#3F51B5</color>
 
-    <color name="colorPrimary_8">#d32f2f</color>
+    <color name="colorPrimary_8">#f44336</color>
     <color name="colorPrimaryDark_8">#d32f2f</color>
-    <color name="colorAccent_8">#d32f2f</color>
+    <color name="colorAccent_8">#f44336</color>
 
     <color name="colorPrimary_2">#9c27b0</color>
-    <color name="colorPrimaryDark_2">#9c27b0</color>
+    <color name="colorPrimaryDark_2">#7b1fa2</color>
     <color name="colorAccent_2">#9c27b0</color>
 
     <color name="colorPrimary_3">#009688</color>
-    <color name="colorPrimaryDark_3">#009688</color>
+    <color name="colorPrimaryDark_3">#00796b</color>
     <color name="colorAccent_3">#009688</color>
 
     <color name="colorPrimary_4">#607d8b</color>
-    <color name="colorPrimaryDark_4">#607d8b</color>
+    <color name="colorPrimaryDark_4">#455a64</color>
     <color name="colorAccent_4">#607d8b</color>
 
     <color name="colorPrimary_5">#795548</color>
-    <color name="colorPrimaryDark_5">#795548</color>
+    <color name="colorPrimaryDark_5">#5d4037</color>
     <color name="colorAccent_5">#795548</color>
 
     <color name="colorPrimary_6">#4caf50</color>
-    <color name="colorPrimaryDark_6">#4caf50</color>
+    <color name="colorPrimaryDark_6">#388e3c</color>
     <color name="colorAccent_6">#4caf50</color>
 
 
     <color name="colorPrimary_7">#673ab7</color>
-    <color name="colorPrimaryDark_7">#673ab7</color>
+    <color name="colorPrimaryDark_7">#512da8</color>
     <color name="colorAccent_7">#673ab7</color>
 
-    <color name="colorPrimary_9">#afb42b</color>
-    <color name="colorPrimaryDark_9">#afb42b</color>
-    <color name="colorAccent_9">#afb42b</color>
+    <color name="colorPrimary_9">#757575</color>
+    <color name="colorPrimaryDark_9">#616161</color>
+    <color name="colorAccent_9">#757575</color>
 
-    <color name="colorPrimary_10">#c2185b</color>
+    <color name="colorPrimary_10">#e91e63</color>
     <color name="colorPrimaryDark_10">#c2185b</color>
-    <color name="colorAccent_10">#c2185b</color>
+    <color name="colorAccent_10">#e91e63</color>
 
 
     <color name="coverCheckBox">#71000000</color>
