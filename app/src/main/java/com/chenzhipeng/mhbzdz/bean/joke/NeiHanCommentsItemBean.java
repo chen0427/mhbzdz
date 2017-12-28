@@ -2,8 +2,10 @@ package com.chenzhipeng.mhbzdz.bean.joke;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
+import java.io.Serializable;
 
-public class NeiHanCommentsItemBean implements MultiItemEntity {
+
+public class NeiHanCommentsItemBean implements MultiItemEntity,Serializable {
     private String text;
     private String avatarUrl;
     private String userName;

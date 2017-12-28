@@ -2,10 +2,11 @@ package com.chenzhipeng.mhbzdz.bean.joke;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 
-public class NeiHanCommentsBean {
+public class NeiHanCommentsBean implements Serializable {
     private Data data;
 
     public Data getData() {
@@ -16,7 +17,7 @@ public class NeiHanCommentsBean {
         this.data = data;
     }
 
-    public class Data {
+    public class Data implements Serializable{
         @SerializedName("top_comments")
         private List<TopComments> topCommentses;
         @SerializedName("recent_comments")
@@ -38,7 +39,7 @@ public class NeiHanCommentsBean {
             this.recentCommentses = recentCommentses;
         }
 
-        public class TopComments {
+        public class TopComments implements Serializable{
             private String text;
             @SerializedName("avatar_url")
             private String avatarUrl;
@@ -70,7 +71,7 @@ public class NeiHanCommentsBean {
             }
         }
 
-        public class RecentComments {
+        public class RecentComments implements Serializable{
             private String text;
             @SerializedName("avatar_url")
             private String avatarUrl;

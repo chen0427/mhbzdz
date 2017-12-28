@@ -7,7 +7,7 @@ import com.chenzhipeng.mhbzdz.download.ComicChapterDownloader;
 import java.io.Serializable;
 import java.util.List;
 
-public class ComicDownloadBean {
+public class ComicDownloadBean implements Serializable {
     private String comicId;
     private String comicName;
     private String chapterName;
