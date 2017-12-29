@@ -11,6 +11,7 @@ import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicDownloadBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
+import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 
 import java.util.ArrayList;
@@ -18,11 +19,16 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class ComicDatabase extends SQLiteOpenHelper {
+public class AppDatabase extends SQLiteOpenHelper {
     private static final int version = 1;
     private static final String DATABASE_NAME = "comicDatabase";
-    private static volatile ComicDatabase database;
+    private static volatile AppDatabase database;
 
+
+    /**
+     * http_cache
+     */
+    private static final String TABLE_HTTP_CACHE = "http_cache";
     /**
      * 漫画阅读历史记录表
      */
@@ -70,16 +76,17 @@ public class ComicDatabase extends SQLiteOpenHelper {
     private static final String TABLE_DOWNLOAD_BOOK = "downloadName";
     private static final String SQL_DOWNLOAD_DATA = "create table " + TABLE_DOWNLOAD_DATA + "(_id integer primary key autoincrement,comicId txt,comicName txt,chapterName txt,urls txt)";
     private static final String SQL_DOWNLOAD_BOOK = "create table " + TABLE_DOWNLOAD_BOOK + "(_id integer primary key autoincrement,comicId txt,comicName txt)";
+    private static final String SQL_HTTP_CACHE = "create table " + TABLE_HTTP_CACHE + "(_id integer primary key autoincrement,url txt,content txt,time txt)";
 
-    private ComicDatabase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    private AppDatabase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
-    public static ComicDatabase getInstance() {
+    public static AppDatabase getInstance() {
         if (database == null) {
-            synchronized (ComicDatabase.class) {
+            synchronized (AppDatabase.class) {
                 if (database == null) {
-                    database = new ComicDatabase(BaseApplication.getContext(), DATABASE_NAME, null, version);
+                    database = new AppDatabase(BaseApplication.getContext(), DATABASE_NAME, null, version);
                 }
             }
         }
@@ -93,6 +100,7 @@ public class ComicDatabase extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_COLLECTION);
         sqLiteDatabase.execSQL(SQL_DOWNLOAD_DATA);
         sqLiteDatabase.execSQL(SQL_DOWNLOAD_BOOK);
+        sqLiteDatabase.execSQL(SQL_HTTP_CACHE);
     }
 
     @Override
@@ -115,7 +123,7 @@ public class ComicDatabase extends SQLiteOpenHelper {
             if (cursor != null && cursor.getCount() == 0) {
                 ContentValues values = new ContentValues();
                 values.put("searchKey", searchKey);
-                getWritableDatabase().insert(ComicDatabase.TABLE_SEARCH, null, values);
+                getWritableDatabase().insert(AppDatabase.TABLE_SEARCH, null, values);
             }
             closeCursor(cursor);
         }
@@ -126,7 +134,7 @@ public class ComicDatabase extends SQLiteOpenHelper {
      */
     public List<String> getSearch() {
         List<String> strings = new ArrayList<>();
-        Cursor cursor = getReadableDatabase().query(ComicDatabase.TABLE_SEARCH, null, null, null, null, null, null);
+        Cursor cursor = getReadableDatabase().query(AppDatabase.TABLE_SEARCH, null, null, null, null, null, null);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             do {
@@ -144,7 +152,7 @@ public class ComicDatabase extends SQLiteOpenHelper {
      */
     public void deleteSearch(String searchKey) {
         if (!TextUtils.isEmpty(searchKey)) {
-            getWritableDatabase().delete(ComicDatabase.TABLE_SEARCH, "searchKey=?", new String[]{searchKey});
+            getWritableDatabase().delete(AppDatabase.TABLE_SEARCH, "searchKey=?", new String[]{searchKey});
         }
     }
 
@@ -172,7 +180,7 @@ public class ComicDatabase extends SQLiteOpenHelper {
      */
     public boolean deleteCollection(String comicId) {
         if (!TextUtils.isEmpty(comicId)) {
-            int delete = getWritableDatabase().delete(ComicDatabase.TABLE_COLLECTION, "comicId=?", new String[]{comicId});
+            int delete = getWritableDatabase().delete(AppDatabase.TABLE_COLLECTION, "comicId=?", new String[]{comicId});
             return delete > 0;
         }
         return false;
@@ -195,7 +203,7 @@ public class ComicDatabase extends SQLiteOpenHelper {
      */
     public List<ComicItemBean> getCollection() {
         List<ComicItemBean> beanList = new ArrayList<>();
-        Cursor cursor = getWritableDatabase().query(ComicDatabase.TABLE_COLLECTION, null, null, null, null, null, null);
+        Cursor cursor = getWritableDatabase().query(AppDatabase.TABLE_COLLECTION, null, null, null, null, null, null);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             do {
@@ -238,7 +246,7 @@ public class ComicDatabase extends SQLiteOpenHelper {
     public String getHistoryPictureUrl(String comicId, String chapterName) {
         String pictureUrl = null;
         if (!EmptyUtils.isStringsEmpty(comicId, chapterName)) {
-            Cursor cursor = getReadableDatabase().query(ComicDatabase.TABLE_HISTORY, null, "comicId=? and chapterName=?", new String[]{comicId, chapterName}, null, null, null);
+            Cursor cursor = getReadableDatabase().query(AppDatabase.TABLE_HISTORY, null, "comicId=? and chapterName=?", new String[]{comicId, chapterName}, null, null, null);
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 pictureUrl = cursor.getString(cursor.getColumnIndex("pictureUrl"));
@@ -251,7 +259,7 @@ public class ComicDatabase extends SQLiteOpenHelper {
     public String getHistoryChapterName(String comicId) {
         String chapterName = null;
         if (!TextUtils.isEmpty(comicId)) {
-            Cursor cursor = getReadableDatabase().query(ComicDatabase.TABLE_HISTORY, null, "comicId=?", new String[]{comicId}, null, null, null);
+            Cursor cursor = getReadableDatabase().query(AppDatabase.TABLE_HISTORY, null, "comicId=?", new String[]{comicId}, null, null, null);
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 chapterName = cursor.getString(cursor.getColumnIndex("chapterName"));
@@ -264,7 +272,7 @@ public class ComicDatabase extends SQLiteOpenHelper {
 
     public List<ComicItemBean> getHistory() {
         List<ComicItemBean> comicItemBeanList = new ArrayList<>();
-        Cursor cursor = getReadableDatabase().query(ComicDatabase.TABLE_HISTORY, null, null, null, null, null, null);
+        Cursor cursor = getReadableDatabase().query(AppDatabase.TABLE_HISTORY, null, null, null, null, null, null);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             do {
@@ -411,5 +419,43 @@ public class ComicDatabase extends SQLiteOpenHelper {
         }
         closeCursor(cursor);
         return comicItemBeanList;
+    }
+
+
+    public void addHttpCache(String url, String content) {
+        if (!TextUtils.isEmpty(url) && !TextUtils.isEmpty(content)) {
+            Cursor cursor = getWritableDatabase().query(TABLE_HTTP_CACHE, null, "url=?", new String[]{url}, null, null, null, null);
+            if (cursor != null && cursor.getCount() > 0) {
+                ContentValues values = new ContentValues();
+                values.put("content", content);
+                values.put("time", String.valueOf(System.currentTimeMillis()));
+                getWritableDatabase().update(TABLE_HTTP_CACHE, values, "url=?", new String[]{url});
+            } else if (cursor != null && cursor.getCount() == 0) {
+                ContentValues values = new ContentValues();
+                values.put("url", url);
+                values.put("content", content);
+                values.put("time", String.valueOf(System.currentTimeMillis()));
+                getWritableDatabase().insert(TABLE_HTTP_CACHE, null, values);
+            }
+            closeCursor(cursor);
+        }
+    }
+
+    public String getHttpCache(String url) {
+        String content = null;
+        if (!TextUtils.isEmpty(url)) {
+            Cursor cursor = getWritableDatabase().query(TABLE_HTTP_CACHE, null, "url=?", new String[]{url}, null, null, null, null);
+            if (cursor != null && cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                String time = cursor.getString(cursor.getColumnIndex("time"));
+                long parseLong = Long.parseLong(time);
+                long millis = System.currentTimeMillis();
+                if (millis - parseLong <= ConfigUtils.getHttpCacheTime() * 60 * 1000) {
+                    content = cursor.getString(cursor.getColumnIndex("content"));
+                }
+            }
+            closeCursor(cursor);
+        }
+        return content;
     }
 }

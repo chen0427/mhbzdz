@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
-import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
+import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
 import com.chenzhipeng.mhbzdz.widget.AppSearchView;
 
 import java.util.List;
@@ -38,14 +38,14 @@ public class ComicSearchViewActivity extends BaseActivity implements AppSearchVi
     @Override
     protected void onResume() {
         super.onResume();
-        List<String> list = ComicDatabase.getInstance().getSearch();
+        List<String> list = AppDatabase.getInstance().getSearch();
         searchView.setRecordData(list);
     }
 
     @Override
     public void doSearch(String str) {
         ComicTypeActivity.startSearch(this, str);
-        ComicDatabase.getInstance().insertSearch(str);
+        AppDatabase.getInstance().insertSearch(str);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ComicSearchViewActivity extends BaseActivity implements AppSearchVi
 
     @Override
     public void onDeleteItem(String str) {
-        ComicDatabase.getInstance().deleteSearch(str);
+        AppDatabase.getInstance().deleteSearch(str);
     }
 
 

@@ -16,7 +16,6 @@ import android.widget.FrameLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.adapter.joke.JokeCommentsAdapter;
-import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.bean.joke.NeiHanCommentsBean;
 import com.chenzhipeng.mhbzdz.bean.joke.NeiHanCommentsItemBean;
 import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
@@ -75,13 +74,13 @@ public class CommentsDialogHelper {
             adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
                 @Override
                 public void onLoadMoreRequested() {
-                    recyclerView.postDelayed(new Runnable() {
+                    recyclerView.post(new Runnable() {
                         @Override
                         public void run() {
                             offset = offset + 15;
                             getData(context, groupId, offset, view);
                         }
-                    }, BaseApplication.LOAD_MORE_DELAY);
+                    });
                 }
             }, recyclerView);
         } else {

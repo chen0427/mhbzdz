@@ -7,7 +7,7 @@ import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
 import com.chenzhipeng.mhbzdz.document.ComicDocumentHelper;
 import com.chenzhipeng.mhbzdz.download.ComicDownloaderManager;
 import com.chenzhipeng.mhbzdz.fragment.comic.ComicMyDownloadFragment;
-import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
+import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicMyDownloadView;
 
@@ -39,7 +39,7 @@ public class ComicMyDownloadPresenter {
         Observable.create(new ObservableOnSubscribe<Object>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Object> e) throws Exception {
-                List<ComicItemBean> comicItemBeanList = ComicDatabase.getInstance().getDownloadBook();
+                List<ComicItemBean> comicItemBeanList = AppDatabase.getInstance().getDownloadBook();
                 e.onNext(comicItemBeanList);
             }
         }).compose(fragment.bindToLifecycle())
@@ -126,7 +126,7 @@ public class ComicMyDownloadPresenter {
             while (iterator.hasNext()) {
                 ComicItemBean next = iterator.next();
                 if (next.isChecked()) {
-                    if (ComicDatabase.getInstance().deleteDownloadBook(next.getComicId())) {
+                    if (AppDatabase.getInstance().deleteDownloadBook(next.getComicId())) {
                         ComicDownloaderManager.getInstance().remove(next.getComicId());
                         ComicDocumentHelper.getInstance().deleteBook(next.getComicId(), next.getComicName());
                         iterator.remove();

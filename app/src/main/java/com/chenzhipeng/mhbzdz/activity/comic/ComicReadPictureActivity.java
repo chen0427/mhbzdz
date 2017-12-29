@@ -19,7 +19,7 @@ import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterItemBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemPicture;
 import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicReadPicturePresenter;
-import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
+import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicPictureView;
@@ -112,7 +112,7 @@ public class ComicReadPictureActivity extends BaseActivity
     public void updateBottomBar(String comicId, String comicName, String chapterName, String currentNumber, String endNumber, String pictureUrl) {
         chapterNameTextView.setText(chapterName + "   " + currentNumber + " / " + endNumber);
         comicNameTextView.setText(comicName);
-        ComicDatabase.getInstance().changeHistory(comicId, comicName, chapterName, pictureUrl);
+        AppDatabase.getInstance().changeHistory(comicId, comicName, chapterName, pictureUrl);
     }
 
     @Override

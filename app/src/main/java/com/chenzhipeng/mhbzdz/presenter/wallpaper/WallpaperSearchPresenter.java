@@ -13,7 +13,6 @@ import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.wallpaper.WallpaperBeanService;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.utils.WallpaperApiUtils;
-import com.chenzhipeng.mhbzdz.utils.WallpaperChangeUtils;
 import com.chenzhipeng.mhbzdz.view.wallpaper.IWallpaperSearchView;
 
 import java.util.List;
@@ -88,7 +87,7 @@ public class WallpaperSearchPresenter {
                 .flatMap(new Function<WallpaperBean, ObservableSource<?>>() {
                     @Override
                     public ObservableSource<?> apply(@NonNull WallpaperBean bean) throws Exception {
-                        return Observable.just(WallpaperChangeUtils.getWallpaperItemBeen(bean));
+                        return Observable.just(WallpaperItemBean.getWallpaperItemList(bean));
                     }
                 }).subscribe(new Observer<Object>() {
             @Override

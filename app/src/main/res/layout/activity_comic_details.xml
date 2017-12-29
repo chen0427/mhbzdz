@@ -91,21 +91,27 @@
                     android:textColor="@color/white" />
             </FrameLayout>
         </LinearLayout>
-        <!--android:backgroundTint="#f5f5f5"-->
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/ViewPager"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/ViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ProgressBar
+                android:id="@+id/ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:visibility="gone" />
+        </FrameLayout>
+
     </LinearLayout>
 
-
-    <ProgressBar
-        android:id="@+id/ProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
 
     <com.chenzhipeng.mhbzdz.widget.FabTextView
         android:id="@+id/fb_comicDetailsXk"

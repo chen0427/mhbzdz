@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.GridLayoutManager;
@@ -35,6 +36,8 @@ public class WallpaperDownloadActivity extends BaseActivity implements IWallpape
     Toolbar toolbar;
     @BindView(R.id.BottomCheckedView)
     BottomCheckedView bottomCheckedView;
+    @BindView(R.id.AppBarLayout)
+    AppBarLayout appBarLayout;
 
 
     private WallpaperDownloadPresenter getPresenter() {

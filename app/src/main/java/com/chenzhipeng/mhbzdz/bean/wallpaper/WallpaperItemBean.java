@@ -1,6 +1,8 @@
 package com.chenzhipeng.mhbzdz.bean.wallpaper;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class WallpaperItemBean implements Serializable {
@@ -48,5 +50,40 @@ public class WallpaperItemBean implements Serializable {
     public String getThumb() {
         return thumb;
     }
+
+
+
+
+    public static List<WallpaperItemBean> getWallpaperItemList(WallpaperBean bean) {
+        List<WallpaperItemBean> beanList = new ArrayList<>();
+        if (bean != null) {
+            List<WallpaperBean.Res.Vertical> verticals = bean.getRes().getVerticals();
+            if (verticals != null && verticals.size() > 0) {
+                for (WallpaperBean.Res.Vertical v : verticals) {
+                    WallpaperItemBean itemBean = new WallpaperItemBean(v.getThumb(), v.getImg());
+                    beanList.add(itemBean);
+                }
+            }
+        }
+        return beanList;
+    }
+
+
+    public static List<WallpaperClassifyItemBean> getWallpaperClassifyItemList(WallpaperClassifyBean bean) {
+        List<WallpaperClassifyItemBean> beanList = new ArrayList<>();
+        if (bean != null) {
+            List<WallpaperClassifyBean.Res.Classify> classifies = bean.getRes().getClassifies();
+            if (classifies != null && classifies.size() > 0) {
+                for (WallpaperClassifyBean.Res.Classify c : classifies) {
+                    WallpaperClassifyItemBean itemBean =
+                            new WallpaperClassifyItemBean(c.getName(), c.getId(), c.getCover());
+                    beanList.add(itemBean);
+                }
+            }
+        }
+        return beanList;
+    }
+
+
 
 }

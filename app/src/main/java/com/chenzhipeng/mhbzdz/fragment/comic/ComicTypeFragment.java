@@ -15,7 +15,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.activity.comic.ComicDetailsActivity;
 import com.chenzhipeng.mhbzdz.adapter.comic.ComicBookListAdapter;
-import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.base.BaseFragment;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicTypeDataPresenter;
@@ -117,13 +116,13 @@ public class ComicTypeFragment extends BaseFragment implements IComicTypeDataVie
     @Override
     public void onLoadMoreRequested() {
         //加载更多
-        recyclerView.postDelayed(new Runnable() {
+        recyclerView.post(new Runnable() {
             @Override
             public void run() {
                 page++;
                 getPresenter().initData(page, true);
             }
-        }, BaseApplication.LOAD_MORE_DELAY);
+        });
     }
 
     @Override

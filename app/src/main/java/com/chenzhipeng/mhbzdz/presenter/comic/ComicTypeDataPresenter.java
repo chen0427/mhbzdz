@@ -66,8 +66,9 @@ public class ComicTypeDataPresenter {
             } else {
                 url = ComicApiUtils.getType(tag, orderby, page);
             }
-            //缓存
-            if (ComicTypeActivity.isSearch) {
+
+            //搜索不用缓存
+            if (!ComicTypeActivity.isSearch) {
                 Object httpCache = HttpCacheUtils.getHttpCache(url);
                 if (httpCache != null) {
                     dataView.setProgress(false);

@@ -98,9 +98,15 @@ public class ComicRecommendTagActivity extends BaseActivity implements IComicRec
 
     @Override
     public void onLoadMoreRequested() {
-        if (adapter != null) {
-            adapter.loadMoreEnd();
-        }
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                if (adapter != null) {
+                    adapter.loadMoreEnd();
+                }
+            }
+        });
+
     }
 
     @Override

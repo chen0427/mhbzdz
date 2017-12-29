@@ -3,7 +3,6 @@ package com.chenzhipeng.mhbzdz.activity.wallpaper;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +15,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.adapter.wallpaper.WallpaperListAdapter;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
-import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.presenter.wallpaper.WallpaperSearchPresenter;
 import com.chenzhipeng.mhbzdz.view.wallpaper.IWallpaperSearchView;
 
@@ -64,7 +62,7 @@ public class WallpaperSearchDataActivity extends BaseActivity implements IWallpa
     @Override
     public void onTitle(String s) {
         if (!TextUtils.isEmpty(s)) {
-            setToolbar(toolbar,s, true);
+            setToolbar(toolbar, s, true);
         }
     }
 
@@ -107,13 +105,13 @@ public class WallpaperSearchDataActivity extends BaseActivity implements IWallpa
 
     @Override
     public void onLoadMoreRequested() {
-        new Handler().postDelayed(new Runnable() {
+        recyclerView.post(new Runnable() {
             @Override
             public void run() {
                 skip = skip + 30;
                 getPresenter().initData(skip, true);
             }
-        }, BaseApplication.LOAD_MORE_DELAY);
+        });
     }
 
     @Override

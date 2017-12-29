@@ -10,7 +10,7 @@ import com.chenzhipeng.mhbzdz.adapter.comic.ComicDownloadListAdapter;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterItemBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterTypeBean;
 import com.chenzhipeng.mhbzdz.intent.SuperIntent;
-import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
+import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDownloadChoiceView;
 
@@ -47,7 +47,7 @@ public class ComicDownloadChoicePresenter {
             for (ComicChapterItemBean c : comicChapterItemBeanList) {
                 String chapterName = c.getChapterName();
                 String comicId = c.getComicId();
-                if (ComicDatabase.getInstance().isExistDownloadData(comicId, chapterName)) {
+                if (AppDatabase.getInstance().isExistDownloadData(comicId, chapterName)) {
                     c.setChecked(true);
                     c.setEnabled(false);
                 } else {
@@ -158,7 +158,7 @@ public class ComicDownloadChoicePresenter {
     public void startComicDownloadChoiceActivity() {
         if (!EmptyUtils.isListsEmpty(checkedComicChapterItemBeanList)) {
             ComicDownloadDataActivity.startActivity(activity, comicId, checkedComicChapterItemBeanList);
-        } else if (ComicDatabase.getInstance().isExistDownloadData(comicId)) {
+        } else if (AppDatabase.getInstance().isExistDownloadData(comicId)) {
             ComicDownloadDataActivity.startActivity(activity, comicId);
         }
     }

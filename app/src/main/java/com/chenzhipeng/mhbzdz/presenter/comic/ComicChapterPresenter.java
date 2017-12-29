@@ -18,7 +18,7 @@ import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterItemBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterTypeBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicDetailsBean;
 import com.chenzhipeng.mhbzdz.fragment.comic.ComicChapterFragment;
-import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
+import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicChapterView;
@@ -131,7 +131,7 @@ public class ComicChapterPresenter {
             boolean isHaveRead = false;
             comicChapterItemBeanList = currentTypeBean.getChapterItemBeanList();
             if (!EmptyUtils.isListsEmpty(comicChapterItemBeanList)) {
-                String chapterName = ComicDatabase.getInstance().getHistoryChapterName(comicId);
+                String chapterName = AppDatabase.getInstance().getHistoryChapterName(comicId);
                 if (!TextUtils.isEmpty(chapterName)) {
                     int count = 0;
                     for (ComicChapterItemBean c : comicChapterItemBeanList) {

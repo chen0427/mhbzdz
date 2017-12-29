@@ -15,7 +15,7 @@ import com.chenzhipeng.mhbzdz.fragment.comic.ComicIntroduceFragment;
 import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.comic.ComicDetailsService;
-import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
+import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
 import com.chenzhipeng.mhbzdz.utils.ComicApiUtils;
 import com.chenzhipeng.mhbzdz.utils.HttpCacheUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDetailsView;
@@ -64,7 +64,7 @@ public class ComicDetailsPresenter {
             comicId = comicItemBean.getComicId();
             detailsView.onTopImgUrl(ComicApiUtils.getComicImg(comicId));
             //此漫画有收藏or没有收藏
-            detailsView.setCollectionStatus(ComicDatabase.getInstance().isCollection(comicId));
+            detailsView.setCollectionStatus(AppDatabase.getInstance().isCollection(comicId));
             retrofit(comicId);
         }
     }
@@ -153,7 +153,7 @@ public class ComicDetailsPresenter {
      * 收藏漫画
      */
     private void saveCollection() {
-        if (ComicDatabase.getInstance().insertCollection(comicId, comicName)) {
+        if (AppDatabase.getInstance().insertCollection(comicId, comicName)) {
             detailsView.setCollectionStatus(true);
             detailsView.onCollectionToast("收藏成功");
         }
@@ -163,7 +163,7 @@ public class ComicDetailsPresenter {
      * 取消收藏
      */
     private void cancelCollection() {
-        if (ComicDatabase.getInstance().deleteCollection(comicId)) {
+        if (AppDatabase.getInstance().deleteCollection(comicId)) {
             detailsView.setCollectionStatus(false);
             detailsView.onCollectionToast("取消收藏");
         }

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -107,37 +106,27 @@ public class WallpaperPictureActivity extends BaseActivity implements
             alertDialog = new AlertDialog.Builder(this).create();
         }
         alertDialog.setMessage(getString(R.string.picture_downloading));
+        alertDialog.setCancelable(false);
         alertDialog.show();
     }
 
     @Override
     public void onComplete() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                alertDialog.dismiss();
-                Snackbar.make(findViewById(android.R.id.content), getString(R.string.complete_download), Snackbar.LENGTH_SHORT)
-                        .addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
-                            @Override
-                            public void onDismissed(Snackbar transientBottomBar, int event) {
-                                super.onDismissed(transientBottomBar, event);
-                                pictureBottomView.setDownload(true);
-                            }
-                        }).show();
-            }
-        }, 300);
+        alertDialog.dismiss();
+        Snackbar.make(findViewById(android.R.id.content), getString(R.string.complete_download), Snackbar.LENGTH_SHORT)
+                .addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                    @Override
+                    public void onDismissed(Snackbar transientBottomBar, int event) {
+                        super.onDismissed(transientBottomBar, event);
+                        pictureBottomView.setDownload(true);
+                    }
+                }).show();
     }
 
     @Override
     public void onError(Throwable e) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Snackbar.make(findViewById(android.R.id.content), R.string.picture_download_fail, Snackbar.LENGTH_SHORT).show();
-                alertDialog.dismiss();
-            }
-        }, 300);
-
+        Snackbar.make(findViewById(android.R.id.content), R.string.picture_download_fail, Snackbar.LENGTH_SHORT).show();
+        alertDialog.dismiss();
     }
 
     @Override

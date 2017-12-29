@@ -5,7 +5,7 @@ import com.chenzhipeng.mhbzdz.activity.comic.ComicMyBookActivity;
 import com.chenzhipeng.mhbzdz.adapter.comic.ComicBookListAdapter;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
 import com.chenzhipeng.mhbzdz.fragment.comic.ComicHistoryFragment;
-import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
+import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicHistoryView;
 
@@ -37,7 +37,7 @@ public class ComicHistoryPresenter {
         Observable.create(new ObservableOnSubscribe<Object>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Object> e) throws Exception {
-                List<ComicItemBean> comicItemBeanList = ComicDatabase.getInstance().getHistory();
+                List<ComicItemBean> comicItemBeanList = AppDatabase.getInstance().getHistory();
                 e.onNext(comicItemBeanList);
             }
         }).compose(fragment.bindToLifecycle()).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
@@ -140,7 +140,7 @@ public class ComicHistoryPresenter {
             while (iterator.hasNext()) {
                 ComicItemBean next = iterator.next();
                 if (next.isChecked()) {
-                    if (ComicDatabase.getInstance().deleteHistory(next.getComicId())) {
+                    if (AppDatabase.getInstance().deleteHistory(next.getComicId())) {
                         iterator.remove();
                     }
                 }

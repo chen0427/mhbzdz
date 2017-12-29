@@ -16,7 +16,6 @@ import com.chenzhipeng.mhbzdz.activity.wallpaper.WallpaperClassifyActivity;
 import com.chenzhipeng.mhbzdz.activity.wallpaper.WallpaperPictureActivity;
 import com.chenzhipeng.mhbzdz.adapter.wallpaper.WallpaperClassifyListAdapter;
 import com.chenzhipeng.mhbzdz.adapter.wallpaper.WallpaperListAdapter;
-import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.base.BaseFragment;
 import com.chenzhipeng.mhbzdz.bean.wallpaper.WallpaperClassifyItemBean;
 import com.chenzhipeng.mhbzdz.presenter.wallpaper.WallpaperTypePresenter;
@@ -151,12 +150,12 @@ public class WallpaperTypeFragment extends BaseFragment implements IWallpaperTyp
 
     @Override
     public void onLoadMoreRequested() {
-        recyclerView.postDelayed(new Runnable() {
+        recyclerView.post(new Runnable() {
             @Override
             public void run() {
                 skip = skip + 30;
                 getPresenter().initData(skip, true);
             }
-        }, BaseApplication.LOAD_MORE_DELAY);
+        });
     }
 }

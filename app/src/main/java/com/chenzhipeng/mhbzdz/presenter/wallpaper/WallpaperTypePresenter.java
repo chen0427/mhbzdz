@@ -18,7 +18,6 @@ import com.chenzhipeng.mhbzdz.retrofit.wallpaper.WallpaperClassifyBeanService;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.utils.HttpCacheUtils;
 import com.chenzhipeng.mhbzdz.utils.WallpaperApiUtils;
-import com.chenzhipeng.mhbzdz.utils.WallpaperChangeUtils;
 import com.chenzhipeng.mhbzdz.view.wallpaper.IWallpaperTypeView;
 
 import java.util.List;
@@ -84,7 +83,7 @@ public class WallpaperTypePresenter {
                     .flatMap(new Function<WallpaperBean, ObservableSource<?>>() {
                         @Override
                         public ObservableSource<?> apply(@NonNull WallpaperBean bean) throws Exception {
-                            return Observable.just(WallpaperChangeUtils.getWallpaperItemBeen(bean));
+                            return Observable.just(WallpaperItemBean.getWallpaperItemList(bean));
                         }
                     }).subscribe(new Observer<Object>() {
                 @Override
@@ -172,7 +171,7 @@ public class WallpaperTypePresenter {
                     .flatMap(new Function<WallpaperClassifyBean, ObservableSource<?>>() {
                         @Override
                         public ObservableSource<?> apply(@NonNull WallpaperClassifyBean bean) throws Exception {
-                            return Observable.just(WallpaperChangeUtils.getWallpaperClassifyItemBeen(bean));
+                            return Observable.just(WallpaperItemBean.getWallpaperClassifyItemList(bean));
                         }
                     }).subscribe(new Observer<Object>() {
                 @Override

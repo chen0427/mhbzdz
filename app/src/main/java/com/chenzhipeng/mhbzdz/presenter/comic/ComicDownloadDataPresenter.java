@@ -16,7 +16,7 @@ import com.chenzhipeng.mhbzdz.document.ComicDocumentHelper;
 import com.chenzhipeng.mhbzdz.download.ComicBookDownloader;
 import com.chenzhipeng.mhbzdz.download.ComicDownloaderManager;
 import com.chenzhipeng.mhbzdz.intent.SuperIntent;
-import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
+import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDownloadDataView;
 import com.chenzhipeng.mhbzdz.widget.BottomCheckedView;
@@ -81,7 +81,7 @@ public class ComicDownloadDataPresenter {
                         if (next.isChecked()) {
                             iterator.remove();
                             next.delete();
-                            ComicDatabase.getInstance().deleteDownloadData(next.getComicId(), next.getChapterName());
+                            AppDatabase.getInstance().deleteDownloadData(next.getComicId(), next.getChapterName());
                             ComicDownloaderManager.getInstance().remove(next);
                             ComicDocumentHelper.getInstance().deleteDownloadData(next);
                             success = true;
@@ -102,7 +102,7 @@ public class ComicDownloadDataPresenter {
                             adapter.notifyDataSetChanged();
                             activity.invalidateOptionsMenu();
                             if (adapter.getData().size() == 0) {
-                                ComicDatabase.getInstance().deleteDownloadBook(comicId);
+                                AppDatabase.getInstance().deleteDownloadBook(comicId);
                                 ComicDocumentHelper.getInstance().deleteBook(comicId, comicName);
                             }
                         }
@@ -252,7 +252,7 @@ public class ComicDownloadDataPresenter {
     private void insertDownloadData(List<ComicDownloadBean> comicDownloadBeanList) {
         if (!EmptyUtils.isListsEmpty(comicDownloadBeanList)) {
             for (ComicDownloadBean c : comicDownloadBeanList) {
-                ComicDatabase.getInstance().insertDownloadData(c);
+                AppDatabase.getInstance().insertDownloadData(c);
             }
         }
     }
@@ -311,10 +311,10 @@ public class ComicDownloadDataPresenter {
                 List<ComicChapterItemBean> comicChapterItemBeanList = (List<ComicChapterItemBean>) SuperIntent.getInstance().get(SuperIntent.S10);
                 comicId = (String) SuperIntent.getInstance().get(SuperIntent.S11);
                 List<ComicDownloadBean> comicDownloadBeanList = new ArrayList<>();
-                List<ComicDownloadBean> dbList = ComicDatabase.getInstance().getDownloadData(comicId);
+                List<ComicDownloadBean> dbList = AppDatabase.getInstance().getDownloadData(comicId);
                 if (!EmptyUtils.isListsEmpty(comicChapterItemBeanList)) {
                     comicName = comicChapterItemBeanList.get(0).getComicName();
-                    ComicDatabase.getInstance().insertDownloadBook(comicId, comicName);
+                    AppDatabase.getInstance().insertDownloadBook(comicId, comicName);
                     //有新添加的任务
                     List<ComicDownloadBean> addList = getComicDownloadBeanList(comicChapterItemBeanList);
                     insertDownloadData(addList);
@@ -360,7 +360,7 @@ public class ComicDownloadDataPresenter {
      */
     public void checkedHistoryRecord(boolean isUpdateAdapter) {
         if (adapter != null && !EmptyUtils.isListsEmpty(adapter.getData())) {
-            String chapterName = ComicDatabase.getInstance().getHistoryChapterName(comicId);
+            String chapterName = AppDatabase.getInstance().getHistoryChapterName(comicId);
             if (!TextUtils.isEmpty(chapterName)) {
                 for (ComicDownloadBean c : adapter.getData()) {
                     if (c.getChapterName().equals(chapterName)) {

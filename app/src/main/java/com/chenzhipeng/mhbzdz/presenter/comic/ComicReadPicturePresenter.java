@@ -8,7 +8,7 @@ import com.chenzhipeng.mhbzdz.adapter.comic.ComicPictureListAdapter;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterItemBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemPicture;
 import com.chenzhipeng.mhbzdz.intent.SuperIntent;
-import com.chenzhipeng.mhbzdz.sqlite.ComicDatabase;
+import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicPictureView;
 
@@ -42,7 +42,7 @@ public class ComicReadPicturePresenter {
 
     private void checkReadHistory(List<ComicItemPicture> pictures) {
         if (!EmptyUtils.isListsEmpty(pictures)) {
-            String pictureUrl = ComicDatabase.getInstance().getHistoryPictureUrl(comicId, chapterName);
+            String pictureUrl = AppDatabase.getInstance().getHistoryPictureUrl(comicId, chapterName);
             if (!TextUtils.isEmpty(pictureUrl)) {
                 int count = 0;
                 for (ComicItemPicture p : pictures) {

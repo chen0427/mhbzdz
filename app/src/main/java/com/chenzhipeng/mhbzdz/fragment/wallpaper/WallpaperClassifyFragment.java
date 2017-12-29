@@ -14,7 +14,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.activity.wallpaper.WallpaperPictureActivity;
 import com.chenzhipeng.mhbzdz.adapter.wallpaper.WallpaperListAdapter;
-import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.base.BaseFragment;
 import com.chenzhipeng.mhbzdz.presenter.wallpaper.WallpaperClassifyPresenter;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
@@ -125,12 +124,12 @@ public class WallpaperClassifyFragment extends BaseFragment implements IWallpape
 
     @Override
     public void onLoadMoreRequested() {
-        recyclerView.postDelayed(new Runnable() {
+        recyclerView.post(new Runnable() {
             @Override
             public void run() {
                 skip = skip + 30;
                 presenter.initData(skip, true);
             }
-        }, BaseApplication.LOAD_MORE_DELAY);
+        });
     }
 }

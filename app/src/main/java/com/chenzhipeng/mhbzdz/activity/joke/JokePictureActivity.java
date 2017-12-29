@@ -3,7 +3,6 @@ package com.chenzhipeng.mhbzdz.activity.joke;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -113,25 +112,14 @@ public class JokePictureActivity extends BaseActivity implements IJokePictureVie
 
     @Override
     public void complete() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                alertDialog.dismiss();
-                Snackbar.make(findViewById(android.R.id.content), R.string.album_download, Snackbar.LENGTH_SHORT).show();
-            }
-        }, 300);
-
+        alertDialog.dismiss();
+        Snackbar.make(findViewById(android.R.id.content), R.string.album_download, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void error(Throwable e) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                alertDialog.dismiss();
-                Snackbar.make(findViewById(android.R.id.content), R.string.picture_download_fail, Snackbar.LENGTH_SHORT).show();
-            }
-        }, 300);
+        alertDialog.dismiss();
+        Snackbar.make(findViewById(android.R.id.content), R.string.picture_download_fail, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

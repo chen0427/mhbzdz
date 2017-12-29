@@ -96,8 +96,13 @@ public class ComicRecommendFragment extends BaseFragment
 
     @Override
     public void onLoadMoreRequested() {
-        if (adapter != null) {
-            adapter.loadMoreEnd();
-        }
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                if (adapter != null) {
+                    adapter.loadMoreEnd();
+                }
+            }
+        });
     }
 }
