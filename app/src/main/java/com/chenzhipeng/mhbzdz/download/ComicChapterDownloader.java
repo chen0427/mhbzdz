@@ -4,9 +4,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 
+import com.chenzhipeng.mhbzdz.document.ComicDocumentHelper;
 import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.comic.ComicDownloadService;
-import com.chenzhipeng.mhbzdz.document.ComicDocumentHelper;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.utils.FileUtils;
 

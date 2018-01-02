@@ -16,7 +16,6 @@ import com.chenzhipeng.mhbzdz.adapter.comic.ComicBookListAdapter;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicRecommendTypeBean;
-import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicRecommendTagPresenter;
 import com.chenzhipeng.mhbzdz.view.comic.IComicRecommendTagView;
 
@@ -33,12 +32,16 @@ public class ComicRecommendTagActivity extends BaseActivity implements IComicRec
     Toolbar toolbar;
     private ComicBookListAdapter adapter;
 
+    public static ComicRecommendTypeBean data;
+
+    public static int recommendPosition;
+
 
     public static void startActivity(Context context, ComicRecommendTypeBean typeBean, int recommendPosition) {
         if (context != null && typeBean != null) {
             Intent intent = new Intent(context, ComicRecommendTagActivity.class);
-            SuperIntent.getInstance().put(SuperIntent.S2, typeBean);
-            SuperIntent.getInstance().put(SuperIntent.S3, recommendPosition);
+            data = typeBean;
+            ComicRecommendTagActivity.recommendPosition = recommendPosition;
             context.startActivity(intent);
         }
     }
@@ -126,7 +129,8 @@ public class ComicRecommendTagActivity extends BaseActivity implements IComicRec
 
     @Override
     public void finish() {
-        SuperIntent.getInstance().remove(SuperIntent.S2, SuperIntent.S3);
+        data = null;
+        recommendPosition = 0;
         super.finish();
     }
 }

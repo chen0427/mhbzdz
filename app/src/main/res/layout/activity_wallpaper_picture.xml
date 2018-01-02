@@ -10,12 +10,20 @@
     <com.chenzhipeng.mhbzdz.widget.rvp.RecyclerViewPager
         android:id="@+id/RecyclerViewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <com.chenzhipeng.mhbzdz.widget.PictureBottomView
         android:id="@+id/pbv_wallpaperPicture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="bottom"
+        android:visibility="gone" />
+
+    <com.chenzhipeng.mhbzdz.widget.WallpaperViewPaper
+        android:id="@+id/WallpaperViewPaper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </FrameLayout>

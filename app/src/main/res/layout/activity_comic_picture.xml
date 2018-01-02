@@ -1,54 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/white"
     tools:context="com.chenzhipeng.mhbzdz.activity.comic.ComicReadPictureActivity">
 
-    <com.chenzhipeng.mhbzdz.widget.rvp.RecyclerViewPager
-        android:id="@+id/RecyclerViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/ll_comicReadPicture" />
 
-    <LinearLayout
-        android:id="@+id/ll_comicReadPicture"
+    <com.chenzhipeng.mhbzdz.widget.ComicViewPaper
+        android:id="@+id/ComicViewPaper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/FrameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp">
+        android:visibility="gone">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/AppCompatTextView_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
             android:background="@color/black"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/AppCompatTextView_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/black"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-    </LinearLayout>
-
-
+            app:theme="@style/ToolbarTheme" />
+    </FrameLayout>
 </RelativeLayout>

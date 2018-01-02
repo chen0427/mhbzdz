@@ -192,7 +192,7 @@ public class RecyclerViewPager extends RecyclerView {
     }
 
     /***
-     * adjust position before Touch event complete and fling action start.
+     * adjust position before Touch event complete and fling action startActivity.
      */
     protected void adjustPositionX(int velocityX) {
         if (reverseLayout) velocityX *= -1;
@@ -222,7 +222,7 @@ public class RecyclerViewPager extends RecyclerView {
     }
 
     /***
-     * adjust position before Touch event complete and fling action start.
+     * adjust position before Touch event complete and fling action startActivity.
      */
     protected void adjustPositionY(int velocityY) {
         if (reverseLayout) velocityY *= -1;

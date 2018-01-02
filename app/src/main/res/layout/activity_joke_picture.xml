@@ -6,14 +6,9 @@
     android:background="@color/black"
     tools:context="com.chenzhipeng.mhbzdz.activity.joke.JokePictureActivity">
 
-    <com.chenzhipeng.mhbzdz.widget.rvp.RecyclerViewPager
-        android:id="@+id/RecyclerViewPager"
+
+    <com.chenzhipeng.mhbzdz.widget.JokeViewPaper
+        android:id="@+id/JokeViewPaper"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-    <com.chenzhipeng.mhbzdz.widget.PictureBottomView
-        android:id="@+id/pbv_jokePicture"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
 </FrameLayout>

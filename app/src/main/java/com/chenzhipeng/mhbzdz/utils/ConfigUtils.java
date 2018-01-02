@@ -1,6 +1,5 @@
 package com.chenzhipeng.mhbzdz.utils;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.chenzhipeng.mhbzdz.R;
@@ -133,7 +132,7 @@ public class ConfigUtils {
 
     public static Long getHttpCacheTime() {
         SharedPreferences sp = BaseApplication.getContext().getSharedPreferences(HTTP_CACHE_CONFIG_NAME, MODE_PRIVATE);
-        return sp.getLong(KEY_TIME, 30);
+        return sp.getLong(KEY_TIME, 0);
     }
 
 }

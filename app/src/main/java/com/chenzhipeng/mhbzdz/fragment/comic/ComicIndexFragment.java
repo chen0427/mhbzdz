@@ -23,7 +23,6 @@ import com.chenzhipeng.mhbzdz.activity.comic.ComicMyBookActivity;
 import com.chenzhipeng.mhbzdz.activity.comic.ComicSearchViewActivity;
 import com.chenzhipeng.mhbzdz.base.BaseFragment;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicIndexPresenter;
-import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicIndexView;
 
 import butterknife.BindView;

@@ -3,7 +3,7 @@ package com.chenzhipeng.mhbzdz.view.wallpaper;
 
 public interface IWallpaperPictureView {
 
-    <T> void onAdapter(T data, int position);
+  /*  <T> void onAdapter(T data, int position);
 
     void onBottomBar(String s);
 
@@ -13,6 +13,7 @@ public interface IWallpaperPictureView {
 
     void onComplete();
 
-    void onError(Throwable e);
+    void onError(Throwable e);*/
 
+    <T> void onData(T data, int position);
 }

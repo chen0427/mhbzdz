@@ -2,7 +2,7 @@ package com.chenzhipeng.mhbzdz.view.joke;
 
 
 public interface IJokePictureView {
-    <T> void onAdapter(T data, int position);
+  /*  <T> void onAdapter(T data, int position);
 
     void onUpdateBottomBar(String s);
 
@@ -10,6 +10,7 @@ public interface IJokePictureView {
 
     void complete();
 
-    void error(Throwable e);
+    void error(Throwable e);*/
 
+    <T> void onData(T data, int position);
 }

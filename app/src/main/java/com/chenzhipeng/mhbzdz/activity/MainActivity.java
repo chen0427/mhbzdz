@@ -19,6 +19,7 @@ import com.chenzhipeng.mhbzdz.utils.DisplayUtils;
 import com.chenzhipeng.mhbzdz.utils.VideoUtils;
 import com.chenzhipeng.mhbzdz.view.IMainView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -195,10 +196,13 @@ public class MainActivity extends BaseActivity implements IMainView, NavigationV
         if (tag != null) {
             String path = String.valueOf(tag);
             if (!TextUtils.isEmpty(path)) {
-                WallpaperItemBean wallpaperItemBean = new WallpaperItemBean(path, false, false);
-                List<WallpaperItemBean> wallpaperItemBeanList = new ArrayList<>();
-                wallpaperItemBeanList.add(wallpaperItemBean);
-                WallpaperPictureActivity.startActivity(this, wallpaperItemBeanList, 0);
+                boolean exists = new File(path).exists();
+                if (exists) {
+                    WallpaperItemBean wallpaperItemBean = new WallpaperItemBean(path, false, false);
+                    List<WallpaperItemBean> wallpaperItemBeanList = new ArrayList<>();
+                    wallpaperItemBeanList.add(wallpaperItemBean);
+                    WallpaperPictureActivity.startActivity(this, wallpaperItemBeanList, 0);
+                }
             }
         }
     }

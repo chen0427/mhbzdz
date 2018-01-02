@@ -222,7 +222,8 @@ public class ComicChapterPresenter {
             comicChapterItemBeanList = currentTypeBean.getChapterItemBeanList();
             if (!EmptyUtils.isListsEmpty(comicChapterItemBeanList)) {
                 if (fragment.getActivity() != null) {
-                    ComicReadPictureActivity.startActivity(fragment.getActivity(), currentTypeBean.getChapterItemBeanList(), historyPosition, currentTypeBean.isReverse());
+                    ComicReadPictureActivity
+                            .startActivity(fragment.getActivity(), currentTypeBean.getChapterItemBeanList(), historyPosition, currentTypeBean.isReverse());
                 }
             }
         }

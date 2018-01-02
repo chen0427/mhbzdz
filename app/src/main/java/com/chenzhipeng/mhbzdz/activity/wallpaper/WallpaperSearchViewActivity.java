@@ -2,15 +2,12 @@ package com.chenzhipeng.mhbzdz.activity.wallpaper;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
-import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.utils.SPUtils;
 import com.chenzhipeng.mhbzdz.widget.AppSearchView;

@@ -5,25 +5,24 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.AnimationSet;
+import android.widget.FrameLayout;
 
 import com.chenzhipeng.mhbzdz.R;
-import com.chenzhipeng.mhbzdz.adapter.comic.ComicPictureListAdapter;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
-import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterItemBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemPicture;
-import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicReadPicturePresenter;
-import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicPictureView;
-import com.chenzhipeng.mhbzdz.widget.rvp.RecyclerViewPager;
+import com.chenzhipeng.mhbzdz.widget.ComicViewPaper;
 
 import java.util.List;
 
@@ -32,42 +31,44 @@ import butterknife.ButterKnife;
 
 @SuppressWarnings("unchecked")
 public class ComicReadPictureActivity extends BaseActivity
-        implements IComicPictureView {
+        implements IComicPictureView, ComicViewPaper.Listener {
     public static final int TYPE_CHAPTER = 0;
     public static final int TYPE_DOWNLOAD = 1;
-    @BindView(R.id.AppCompatTextView_1)
-    AppCompatTextView chapterNameTextView;
-    @BindView(R.id.AppCompatTextView_2)
-    AppCompatTextView comicNameTextView;
-    @BindView(R.id.RecyclerViewPager)
-    RecyclerViewPager recyclerViewPager;
+    @BindView(R.id.ComicViewPaper)
+    ComicViewPaper paper;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.FrameLayout)
+    FrameLayout frameLayout;
     private ComicReadPicturePresenter presenter;
-    private int readPosition = 0;
+    public static List<ComicChapterItemBean> dataList;
+    public static int position;
+    public static boolean isReverse;
+    public static int type;
+    public static List<ComicItemPicture> pictures;
+    public static String[] comicIdAndComicName;
 
-
-    public static void startActivity(Context context,
-                                     List<ComicChapterItemBean> comicChapterItemBeanList,
-                                     int selectChapter, boolean isReverse) {
-        if (context != null && !EmptyUtils.isListsEmpty(comicChapterItemBeanList)) {
-            Intent intent = new Intent(context, ComicReadPictureActivity.class);
-            SuperIntent.getInstance().put(SuperIntent.S8, selectChapter);
-            SuperIntent.getInstance().put(SuperIntent.S17, comicChapterItemBeanList);
-            SuperIntent.getInstance().put(SuperIntent.S6, TYPE_CHAPTER);
-            SuperIntent.getInstance().put(SuperIntent.S7, isReverse);
-            context.startActivity(intent);
-        }
-    }
 
     public static void startActivity(Context context,
                                      List<ComicItemPicture> pictures,
                                      String[] comicIdAndComicName, boolean isReverse) {
         if (context != null && !EmptyUtils.isListsEmpty(pictures) && comicIdAndComicName != null && comicIdAndComicName.length == 3) {
             Intent intent = new Intent(context, ComicReadPictureActivity.class);
-            SuperIntent.getInstance().put(SuperIntent.S4, pictures);
-            SuperIntent.getInstance().put(SuperIntent.S5, comicIdAndComicName);
-            SuperIntent.getInstance().put(SuperIntent.S6, TYPE_DOWNLOAD);
-            SuperIntent.getInstance().put(SuperIntent.S7, isReverse);
+            ComicReadPictureActivity.comicIdAndComicName = comicIdAndComicName;
+            ComicReadPictureActivity.pictures = pictures;
+            ComicReadPictureActivity.isReverse = isReverse;
+            ComicReadPictureActivity.type = TYPE_DOWNLOAD;
             context.startActivity(intent);
+        }
+    }
+
+
+    public static void startActivity(Context context, List<ComicChapterItemBean> beanList, int position, boolean isReverse) {
+        if (context != null && !EmptyUtils.isListsEmpty(beanList)) {
+            ComicReadPictureActivity.dataList = beanList;
+            ComicReadPictureActivity.position = position;
+            ComicReadPictureActivity.isReverse = isReverse;
+            context.startActivity(new Intent(context, ComicReadPictureActivity.class));
         }
     }
 
@@ -84,7 +85,11 @@ public class ComicReadPictureActivity extends BaseActivity
         setContentView(R.layout.activity_comic_picture);
         setStatusBarColor(Color.BLACK);
         ButterKnife.bind(this);
-        getPresenter().updateHorizontalList();
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        getPresenter().initData();
     }
 
     private void setStatusBarColor(int color) {
@@ -93,53 +98,135 @@ public class ComicReadPictureActivity extends BaseActivity
         }
     }
 
+    private void showToolbar() {
+        if (frameLayout.getVisibility() == View.GONE) {
+            frameLayout.setVisibility(View.VISIBLE);
+            AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1f);
+            AnimationSet animationSet = new AnimationSet(true);
+            animationSet.addAnimation(alphaAnimation);
+            animationSet.setDuration(170);
+            frameLayout.startAnimation(animationSet);
+        }
+    }
 
-    @Override
-    public <T> void onAdapter(T data, int readPosition) {
-        if (data != null) {
-            ComicPictureListAdapter adapter = (ComicPictureListAdapter) data;
-            recyclerViewPager.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-            recyclerViewPager.setScrollSpeed(BaseApplication.SCROLL_SPEED);
-            recyclerViewPager.setHasFixedSize(true);
-            recyclerViewPager.addOnScrollListener(new RecyclerViewScroll());
-            recyclerViewPager.setAdapter(adapter);
-            recyclerViewPager.scrollToPosition(readPosition);
-            this.readPosition = readPosition;
+    private void hideToolbar() {
+        if (frameLayout.getVisibility() == View.VISIBLE) {
+            frameLayout.setVisibility(View.GONE);
+            AlphaAnimation alphaAnimation = new AlphaAnimation(1f, 0f);
+            AnimationSet animationSet = new AnimationSet(true);
+            animationSet.addAnimation(alphaAnimation);
+            animationSet.setDuration(170);
+            frameLayout.startAnimation(animationSet);
         }
     }
 
     @Override
-    public void updateBottomBar(String comicId, String comicName, String chapterName, String currentNumber, String endNumber, String pictureUrl) {
-        chapterNameTextView.setText(chapterName + "   " + currentNumber + " / " + endNumber);
-        comicNameTextView.setText(comicName);
-        AppDatabase.getInstance().changeHistory(comicId, comicName, chapterName, pictureUrl);
+    public <T> void onData(T data) {
+        ComicChapterItemBean bean = (ComicChapterItemBean) data;
+        if (bean != null) {
+            paper.setListener(this);
+            paper.setData(bean.getComicId(), bean.getComicName(), bean.getComicItemPictureList());
+        }
     }
 
     @Override
-    public void showWorkDialog() {
-        chapterNameTextView.setText(R.string.handle);
+    public void onDataToDownload(String comicId, String comicName, String chapterName, List<ComicItemPicture> pictures) {
+        if (!EmptyUtils.isStringsEmpty(comicId, comicName, chapterName) && !EmptyUtils.isListsEmpty(pictures)) {
+            position = 0;
+            paper.setListener(this);
+            paper.setData(comicId, comicName, pictures);
+
+        }
     }
 
     @Override
-    public void dismissWorkDialog() {
-        chapterNameTextView.setText("");
+    public void onTitle(String s) {
+        if (!TextUtils.isEmpty(s)) {
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setTitle(s);
+            }
+        }
     }
 
-
-    /**
-     * 监听滑动到第几页
-     */
-    private class RecyclerViewScroll extends RecyclerView.OnScrollListener {
-        @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            super.onScrollStateChanged(recyclerView, newState);
-            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-                if (layoutManager instanceof LinearLayoutManager) {
-                    readPosition = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
-                    getPresenter().updateBottomBar(readPosition);
+    @Override
+    public void move(int i) {
+        if (i == ComicViewPaper.MOVE_LEFT) {
+            if (!EmptyUtils.isListsEmpty(dataList)) {
+                int a;
+                if (isReverse) {
+                    a = position + 1;
+                } else {
+                    a = position - 1;
+                }
+                if (a >= 0 && a < dataList.size()) {
+                    position = a;
+                    paper.updateData(dataList.get(position).getComicItemPictureList());
                 }
             }
+        } else if (i == ComicViewPaper.MOVE_RIGHT) {
+            if (!EmptyUtils.isListsEmpty(dataList)) {
+                int a;
+                if (isReverse) {
+                    a = position - 1;
+                } else {
+                    a = position + 1;
+                }
+                if (a >= 0 && a < dataList.size()) {
+                    position = a;
+                    paper.updateData(dataList.get(position).getComicItemPictureList());
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onMove(int i) {
+        if (i == ComicViewPaper.MOVE_LEFT) {
+            if (!EmptyUtils.isListsEmpty(dataList)) {
+                int a;
+                if (isReverse) {
+                    a = position + 1;
+                } else {
+                    a = position - 1;
+                }
+                if (a >= 0 && a < dataList.size()) {
+                    paper.left();
+                } else {
+                    //没有
+                    paper.showNoChapter();
+                }
+            }
+        } else if (i == ComicViewPaper.MOVE_RIGHT) {
+            if (!EmptyUtils.isListsEmpty(dataList)) {
+                int a;
+                if (isReverse) {
+                    a = position - 1;
+                } else {
+                    a = position + 1;
+                }
+                if (a >= 0 && a < dataList.size()) {
+                    paper.right();
+                } else {
+                    //没有
+                    paper.showNoChapter();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onClick() {
+        if (frameLayout.getVisibility() == View.VISIBLE) {
+            hideToolbar();
+        } else {
+            showToolbar();
+        }
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if (frameLayout.getVisibility() == View.VISIBLE) {
+            hideToolbar();
         }
     }
 
@@ -158,23 +245,10 @@ public class ComicReadPictureActivity extends BaseActivity
         if (ConfigUtils.getVolumePage()) {
             switch (keyCode) {
                 case KeyEvent.KEYCODE_VOLUME_DOWN:
-                    if (readPosition != 0) {
-                        int a = readPosition - 1;
-                        if (a >= 0) {
-                            readPosition = a;
-                            recyclerViewPager.smoothScrollToPosition(readPosition);
-                        }
-                    }
+                    paper.volumeDown();
                     return true;
                 case KeyEvent.KEYCODE_VOLUME_UP:
-                    int itemCount = recyclerViewPager.getAdapter().getItemCount();
-                    if (readPosition != itemCount - 1) {
-                        int b = readPosition + 1;
-                        if (b <= itemCount - 1) {
-                            readPosition = b;
-                            recyclerViewPager.smoothScrollToPosition(readPosition);
-                        }
-                    }
+                    paper.volumeUp();
                     return true;
             }
         }
@@ -183,9 +257,12 @@ public class ComicReadPictureActivity extends BaseActivity
 
     @Override
     public void finish() {
-        SuperIntent.getInstance().remove(SuperIntent.S4, SuperIntent.S5,
-                SuperIntent.S6, SuperIntent.S7, SuperIntent.S8,
-                SuperIntent.S17);
+        dataList = null;
+        position = 0;
+        isReverse = false;
+        type = TYPE_CHAPTER;
+        pictures = null;
+        comicIdAndComicName = null;
         super.finish();
     }
 }

@@ -15,7 +15,6 @@ import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
 import com.chenzhipeng.mhbzdz.document.ComicDocumentHelper;
 import com.chenzhipeng.mhbzdz.download.ComicBookDownloader;
 import com.chenzhipeng.mhbzdz.download.ComicDownloaderManager;
-import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDownloadDataView;
@@ -308,8 +307,8 @@ public class ComicDownloadDataPresenter {
         Observable.create(new ObservableOnSubscribe<Object>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Object> e) throws Exception {
-                List<ComicChapterItemBean> comicChapterItemBeanList = (List<ComicChapterItemBean>) SuperIntent.getInstance().get(SuperIntent.S10);
-                comicId = (String) SuperIntent.getInstance().get(SuperIntent.S11);
+                List<ComicChapterItemBean> comicChapterItemBeanList = ComicDownloadDataActivity.data;
+                comicId = ComicDownloadDataActivity.comicId;
                 List<ComicDownloadBean> comicDownloadBeanList = new ArrayList<>();
                 List<ComicDownloadBean> dbList = AppDatabase.getInstance().getDownloadData(comicId);
                 if (!EmptyUtils.isListsEmpty(comicChapterItemBeanList)) {

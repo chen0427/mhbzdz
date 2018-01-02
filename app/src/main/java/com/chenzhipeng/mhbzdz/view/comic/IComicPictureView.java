@@ -1,13 +1,15 @@
 package com.chenzhipeng.mhbzdz.view.comic;
 
 
+import com.chenzhipeng.mhbzdz.bean.comic.ComicItemPicture;
+
+import java.util.List;
+
 public interface IComicPictureView {
-    <T> void onAdapter(T data, int readPosition);
 
-    void updateBottomBar(String comicId, String comicName, String chapterName, String currentNumber, String endNumber, String pictureUrl);
+    <T> void onData(T data);
 
-    void showWorkDialog();
+    void onDataToDownload(String comicId, String comicName, String chapterName, List<ComicItemPicture> pictures);
 
-    void dismissWorkDialog();
-
+    void onTitle(String s);
 }

@@ -9,10 +9,8 @@ import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.activity.comic.ComicDetailsActivity;
 import com.chenzhipeng.mhbzdz.adapter.comic.ComicDetailsViewPagerAdapter;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicDetailsBean;
-import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
 import com.chenzhipeng.mhbzdz.fragment.comic.ComicChapterFragment;
 import com.chenzhipeng.mhbzdz.fragment.comic.ComicIntroduceFragment;
-import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.comic.ComicDetailsService;
 import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
@@ -59,9 +57,8 @@ public class ComicDetailsPresenter {
     }
 
     public void updateViewPager() {
-        ComicItemBean comicItemBean = (ComicItemBean) SuperIntent.getInstance().get(SuperIntent.S14);
-        if (comicItemBean != null) {
-            comicId = comicItemBean.getComicId();
+        if (ComicDetailsActivity.data != null) {
+            comicId = ComicDetailsActivity.data.getComicId();
             detailsView.onTopImgUrl(ComicApiUtils.getComicImg(comicId));
             //此漫画有收藏or没有收藏
             detailsView.setCollectionStatus(AppDatabase.getInstance().isCollection(comicId));
@@ -155,7 +152,7 @@ public class ComicDetailsPresenter {
     private void saveCollection() {
         if (AppDatabase.getInstance().insertCollection(comicId, comicName)) {
             detailsView.setCollectionStatus(true);
-            detailsView.onCollectionToast("收藏成功");
+            detailsView.onCollectionToast(activity.getString(R.string.success_collection));
         }
     }
 
@@ -165,7 +162,7 @@ public class ComicDetailsPresenter {
     private void cancelCollection() {
         if (AppDatabase.getInstance().deleteCollection(comicId)) {
             detailsView.setCollectionStatus(false);
-            detailsView.onCollectionToast("取消收藏");
+            detailsView.onCollectionToast(activity.getString(R.string.cancel_collection));
         }
     }
 

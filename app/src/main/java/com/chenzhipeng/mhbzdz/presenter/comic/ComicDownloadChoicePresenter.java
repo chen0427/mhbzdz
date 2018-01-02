@@ -8,8 +8,6 @@ import com.chenzhipeng.mhbzdz.activity.comic.ComicDownloadChoiceActivity;
 import com.chenzhipeng.mhbzdz.activity.comic.ComicDownloadDataActivity;
 import com.chenzhipeng.mhbzdz.adapter.comic.ComicDownloadListAdapter;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterItemBean;
-import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterTypeBean;
-import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDownloadChoiceView;
@@ -65,10 +63,9 @@ public class ComicDownloadChoicePresenter {
         Observable.create(new ObservableOnSubscribe<Object>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Object> e) throws Exception {
-                ComicChapterTypeBean typeBean = (ComicChapterTypeBean) SuperIntent.getInstance().get(SuperIntent.S1);
-                if (typeBean != null) {
-                    comicId = typeBean.getComicId();
-                    comicChapterItemBeanList = typeBean.getChapterItemBeanList();
+                if (ComicDownloadChoiceActivity.data != null) {
+                    comicId = ComicDownloadChoiceActivity.data.getComicId();
+                    comicChapterItemBeanList = ComicDownloadChoiceActivity.data.getChapterItemBeanList();
                     setChecked(comicChapterItemBeanList);
                 }
                 e.onNext(comicChapterItemBeanList);

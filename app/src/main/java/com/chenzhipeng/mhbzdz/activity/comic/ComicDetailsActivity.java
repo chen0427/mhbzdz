@@ -21,7 +21,6 @@ import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemBean;
 import com.chenzhipeng.mhbzdz.image.ImageHelper;
-import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicDetailsPresenter;
 import com.chenzhipeng.mhbzdz.utils.DisplayUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDetailsView;
@@ -49,10 +48,12 @@ public class ComicDetailsActivity extends BaseActivity implements IComicDetailsV
     private ComicDetailsPresenter presenter;
     private boolean isCollection;
 
+    public static ComicItemBean data;
+
 
     public static void startActivity(Context context, ComicItemBean data) {
         Intent intent = new Intent(context, ComicDetailsActivity.class);
-        SuperIntent.getInstance().put(SuperIntent.S14, data);
+        ComicDetailsActivity.data = data;
         context.startActivity(intent);
     }
 
@@ -234,7 +235,7 @@ public class ComicDetailsActivity extends BaseActivity implements IComicDetailsV
 
     @Override
     public void finish() {
-        SuperIntent.getInstance().remove(SuperIntent.S14);
+        data = null;
         super.finish();
     }
 }

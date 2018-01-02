@@ -17,7 +17,6 @@ import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
 import com.chenzhipeng.mhbzdz.bean.wallpaper.WallpaperClassifyItemBean;
 import com.chenzhipeng.mhbzdz.fragment.wallpaper.WallpaperClassifyFragment;
-import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +38,11 @@ public class WallpaperClassifyActivity extends BaseActivity {
     private List<WallpaperClassifyFragment> fragments;
     private List<String> titleStrings;
 
+    public static WallpaperClassifyItemBean data;
 
     public static void startActivity(Activity activity, WallpaperClassifyItemBean bean) {
         Intent intent = new Intent(activity, WallpaperClassifyActivity.class);
-        SuperIntent.getInstance().put(SuperIntent.S9, bean);
+        data = bean;
         activity.startActivity(intent);
     }
 
@@ -51,7 +51,7 @@ public class WallpaperClassifyActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallpaper_classify);
         ButterKnife.bind(this);
-        WallpaperClassifyItemBean itemBean = (WallpaperClassifyItemBean) SuperIntent.getInstance().get(SuperIntent.S9);
+        WallpaperClassifyItemBean itemBean = data;
         if (itemBean == null) {
             return;
         }
@@ -122,7 +122,7 @@ public class WallpaperClassifyActivity extends BaseActivity {
 
     @Override
     public void finish() {
-        SuperIntent.getInstance().remove(SuperIntent.S9);
+        data = null;
         super.finish();
     }
 }

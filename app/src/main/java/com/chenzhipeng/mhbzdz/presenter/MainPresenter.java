@@ -27,7 +27,6 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 
-
 public class MainPresenter {
     private IMainView iMainView;
     private MainActivity activity;

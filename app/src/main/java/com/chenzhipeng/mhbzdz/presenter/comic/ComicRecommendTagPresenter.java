@@ -15,7 +15,6 @@ import com.chenzhipeng.mhbzdz.bean.comic.ComicRecommendBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicRecommendSlideBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicRecommendTypeBean;
 import com.chenzhipeng.mhbzdz.image.ImageHelper;
-import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.retrofit.RetrofitHelper;
 import com.chenzhipeng.mhbzdz.retrofit.comic.ComicRecommendService;
 import com.chenzhipeng.mhbzdz.utils.ComicApiUtils;
@@ -54,8 +53,8 @@ public class ComicRecommendTagPresenter implements OnBannerListener {
     }
 
     public void initAdapter() {
-        ComicRecommendTypeBean typeBean = (ComicRecommendTypeBean) SuperIntent.getInstance().get(SuperIntent.S2);
-        recommendPosition = (int) SuperIntent.getInstance().get(SuperIntent.S3);
+        ComicRecommendTypeBean typeBean = ComicRecommendTagActivity.data;
+        recommendPosition = ComicRecommendTagActivity.recommendPosition;
         if (typeBean != null) {
             recommendTagView.onTitle(typeBean.getTabTitle());
             List<ComicItemBean> itemBeanList = typeBean.getItemBeanList();

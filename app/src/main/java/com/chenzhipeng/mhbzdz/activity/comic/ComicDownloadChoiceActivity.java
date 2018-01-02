@@ -18,7 +18,6 @@ import com.chenzhipeng.mhbzdz.adapter.comic.ComicDownloadListAdapter;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterItemBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterTypeBean;
-import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicDownloadChoicePresenter;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDownloadChoiceView;
 
@@ -34,6 +33,8 @@ public class ComicDownloadChoiceActivity extends BaseActivity implements IComicD
     ProgressBar progressBar;
     private ComicDownloadChoicePresenter presenter;
 
+    public static ComicChapterTypeBean data;
+
     private ComicDownloadChoicePresenter getPresenter() {
         if (presenter == null) {
             presenter = new ComicDownloadChoicePresenter(this);
@@ -44,7 +45,7 @@ public class ComicDownloadChoiceActivity extends BaseActivity implements IComicD
     public static void startActivity(Context context, ComicChapterTypeBean comicChapterTypeBean) {
         if (context != null && comicChapterTypeBean != null) {
             Intent intent = new Intent(context, ComicDownloadChoiceActivity.class);
-            SuperIntent.getInstance().put(SuperIntent.S1, comicChapterTypeBean);
+            data = comicChapterTypeBean;
             context.startActivity(intent);
         }
     }
@@ -128,7 +129,7 @@ public class ComicDownloadChoiceActivity extends BaseActivity implements IComicD
 
     @Override
     public void finish() {
-        SuperIntent.getInstance().remove(SuperIntent.S1);
+        data = null;
         super.finish();
     }
 }

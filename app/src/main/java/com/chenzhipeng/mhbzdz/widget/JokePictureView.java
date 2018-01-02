@@ -10,6 +10,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
@@ -18,12 +19,16 @@ import com.chenzhipeng.mhbzdz.image.ImageHelper;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
 
-public class JokePictureView extends FrameLayout {
+public class JokePictureView extends FrameLayout implements View.OnClickListener {
     private SubsamplingScaleImageView scaleImageView;
     private AppCompatImageView imageView;
     private ProgressBar progressBar;
     private AppCompatTextView textView;
+    private Listener listener;
 
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
 
     public JokePictureView(@NonNull Context context) {
         super(context);
@@ -47,6 +52,8 @@ public class JokePictureView extends FrameLayout {
         progressBar = findViewById(R.id.pb_JokePicture);
         textView = findViewById(R.id.AppCompatTextView);
         textView.setTextColor(Color.WHITE);
+        scaleImageView.setOnClickListener(this);
+        imageView.setOnClickListener(this);
     }
 
     public void setTextVisibility(boolean b) {
@@ -75,10 +82,25 @@ public class JokePictureView extends FrameLayout {
     public void setImage(String url) {
         if (!TextUtils.isEmpty(url)) {
             if (url.contains("webp")) {
+                imageView.setVisibility(GONE);
+                scaleImageView.setVisibility(VISIBLE);
                 ImageHelper.setJokeToLargeImage(url, this);
             } else {
+                imageView.setVisibility(VISIBLE);
+                scaleImageView.setVisibility(GONE);
                 ImageHelper.setJokeToGIF(url, this);
             }
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (listener != null) {
+            listener.click();
+        }
+    }
+
+    public interface Listener {
+        void click();
     }
 }

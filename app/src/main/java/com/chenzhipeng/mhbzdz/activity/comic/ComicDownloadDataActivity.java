@@ -24,7 +24,6 @@ import com.chenzhipeng.mhbzdz.base.BaseActivity;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicChapterItemBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicDownloadBean;
 import com.chenzhipeng.mhbzdz.bean.comic.ComicItemPicture;
-import com.chenzhipeng.mhbzdz.intent.SuperIntent;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicDownloadDataPresenter;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicDownloadDataView;
@@ -49,12 +48,16 @@ public class ComicDownloadDataActivity extends BaseActivity implements IComicDow
     @BindView(R.id.BottomCheckedView)
     BottomCheckedView bottomCheckedView;
 
+    public static List<ComicChapterItemBean> data;
+
+    public static String comicId;
+
 
     public static void startActivity(Context context, String comicId, List<ComicChapterItemBean> list) {
         if (context != null && !TextUtils.isEmpty(comicId) && !EmptyUtils.isListsEmpty(list)) {
             Intent intent = new Intent(context, ComicDownloadDataActivity.class);
-            SuperIntent.getInstance().put(SuperIntent.S10, list);
-            SuperIntent.getInstance().put(SuperIntent.S11, comicId);
+            data = list;
+            ComicDownloadDataActivity.comicId = comicId;
             context.startActivity(intent);
         }
     }
@@ -62,7 +65,7 @@ public class ComicDownloadDataActivity extends BaseActivity implements IComicDow
     public static void startActivity(Context context, String comicId) {
         if (context != null && !TextUtils.isEmpty(comicId)) {
             Intent intent = new Intent(context, ComicDownloadDataActivity.class);
-            SuperIntent.getInstance().put(SuperIntent.S11, comicId);
+            ComicDownloadDataActivity.comicId = comicId;
             context.startActivity(intent);
         }
     }
@@ -323,7 +326,8 @@ public class ComicDownloadDataActivity extends BaseActivity implements IComicDow
         if (getPresenter().closeMenu()) {
             return;
         }
-        SuperIntent.getInstance().remove(SuperIntent.S10, SuperIntent.S11);
+        data = null;
+        comicId = null;
         super.finish();
     }
 

@@ -19,10 +19,6 @@ import io.reactivex.schedulers.Schedulers;
 @SuppressLint("StaticFieldLeak")
 public class BaseApplication extends Application {
     private static Context context;
-    /**
-     * list加载更多延迟时间
-     */
-    public static final int LOAD_MORE_DELAY = 1000;
 
     /**
      * 壁纸下载路径  //com.chenzhipeng.mhbzdz/wallpaper
@@ -45,7 +41,6 @@ public class BaseApplication extends Application {
             .getExternalStorageDirectory().getAbsolutePath()
             + File.separator + "com.chenzhipeng.mhbzdz" + File.separator + "joke";
 
-    public static final float SCROLL_SPEED = 0.13F;
 
     public static int choiceToIndex;
     public static int choiceToAppColor;
