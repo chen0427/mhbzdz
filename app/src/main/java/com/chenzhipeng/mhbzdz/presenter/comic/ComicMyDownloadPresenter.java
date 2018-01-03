@@ -9,6 +9,7 @@ import com.chenzhipeng.mhbzdz.download.ComicDownloaderManager;
 import com.chenzhipeng.mhbzdz.fragment.comic.ComicMyDownloadFragment;
 import com.chenzhipeng.mhbzdz.sqlite.AppDatabase;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
+import com.chenzhipeng.mhbzdz.utils.LogUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicMyDownloadView;
 
 import java.util.Iterator;
@@ -131,7 +132,8 @@ public class ComicMyDownloadPresenter {
                         ComicDocumentHelper.getInstance().deleteBook(next.getComicId(), next.getComicName());
                         iterator.remove();
                         adapter.notifyDataSetChanged();
-                        closeMenu();
+                        setShowChecked(false);
+                        invalidateOptionsMenu();
                     }
                 }
             }

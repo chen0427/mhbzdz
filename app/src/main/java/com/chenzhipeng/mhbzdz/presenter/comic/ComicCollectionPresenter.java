@@ -140,7 +140,8 @@ public class ComicCollectionPresenter {
                     if (AppDatabase.getInstance().deleteCollection(next.getComicId())) {
                         iterator.remove();
                         adapter.notifyDataSetChanged();
-                        closeMenu();
+                        setShowChecked(false);
+                        invalidateOptionsMenu();
                     }
                 }
             }

@@ -77,12 +77,7 @@ public class ComicMyDownloadFragment extends BaseFragment implements IComicMyDow
     public void showDeleteDialog() {
         new AlertDialog.Builder(getActivity())
                 .setMessage(getString(R.string.sure_delete))
-                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.no), null).setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 getPresenter().delete();

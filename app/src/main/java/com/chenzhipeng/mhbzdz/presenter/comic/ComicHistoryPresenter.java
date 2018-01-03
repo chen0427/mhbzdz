@@ -143,7 +143,8 @@ public class ComicHistoryPresenter {
                     if (AppDatabase.getInstance().deleteHistory(next.getComicId())) {
                         iterator.remove();
                         adapter.notifyDataSetChanged();
-                        closeMenu();
+                        setShowChecked(false);
+                        invalidateOptionsMenu();
                     }
                 }
             }
