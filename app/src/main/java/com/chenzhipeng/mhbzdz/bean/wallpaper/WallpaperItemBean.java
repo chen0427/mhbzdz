@@ -52,8 +52,6 @@ public class WallpaperItemBean implements Serializable {
     }
 
 
-
-
     public static List<WallpaperItemBean> getWallpaperItemList(WallpaperBean bean) {
         List<WallpaperItemBean> beanList = new ArrayList<>();
         if (bean != null) {
@@ -83,7 +81,6 @@ public class WallpaperItemBean implements Serializable {
         }
         return beanList;
     }
-
 
 
 }

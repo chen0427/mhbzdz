@@ -3,12 +3,13 @@ package com.chenzhipeng.mhbzdz.activity.joke;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
+import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.presenter.joke.JokePicturePresenter;
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.chenzhipeng.mhbzdz.view.joke.IJokePictureView;
@@ -81,13 +82,13 @@ public class JokePictureActivity extends BaseActivity implements IJokePictureVie
 
     @Override
     public void complete() {
-        Snackbar.make(findViewById(android.R.id.content), R.string.album_download, Snackbar.LENGTH_SHORT).show();
+        Toast.makeText(BaseApplication.getContext(), R.string.album_download, Toast.LENGTH_SHORT).show();
         alertDialog.dismiss();
     }
 
     @Override
     public void error() {
-        Snackbar.make(findViewById(android.R.id.content), R.string.picture_download_fail, Snackbar.LENGTH_SHORT).show();
+        Toast.makeText(BaseApplication.getContext(), R.string.picture_download_fail, Toast.LENGTH_SHORT).show();
         alertDialog.dismiss();
     }
 

@@ -84,10 +84,11 @@ public class ComicMyBookPresenter {
                     if (fragment_1 != null) {
                         boolean showChecked_1 = fragment_1.isShowChecked();
                         boolean allChecked_1 = fragment_1.isAllChecked();
-                        menu.getItem(0).setVisible(false);
-                        menu.getItem(1).setVisible(false);
+                        menu.getItem(0).setVisible(showChecked_1);
+                        menu.getItem(1).setVisible(showChecked_1);
+                        menu.getItem(1).setTitle(allChecked_1 ? activity.getString(R.string.select_cancel) : activity.getString(R.string.select));
                         menu.getItem(2).setTitle(showChecked_1 ? activity.getString(R.string.complete) : activity.getString(R.string.edit));
-                        fragment_1.setBottomCheckedViewVisibility(showChecked_1);
+                        fragment_1.setBottomCheckedViewVisibility(false);
                         fragment_1.setBottomCheckedViewChecked(allChecked_1);
                     }
                     break;
@@ -95,10 +96,11 @@ public class ComicMyBookPresenter {
                     if (fragment_2 != null) {
                         boolean showChecked_2 = fragment_2.isShowChecked();
                         boolean allChecked_2 = fragment_2.isAllChecked();
-                        menu.getItem(0).setVisible(false);
-                        menu.getItem(1).setVisible(false);
+                        menu.getItem(0).setVisible(showChecked_2);
+                        menu.getItem(1).setVisible(showChecked_2);
+                        menu.getItem(1).setTitle(allChecked_2 ? activity.getString(R.string.select_cancel) : activity.getString(R.string.select));
                         menu.getItem(2).setTitle(showChecked_2 ? activity.getString(R.string.complete) : activity.getString(R.string.edit));
-                        fragment_2.setBottomCheckedViewVisibility(showChecked_2);
+                        fragment_2.setBottomCheckedViewVisibility(false);
                         fragment_2.setBottomCheckedViewChecked(allChecked_2);
                     }
                     break;
@@ -106,10 +108,11 @@ public class ComicMyBookPresenter {
                     if (fragment_3 != null) {
                         boolean showChecked_3 = fragment_3.isShowChecked();
                         boolean allChecked_3 = fragment_3.isAllChecked();
-                        menu.getItem(0).setVisible(false);
-                        menu.getItem(1).setVisible(false);
+                        menu.getItem(0).setVisible(showChecked_3);
+                        menu.getItem(1).setVisible(showChecked_3);
+                        menu.getItem(1).setTitle(allChecked_3 ? activity.getString(R.string.select_cancel) : activity.getString(R.string.select));
                         menu.getItem(2).setTitle(showChecked_3 ? activity.getString(R.string.complete) : activity.getString(R.string.edit));
-                        fragment_3.setBottomCheckedViewVisibility(showChecked_3);
+                        fragment_3.setBottomCheckedViewVisibility(false);
                         fragment_3.setBottomCheckedViewChecked(allChecked_3);
                     }
                     break;
@@ -117,7 +120,7 @@ public class ComicMyBookPresenter {
         }
     }
 
-    public boolean clseMenu() {
+    public boolean closeMenu() {
         switch (position) {
             case 0:
                 if (fragment_1 != null) {
@@ -136,6 +139,49 @@ public class ComicMyBookPresenter {
                 break;
 
         }
+        activity.invalidateOptionsMenu();
         return false;
+    }
+
+    public void delete() {
+        switch (position) {
+            case 0:
+                if (fragment_1 != null) {
+                    fragment_1.delete();
+                }
+                break;
+            case 1:
+                if (fragment_2 != null) {
+                    fragment_2.delete();
+                }
+                break;
+            case 2:
+                if (fragment_3 != null) {
+                    fragment_3.delete();
+                }
+                break;
+        }
+        activity.invalidateOptionsMenu();
+    }
+
+    public void allChecked() {
+        switch (position) {
+            case 0:
+                if (fragment_1 != null) {
+                    fragment_1.allChecked();
+                }
+                break;
+            case 1:
+                if (fragment_2 != null) {
+                    fragment_2.allChecked();
+                }
+                break;
+            case 2:
+                if (fragment_3 != null) {
+                    fragment_3.allChecked();
+                }
+                break;
+        }
+        activity.invalidateOptionsMenu();
     }
 }

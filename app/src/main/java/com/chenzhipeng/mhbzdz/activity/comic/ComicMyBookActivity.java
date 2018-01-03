@@ -94,6 +94,12 @@ public class ComicMyBookActivity extends BaseActivity implements IComicMyBookVie
             case R.id.item_editComic:
                 getPresenter().edit();
                 break;
+            case R.id.item_delete:
+                getPresenter().delete();
+                break;
+            case R.id.item_select:
+                getPresenter().allChecked();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -113,7 +119,7 @@ public class ComicMyBookActivity extends BaseActivity implements IComicMyBookVie
 
     @Override
     public void finish() {
-        if (getPresenter().clseMenu()) {
+        if (getPresenter().closeMenu()) {
             return;
         }
         super.finish();

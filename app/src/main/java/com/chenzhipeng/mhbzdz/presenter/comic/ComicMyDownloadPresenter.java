@@ -130,11 +130,11 @@ public class ComicMyDownloadPresenter {
                         ComicDownloaderManager.getInstance().remove(next.getComicId());
                         ComicDocumentHelper.getInstance().deleteBook(next.getComicId(), next.getComicName());
                         iterator.remove();
+                        adapter.notifyDataSetChanged();
+                        closeMenu();
                     }
                 }
             }
-            adapter.notifyDataSetChanged();
-            closeMenu();
         }
     }
 

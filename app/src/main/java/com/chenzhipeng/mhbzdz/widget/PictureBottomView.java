@@ -88,7 +88,6 @@ public class PictureBottomView extends FrameLayout implements View.OnClickListen
     }
 
 
-
     public interface Listener {
         void centerClick();
 

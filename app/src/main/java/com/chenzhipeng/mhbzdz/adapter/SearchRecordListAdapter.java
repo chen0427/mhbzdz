@@ -10,7 +10,6 @@ import com.chenzhipeng.mhbzdz.R;
 import java.util.List;
 
 
-
 public class SearchRecordListAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     public SearchRecordListAdapter(@LayoutRes int layoutResId, @Nullable List<String> data) {
         super(layoutResId, data);

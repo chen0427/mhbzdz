@@ -3,11 +3,12 @@ package com.chenzhipeng.mhbzdz.wallpaper;
 
 import android.app.WallpaperManager;
 import android.graphics.BitmapFactory;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.chenzhipeng.mhbzdz.R;
+import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.image.ImageHelper;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -60,9 +61,9 @@ public class SetWallpaperHelper {
                         public void accept(Object o) throws Exception {
                             if (file != null && file.exists()) {
                                 WallpaperManager.getInstance(activity).setBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
-                                Snackbar.make(activity.findViewById(android.R.id.content), R.string.setting_success, Snackbar.LENGTH_SHORT).show();
+                                Toast.makeText(BaseApplication.getContext(), R.string.setting_success, Toast.LENGTH_SHORT).show();
                             } else {
-                                Snackbar.make(activity.findViewById(android.R.id.content), R.string.setting_fail, Snackbar.LENGTH_SHORT).show();
+                                Toast.makeText(BaseApplication.getContext(), R.string.setting_fail, Toast.LENGTH_SHORT).show();
                             }
                             dismissDialog();
                         }

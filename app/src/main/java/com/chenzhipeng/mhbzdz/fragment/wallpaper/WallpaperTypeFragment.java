@@ -94,7 +94,7 @@ public class WallpaperTypeFragment extends BaseFragment implements IWallpaperTyp
 
     @Override
     public void onFail(Throwable e) {
-        showSnackbar(getString(R.string.networFail));
+        showToast(getString(R.string.networFail));
     }
 
     @Override
@@ -105,7 +105,7 @@ public class WallpaperTypeFragment extends BaseFragment implements IWallpaperTyp
 
     @Override
     public void onEmptyData() {
-        showSnackbar(getString(R.string.emptyData));
+        showToast(getString(R.string.emptyData));
     }
 
     @Override

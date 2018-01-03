@@ -41,10 +41,11 @@ public class WallpaperDownloadPresenter {
         if (menu != null && bottomCheckedView != null) {
             boolean showChecked = isShowChecked();
             boolean allChecked = isAllChecked();
-            menu.getItem(0).setVisible(false);
-            menu.getItem(1).setVisible(false);
-            menu.getItem(2).setTitle(showChecked ? "完成" : "整理");
-            bottomCheckedView.setVisibility(showChecked ? View.VISIBLE : View.GONE);
+            menu.getItem(0).setVisible(showChecked);
+            menu.getItem(1).setVisible(showChecked);
+            menu.getItem(1).setTitle(allChecked ? activity.getString(R.string.select_cancel) : activity.getString(R.string.select));
+            menu.getItem(2).setTitle(showChecked ? activity.getString(R.string.complete) : activity.getString(R.string.edit));
+            bottomCheckedView.setVisibility(View.GONE);
             bottomCheckedView.setChecked(allChecked);
         }
     }
@@ -197,13 +198,14 @@ public class WallpaperDownloadPresenter {
                         boolean delete = file.delete();
                         if (delete) {
                             iterator.remove();
+                            adapter.notifyDataSetChanged();
+                            activity.invalidateOptionsMenu();
+                            closeMenu();
                         }
                     }
                 }
             }
-            adapter.notifyDataSetChanged();
-            activity.invalidateOptionsMenu();
-            closeMenu();
+
         }
     }
 }

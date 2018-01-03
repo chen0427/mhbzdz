@@ -5,7 +5,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import java.io.Serializable;
 
 
-public class NeiHanCommentsItemBean implements MultiItemEntity,Serializable {
+public class NeiHanCommentsItemBean implements MultiItemEntity, Serializable {
     private String text;
     private String avatarUrl;
     private String userName;

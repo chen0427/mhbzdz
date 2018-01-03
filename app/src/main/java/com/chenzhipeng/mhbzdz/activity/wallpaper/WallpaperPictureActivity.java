@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.BaseTransientBottomBar;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.chenzhipeng.mhbzdz.R;
 import com.chenzhipeng.mhbzdz.base.BaseActivity;
+import com.chenzhipeng.mhbzdz.base.BaseApplication;
 import com.chenzhipeng.mhbzdz.bean.wallpaper.WallpaperItemBean;
 import com.chenzhipeng.mhbzdz.presenter.wallpaper.WallpaperPicturePresenter;
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
@@ -89,19 +89,13 @@ public class WallpaperPictureActivity extends BaseActivity implements
     @Override
     public void complete() {
         alertDialog.dismiss();
-        Snackbar.make(findViewById(android.R.id.content), getString(R.string.complete_download), Snackbar.LENGTH_SHORT)
-                .addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
-                    @Override
-                    public void onDismissed(Snackbar transientBottomBar, int event) {
-                        super.onDismissed(transientBottomBar, event);
-                        viewPaper.updateDownload();
-                    }
-                }).show();
+        Toast.makeText(BaseApplication.getContext(), getString(R.string.complete_download), Toast.LENGTH_SHORT).show();
+        viewPaper.updateDownload();
     }
 
     @Override
     public void error() {
-        Snackbar.make(findViewById(android.R.id.content), R.string.picture_download_fail, Snackbar.LENGTH_SHORT).show();
+        Toast.makeText(BaseApplication.getContext(), R.string.picture_download_fail, Toast.LENGTH_SHORT).show();
         alertDialog.dismiss();
     }
 

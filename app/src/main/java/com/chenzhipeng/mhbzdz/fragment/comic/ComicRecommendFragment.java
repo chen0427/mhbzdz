@@ -64,7 +64,7 @@ public class ComicRecommendFragment extends BaseFragment
 
     @Override
     public void onEmptyData() {
-        showSnackbar(getString(R.string.emptyData));
+        showToast(getString(R.string.emptyData));
     }
 
     @Override
@@ -74,7 +74,7 @@ public class ComicRecommendFragment extends BaseFragment
 
     @Override
     public void onFail(Throwable e) {
-        showSnackbar(getString(R.string.networFail));
+        showToast(getString(R.string.networFail));
     }
 
     @Override

@@ -4,13 +4,13 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
@@ -26,8 +26,7 @@ public class BaseActivity extends RxAppCompatActivity {
 
     protected void showSnackbar(String s) {
         if (!TextUtils.isEmpty(s)) {
-            View rootView = findViewById(android.R.id.content);
-            Snackbar.make(rootView, s, Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(BaseApplication.getContext(), s, Toast.LENGTH_SHORT).show();
         }
     }
 

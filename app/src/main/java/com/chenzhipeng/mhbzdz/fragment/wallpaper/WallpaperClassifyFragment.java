@@ -89,12 +89,12 @@ public class WallpaperClassifyFragment extends BaseFragment implements IWallpape
     @Override
     public void onEmptyData() {
         //没有数据
-        showSnackbar(getString(R.string.emptyData));
+        showToast(getString(R.string.emptyData));
     }
 
     @Override
     public void onFail(Throwable e) {
-        showSnackbar(getString(R.string.networFail));
+        showToast(getString(R.string.networFail));
     }
 
 

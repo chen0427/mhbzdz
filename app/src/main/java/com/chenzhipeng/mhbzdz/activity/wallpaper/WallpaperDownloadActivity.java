@@ -119,6 +119,12 @@ public class WallpaperDownloadActivity extends BaseActivity implements IWallpape
             case R.id.item_editWallpaper:
                 getPresenter().edit();
                 break;
+            case R.id.item_delete:
+                getPresenter().deleteChecked();
+                break;
+            case R.id.item_select:
+                getPresenter().allChecked();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

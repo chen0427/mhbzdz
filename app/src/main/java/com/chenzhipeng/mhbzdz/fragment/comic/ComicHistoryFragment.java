@@ -135,10 +135,18 @@ public class ComicHistoryFragment extends BaseFragment implements IComicHistoryV
         return getPresenter().closeMenu();
     }
 
+    public void delete() {
+        getPresenter().delete();
+    }
+
     public void setBottomCheckedViewVisibility(boolean b) {
         if (bottomCheckedView != null) {
             bottomCheckedView.setVisibility(b ? View.VISIBLE : View.GONE);
         }
+    }
+
+    public void allChecked() {
+        getPresenter().allChecked();
     }
 
     public void setBottomCheckedViewChecked(boolean b) {

@@ -17,7 +17,7 @@ public class NeiHanCommentsBean implements Serializable {
         this.data = data;
     }
 
-    public class Data implements Serializable{
+    public class Data implements Serializable {
         @SerializedName("top_comments")
         private List<TopComments> topCommentses;
         @SerializedName("recent_comments")
@@ -39,7 +39,7 @@ public class NeiHanCommentsBean implements Serializable {
             this.recentCommentses = recentCommentses;
         }
 
-        public class TopComments implements Serializable{
+        public class TopComments implements Serializable {
             private String text;
             @SerializedName("avatar_url")
             private String avatarUrl;
@@ -71,7 +71,7 @@ public class NeiHanCommentsBean implements Serializable {
             }
         }
 
-        public class RecentComments implements Serializable{
+        public class RecentComments implements Serializable {
             private String text;
             @SerializedName("avatar_url")
             private String avatarUrl;

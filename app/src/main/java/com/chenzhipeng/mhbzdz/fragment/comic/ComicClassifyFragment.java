@@ -76,7 +76,7 @@ public class ComicClassifyFragment extends BaseFragment implements IComicClassif
 
     @Override
     public void onFail(Throwable e) {
-        showSnackbar(getString(R.string.networFail));
+        showToast(getString(R.string.networFail));
     }
 
     @Override

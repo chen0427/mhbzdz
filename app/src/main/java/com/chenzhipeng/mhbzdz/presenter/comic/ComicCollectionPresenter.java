@@ -139,11 +139,12 @@ public class ComicCollectionPresenter {
                 if (next.isChecked()) {
                     if (AppDatabase.getInstance().deleteCollection(next.getComicId())) {
                         iterator.remove();
+                        adapter.notifyDataSetChanged();
+                        closeMenu();
                     }
                 }
             }
-            adapter.notifyDataSetChanged();
-            closeMenu();
+
         }
     }
 

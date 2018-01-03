@@ -147,6 +147,14 @@ public class ComicCollectionFragment extends BaseFragment implements IComicColle
         }
     }
 
+    public void delete() {
+        getPresenter().delete();
+    }
+
+    public void allChecked() {
+        getPresenter().allChecked();
+    }
+
     public void setBottomCheckedViewChecked(boolean b) {
         if (bottomCheckedView != null) {
             bottomCheckedView.setChecked(b);

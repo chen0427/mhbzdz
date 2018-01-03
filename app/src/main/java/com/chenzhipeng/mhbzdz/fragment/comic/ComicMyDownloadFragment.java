@@ -130,6 +130,14 @@ public class ComicMyDownloadFragment extends BaseFragment implements IComicMyDow
 
     }
 
+    public void delete() {
+        getPresenter().showDeleteDialog();
+    }
+
+    public void allChecked() {
+        getPresenter().allChecked();
+    }
+
     public void setBottomCheckedViewChecked(boolean b) {
         if (bottomCheckedView != null) {
             bottomCheckedView.setChecked(b);

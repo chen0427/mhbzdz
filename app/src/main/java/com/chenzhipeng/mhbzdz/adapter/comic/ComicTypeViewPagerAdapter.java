@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 
-
 public class ComicTypeViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments;
     private List<String> titleStrings;

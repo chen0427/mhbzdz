@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class JokeGifTagImageView extends FrameLayout implements View.OnClickListener {
     private AppCompatImageView imageView;
     private AppCompatTextView tagTextView;
