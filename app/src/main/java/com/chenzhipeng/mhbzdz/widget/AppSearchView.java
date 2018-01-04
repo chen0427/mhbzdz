@@ -98,6 +98,11 @@ public class AppSearchView extends FrameLayout implements View.OnClickListener, 
             } else {
                 adapter.setNewData(strings);
             }
+            if (strings.size() == 0) {
+                getFooterView().setVisibility(GONE);
+            } else {
+                getFooterView().setVisibility(VISIBLE);
+            }
         }
     }
 
@@ -154,6 +159,11 @@ public class AppSearchView extends FrameLayout implements View.OnClickListener, 
                 listener.onDeleteItem(str);
                 adapter.remove(position);
             }
+        }
+        if (adapter.getData().size() == 0) {
+            getFooterView().setVisibility(GONE);
+        } else {
+            getFooterView().setVisibility(VISIBLE);
         }
     }
 
