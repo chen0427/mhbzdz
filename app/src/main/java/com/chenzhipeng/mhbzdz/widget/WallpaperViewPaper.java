@@ -1,9 +1,12 @@
 package com.chenzhipeng.mhbzdz.widget;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.annotation.StyleRes;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -43,6 +46,7 @@ public class WallpaperViewPaper extends FrameLayout implements PictureBottomView
     public void setListener(Listener listener) {
         this.listener = listener;
     }
+
 
     public WallpaperViewPaper(@NonNull Context context) {
         super(context);

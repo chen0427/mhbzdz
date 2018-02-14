@@ -11,6 +11,7 @@ import com.chenzhipeng.mhbzdz.document.ComicDocumentHelper;
 import com.chenzhipeng.mhbzdz.image.ImageHelper;
 import com.chenzhipeng.mhbzdz.utils.DisplayUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
+import com.chenzhipeng.mhbzdz.utils.LogUtils;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.File;
@@ -68,6 +69,7 @@ public class ComicReadPictureView extends PhotoView {
     public void setImage(String url, String comicId, String comicName, String chapterName) {
         if (!TextUtils.isEmpty(url) && !EmptyUtils.isStringsEmpty(comicId, comicName, chapterName)) {
             String path = ComicDocumentHelper.getInstance().getStoragePath(url, comicId, comicName, chapterName);
+            LogUtils.d(path);
             if (!TextUtils.isEmpty(path)) {
                 File file = new File(path);
                 if (file.exists()) {

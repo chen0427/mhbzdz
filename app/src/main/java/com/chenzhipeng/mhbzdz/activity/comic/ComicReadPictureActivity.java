@@ -21,6 +21,7 @@ import com.chenzhipeng.mhbzdz.bean.comic.ComicItemPicture;
 import com.chenzhipeng.mhbzdz.presenter.comic.ComicReadPicturePresenter;
 import com.chenzhipeng.mhbzdz.utils.ConfigUtils;
 import com.chenzhipeng.mhbzdz.utils.EmptyUtils;
+import com.chenzhipeng.mhbzdz.utils.LogUtils;
 import com.chenzhipeng.mhbzdz.view.comic.IComicPictureView;
 import com.chenzhipeng.mhbzdz.widget.ComicViewPaper;
 
@@ -135,7 +136,7 @@ public class ComicReadPictureActivity extends BaseActivity
             position = 0;
             paper.setListener(this);
             paper.setData(comicId, comicName, pictures);
-
+            LogUtils.d(pictures.get(0).getUrl());
         }
     }
 

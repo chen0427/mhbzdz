@@ -1,6 +1,11 @@
 package com.chenzhipeng.mhbzdz.activity;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -53,7 +58,36 @@ public class MainActivity extends BaseActivity implements IMainView, NavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        initData();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            int permission = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (permission == PackageManager.PERMISSION_DENIED) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 3);
+            } else {
+                initData();
+            }
+        } else {
+            initData();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 3 && permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                new AlertDialog.Builder(this).setMessage("为了能正常能使用该APP，请给予相应的权限")
+                        .setCancelable(false)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                secondTime = System.currentTimeMillis();
+                                finish();
+                            }
+                        }).show();
+            } else {
+                initData();
+            }
+        }
     }
 
     private void initData() {
